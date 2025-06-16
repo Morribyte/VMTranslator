@@ -11,7 +11,7 @@ class Parser:
     """
     def __init__(self):
         self.command_line: list[str] = []
-        self.command_type: str
+        self.command_type: CommandType
 
     def get_next_line(self, vm_command: str) -> list[str]:
         """
@@ -26,3 +26,4 @@ class Parser:
         Command types will be one of 8 named in the CommandType enum class.
         """
         return CommandType.__members__.get(self.command_line[0].upper(), None)
+

@@ -41,3 +41,13 @@ def test_command_type(setup_resources):
     value: CommandType = parser.command_type()
     print(value.value)
     assert value.value == "C_PUSH"
+
+
+def test_arg1_returns_string(setup_resources):
+    """
+    Test that our arg1 properly returns the string it needs to.
+    """
+    parser = setup_resources["parser"]
+    command_list: list[str] = ["push", "constant", "7"]
+    value: str = parser.arg1()
+    assert value == "constant"
