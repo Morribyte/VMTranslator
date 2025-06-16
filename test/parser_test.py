@@ -28,4 +28,5 @@ def test_command_type(setup_resources):
     """
     parser = setup_resources["parser"]
     value = parser.command_type("push constant 7")
-    assert value == "push constant 7"
+    assert value == ["push", "constant", "7"]
+

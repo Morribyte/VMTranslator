@@ -15,4 +15,5 @@ class Parser:
         """
         Takes a string and splits it into a list.
         """
-        return "push constant 7"
+        command: list[str] = vm_command.split()
+        return command
