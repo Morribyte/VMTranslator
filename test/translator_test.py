@@ -28,5 +28,7 @@ def test_write_push_pop(setup_resources):
     Test that the push function properly translates.
     """
     translator = setup_resources["translator"]
+    translator.parser.command_line = ["push", "constant", "7"]
     translated_push_value: list[str] = translator.write_push_pop("push", "constant", 7)
-    assert translated_push_value == ["@SP", "AM=M+1", "A=A-1", "M=D"]
+    print(translated_push_value)
+    assert translated_push_value == ["@7", "D=A", "@SP", "AM=M+1", "A=A-1", "M=D"]
