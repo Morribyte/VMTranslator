@@ -80,4 +80,7 @@ def test_arg2_returns_index(setup_resources):
     Test that arg2 returns the second portion of the list.
     Called when command type is C_PUSH, C_POP, C_FUNCTION, or C_CALL
     """
+    parser = setup_resources["parser"]
+    parser.get_next_line("push constant 7")
+    value: str = parse.arg2()
     assert value == CommandType.PUSH
