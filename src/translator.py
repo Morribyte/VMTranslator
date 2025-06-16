@@ -15,7 +15,8 @@ class Translator:
     def __init__(self):
         pass
 
-    def write_push_pop(self, command: str):
+    def write_push_pop(self, command: str, segment: str, index: int):
         """
         Takes a command and depending on whether it's C_PUSH or C_POP, operate on it.
         """
+        
