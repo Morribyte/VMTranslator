@@ -1,5 +1,6 @@
 import pytest
 
+from src.command_type import CommandType
 from src.parser import Parser
 
 @pytest.fixture(scope="module")
@@ -37,5 +38,6 @@ def test_command_type(setup_resources):
     """
     parser = setup_resources["parser"]
     command_list: list[str] = ["push", "constant", "7"]
-    value: str = parser.command_type()
-    assert value == "push"
+    value: CommandType = parser.command_type()
+    print(value.value)
+    assert value.value == "C_PUSH"

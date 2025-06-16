@@ -2,6 +2,7 @@
 src/parser_test.py
 Handles parsing the file and pulling out the lexical elements we need.
 """
+from src.command_type import CommandType
 
 
 class Parser:
@@ -19,9 +20,9 @@ class Parser:
         self.command_line = vm_command.split()
         return self.command_line
 
-    def command_type(self) -> str:
+    def command_type(self) -> CommandType | None:
         """
         Returns the command type of the current command.
         Command types will be one of 8 named in the CommandType enum class.
         """
-        return self.command_line[0]
+        return CommandType.__members__.get(self.command_line[0].upper(), None)
