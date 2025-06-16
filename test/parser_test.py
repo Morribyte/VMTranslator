@@ -53,17 +53,6 @@ def test_arg1_returns_string(setup_resources):
     assert value == "constant"
 
 
-def test_arg1_c_return_returns_none(setup_resources):
-    """
-    Test that arg1 returns None in the case of C_RETURN.
-    """
-    parser = setup_resources["parser"]
-    parser.get_next_line("return")
-    value: CommandType = parser.command_type()
-    value: str = parser.arg1()
-    assert value is None
-
-
 def test_arg1_c_arithmetic_returns_command(setup_resources):
     """
     Test that arg1 returns the first portion of the list in case of C_ARITHMETIC
@@ -82,5 +71,5 @@ def test_arg2_returns_index(setup_resources):
     """
     parser = setup_resources["parser"]
     parser.get_next_line("push constant 7")
-    value: str = parse.arg2()
-    assert value == CommandType.PUSH
+    value: str = parser.arg2()
+    assert value == "7"

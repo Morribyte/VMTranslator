@@ -34,8 +34,6 @@ class Parser:
         If the command type is either C_RETURN or C_ARITHMETIC, we will handle differently.
         """
         print(self.command_type())
-        if self.command_type() == CommandType.RETURN:
-            return None
         if self.command_type() == CommandType.ARITHMETIC:
             return self.command_line[0]
         return self.command_line[1]
