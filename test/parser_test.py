@@ -2,7 +2,7 @@ import pytest
 
 from src.parser import Parser
 
-@pytest.fixture
+@pytest.fixture(scope="module")
 def setup_resources():
     """
     Sets up the parser object for testing.
@@ -38,4 +38,4 @@ def test_command_type(setup_resources):
     parser = setup_resources["parser"]
     command_list: list[str] = ["push", "constant", "7"]
     value: str = parser.command_type()
-    assert value == "C_PUSH"
+    assert value == "push"

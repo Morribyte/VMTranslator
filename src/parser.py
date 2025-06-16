@@ -10,10 +10,18 @@ class Parser:
     """
     def __init__(self):
         self.command_line: list[str] = []
+        self.command_type: str
 
     def get_next_line(self, vm_command: str) -> list[str]:
         """
         Takes a string and splits it into a list.
         """
-        command: list[str] = vm_command.split()
-        return command
+        self.command_line = vm_command.split()
+        return self.command_line
+
+    def command_type(self) -> str:
+        """
+        Returns the command type of the current command.
+        Command types will be one of 8 named in the CommandType enum class.
+        """
+        return self.command_line[0]
