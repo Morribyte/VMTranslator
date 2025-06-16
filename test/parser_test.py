@@ -62,3 +62,14 @@ def test_arg1_c_return_returns_none(setup_resources):
     value: CommandType = parser.command_type()
     value: str = parser.arg1()
     assert value is None
+
+
+def test_arg1_c_arithmetic_returns_command(setup_resources):
+    """
+    Test that arg1 returns the first portion of the list in case of C_ARITHMETIC
+    """
+    parser = setup_resources["parser"]
+    parser.get_next_line("add")
+    value: CommandType = parser.command_type()
+    value: str = parser.arg1()
+    assert value == "add"

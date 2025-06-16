@@ -34,4 +34,6 @@ class Parser:
         print(self.command_type())
         if self.command_type() == CommandType.RETURN:
             return None
+        if self.command_type() == CommandType.ARITHMETIC:
+            return self.command_line[0]
         return self.command_line[1]
