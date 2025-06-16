@@ -1,6 +1,6 @@
 import pytest
 
-from src.command_type import CommandType
+from src.data_storage import CommandType
 from src.parser import Parser
 
 @pytest.fixture(scope="module")
@@ -73,3 +73,11 @@ def test_arg1_c_arithmetic_returns_command(setup_resources):
     value: CommandType = parser.command_type()
     value: str = parser.arg1()
     assert value == "add"
+
+
+def test_arg2_returns_index(setup_resources):
+    """
+    Test that arg2 returns the second portion of the list.
+    Called when command type is C_PUSH, C_POP, C_FUNCTION, or C_CALL
+    """
+    assert value == CommandType.PUSH

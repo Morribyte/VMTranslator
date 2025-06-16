@@ -2,7 +2,7 @@
 src/parser_test.py
 Handles parsing the file and pulling out the lexical elements we need.
 """
-from src.command_type import CommandType, ARITHMETIC_COMMANDS
+from src.data_storage import CommandType, ARITHMETIC_COMMANDS
 
 
 class Parser:
