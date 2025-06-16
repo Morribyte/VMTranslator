@@ -71,11 +71,10 @@ def write_to_file(file_name: str, code_file: list[str]):
             match current_command:
                 case CommandType.PUSH | CommandType.POP:
                     translated_line = translator.write_push_pop(current_command, arg1, arg2)
-                    print(f"Translated line: {translated_line}")
                 case CommandType.ARITHMETIC:
                     translated_line = translator.write_arithmetic(arg1)
-                    print(f"Translated line: {translated_line}")
 
+            print(f"Translated line: {translated_line}")
             file.writelines(f"{line}\n" for line in translated_line)
 
 
