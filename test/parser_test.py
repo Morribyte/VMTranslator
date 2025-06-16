@@ -28,7 +28,7 @@ def test_get_line(setup_resources):
     Test that the parser can read commands and parse them.
     """
     parser = setup_resources["parser"]
-    value = parser.get_next_line("push constant 7")
+    value = parser.get_line("push constant 7")
     assert value == ["push", "constant", "7"]
 
 
@@ -58,7 +58,7 @@ def test_arg1_c_arithmetic_returns_command(setup_resources):
     Test that arg1 returns the first portion of the list in case of C_ARITHMETIC
     """
     parser = setup_resources["parser"]
-    parser.get_next_line("add")
+    parser.get_line("add")
     value: CommandType = parser.command_type()
     value: str = parser.arg1()
     assert value == "add"
@@ -70,6 +70,6 @@ def test_arg2_returns_index(setup_resources):
     Called when command type is C_PUSH, C_POP, C_FUNCTION, or C_CALL
     """
     parser = setup_resources["parser"]
-    parser.get_next_line("push constant 7")
+    parser.get_line("push constant 7")
     value: str = parser.arg2()
     assert value == "7"

@@ -5,6 +5,12 @@ Handles the orchestration of the VM translation process.
 import argparse
 from pathlib import Path
 
+from src.parser import Parser
+from src.translator import Translator
+
+parser = Parser()
+translator = Translator()
+
 def get_file():
     """
     Prompts user for a file if not provided via command-line.
@@ -27,12 +33,22 @@ def read_file(file_path):
     return lines
 
 
-def write_to_file(file_name: str, translated_file: list[str]):
+def write_to_file(file_name: str, code_file: list[str]):
     """
     Writes a translated list to a file, line by line.
     """
     with open(f"output/{file_name}.hack", "w") as file:
-        file.writelines(f"{line}\n" for line in translated_file)
+        print(f"Translated VM File @ output/{file_name}.hack")
+        file.writelines(f"// Translated VM File @ output/{file_name}.hack\n")
+
+        for index, line in enumerate(code_file):
+            print(f"\nIndex: {index} | Line: {line}")
+
+            split_line: list[str] = parser.get_line(line)
+            print(f"{split_line}")
+
+
+        file.writelines(f"{line}\n" for line in code_file)
 
 def main():
     """

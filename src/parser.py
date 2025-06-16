@@ -12,7 +12,7 @@ class Parser:
     def __init__(self):
         self.command_line: list[str] = []
 
-    def get_next_line(self, vm_command: str) -> list[str]:
+    def get_line(self, vm_command: str) -> list[str]:
         """
         Takes a string and splits it into a list.
         """
