@@ -65,9 +65,9 @@ def write_to_file(file_name: str, code_file: list[str]):
 
             print(f"Current command: {current_command} | Current arg1: {arg1} | Current arg2: {arg2}")
 
-
-
-
+            match CommandType:
+                case CommandType.PUSH | CommandType.POP:
+                    return translator.write_push_pop(current_command, segment, index)
 
         file.writelines(f"{line}\n" for line in code_file)
 

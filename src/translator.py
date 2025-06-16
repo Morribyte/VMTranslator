@@ -28,11 +28,11 @@ class Translator:
     def __init__(self):
         self.parser = Parser()
 
-    def write_push_pop(self, command: str, segment: str, index: int) -> list[str] | None:
+    def write_push_pop(self, command: CommandType, segment: str, index: int) -> list[str] | None:
         """
         Takes a command and depending on whether it's C_PUSH or C_POP, operate on it.
         """
-        if command.upper() == CommandType.PUSH.name:
+        if command == CommandType.PUSH.name:
             return segment_map[segment](index) + command_map[CommandType.PUSH]
         return None
 
