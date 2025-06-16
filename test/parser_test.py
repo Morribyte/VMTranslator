@@ -22,7 +22,7 @@ def test_object_creation(setup_resources):
     assert parser is not None
 
 
-def test_command_type(setup_resources):
+def test_get_line(setup_resources):
     """
     Test that the parser can read commands and parse them.
     """
