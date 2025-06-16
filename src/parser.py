@@ -39,3 +39,9 @@ class Parser:
         if self.command_type() == CommandType.ARITHMETIC:
             return self.command_line[0]
         return self.command_line[1]
+
+    def arg2(self) -> str | None:
+        """
+        Returns the index if we need it.
+        Called if the command_type is either C_PUSH, C_POP, C_FUNCTION, or C_CALL
+        """
