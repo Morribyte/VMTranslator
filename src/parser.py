@@ -2,7 +2,7 @@
 src/parser_test.py
 Handles parsing the file and pulling out the lexical elements we need.
 """
-from src.command_type import CommandType
+from src.command_type import CommandType, ARITHMETIC_COMMANDS
 
 
 class Parser:
@@ -24,7 +24,7 @@ class Parser:
         Returns the command type of the current command.
         Command types will be one of 8 named in the CommandType enum class.
         """
-        if self.command_line[0] in CommandType.ARITHMETIC_COMMANDS:
+        if self.command_line[0] in ARITHMETIC_COMMANDS:
             return CommandType.ARITHMETIC
         return CommandType.__members__.get(self.command_line[0].upper(), None)
 

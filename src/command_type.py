@@ -15,4 +15,4 @@ class CommandType(Enum):
     RETURN = "C_RETURN"
     CALL = "C_CALL"
 
-    ARITHMETIC_COMMANDS= ["add"]
+ARITHMETIC_COMMANDS = ["add"]
