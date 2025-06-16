@@ -51,7 +51,7 @@ def write_to_file(file_name: str, code_file: list[str]):
     """
     Writes a translated list to a file, line by line.
     """
-    with open(f"output/{file_name}.hack", "w") as file:
+    with open(f"output/{file_name}.asm", "w") as file:
         print(f"Translated VM File @ output/{file_name}.hack")
         file.writelines(f"// Translated VM File @ output/{file_name}.hack\n")
 
