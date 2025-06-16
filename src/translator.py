@@ -14,12 +14,12 @@ segment_map: dict = {
 }
 
 arithmetic_map: dict = {
-    "add": ["M=D+M"]
+    "add": ["@SP", "AM=M-1", "D=M", "A=A-1", "M=D+M"]
 }
 
-op_type: dict = {
-    "binary_op": ["@SP", "AM=M-1", "D=M", "A=A-1"]
-}
+# op_type: dict = {
+#     "binary_op": ["@SP", "AM=M-1", "D=M", "A=A-1"]
+# }
 
 class Translator:
     """
@@ -40,6 +40,7 @@ class Translator:
         """
         Takes a command and translates it to a different command depending on what we need.
         """
+        return arithmetic_map[command]
 
 
 
