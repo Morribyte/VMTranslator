@@ -56,6 +56,7 @@ def write_to_file(file_name: str, code_file: list[str]):
         file.writelines(f"// Translated VM File @ output/{file_name}.hack\n")
 
         for index, line in enumerate(code_file):
+            translated_line = []
             print(f"\nIndex: {index} | Line: {line}")
 
             split_line: list[str] = parser.get_line(line)
@@ -64,12 +65,19 @@ def write_to_file(file_name: str, code_file: list[str]):
             current_command, arg1, arg2 = process_command_arguments()
 
             print(f"Current command: {current_command} | Current arg1: {arg1} | Current arg2: {arg2}")
+            file.writelines(f"// {line}\n")
 
-            match CommandType:
+
+            match current_command:
                 case CommandType.PUSH | CommandType.POP:
-                    return translator.write_push_pop(current_command, segment, index)
+                    translated_line = translator.write_push_pop(current_command, arg1, arg2)
+                    print(f"Translated line: {translated_line}")
+                case CommandType.ARITHMETIC:
+                    translated_line = translator.write_arithmetic(arg1)
+                    print(f"Translated line: {translated_line}")
 
-        file.writelines(f"{line}\n" for line in code_file)
+            file.writelines(f"{line}\n" for line in translated_line)
+
 
 
 
