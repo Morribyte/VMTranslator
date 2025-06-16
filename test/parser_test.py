@@ -71,5 +71,5 @@ def test_arg2_returns_index(setup_resources):
     """
     parser = setup_resources["parser"]
     parser.get_line("push constant 7")
-    value: str = parser.arg2()
-    assert value == "7"
+    value: int = parser.arg2()
+    assert value == 7
