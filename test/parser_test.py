@@ -22,3 +22,10 @@ def test_object_creation(setup_resources):
     assert parser is not None
 
 
+def test_command_type(setup_resources):
+    """
+    Test that the parser can read commands and parse them.
+    """
+    parser = setup_resources["parser"]
+    value = parser.command_type("push constant 7")
+    assert value == "push constant 7"
