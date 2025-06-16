@@ -16,6 +16,24 @@ def get_file():
         print("File not found. Try again.")
 
 
+def read_file(file_path):
+    """
+    Opens a file, and strips comments whether they're at the start or at the end of a line.
+    """
+    with open(file_path, "r") as file:
+        lines: list[str] = [line.split("//")[0].rstrip() for line in file.readlines() if line.split("//")[0].strip()]
+    lines = [line.strip() for line in lines]
+    print(lines)
+    return lines
+
+
+def write_to_file(file_name: str, translated_file: list[str]):
+    """
+    Writes a translated list to a file, line by line.
+    """
+    with open(f"output/{file_name}.hack", "w") as file:
+        file.writelines(f"{line}\n" for line in translated_file)
+
 def main():
     """
     main function
@@ -29,6 +47,12 @@ def main():
 
     print(f"Current file path: {file_path}")
     print(f"Current file name: {file_path.stem}")
+
+    open_file = read_file(file_path)
+
+    print(f"Translating file...\n")
+
+    write_to_file(file_name, open_file)
 
 
 if __name__ == "__main__":
