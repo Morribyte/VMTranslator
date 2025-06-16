@@ -44,7 +44,7 @@ def process_command_arguments():
         arg2: int = parser.arg2()
     else:
         arg2: None = None
-    return arg1, arg2, current_command
+    return current_command, arg1, arg2
 
 
 def write_to_file(file_name: str, code_file: list[str]):
@@ -61,9 +61,11 @@ def write_to_file(file_name: str, code_file: list[str]):
             split_line: list[str] = parser.get_line(line)
             print(f"{split_line}")
 
-            arg1, arg2, current_command = process_command_arguments()
+            current_command, arg1, arg2 = process_command_arguments()
 
-            print(f"Current command: {current_command} | Current arg1: {arg1 if arg1 else None} | Current arg2: {arg2 if arg2 else None}")
+            print(f"Current command: {current_command} | Current arg1: {arg1} | Current arg2: {arg2}")
+
+
 
 
 
