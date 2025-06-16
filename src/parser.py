@@ -42,5 +42,6 @@ class Parser:
         """
         Returns the index if we need it.
         Called if the command_type is either C_PUSH, C_POP, C_FUNCTION, or C_CALL
+        Not called if others.
         """
         return self.command_line[2]
