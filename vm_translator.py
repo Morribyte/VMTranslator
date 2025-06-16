@@ -5,6 +5,7 @@ Handles the orchestration of the VM translation process.
 import argparse
 from pathlib import Path
 
+from src.data_storage import CommandType
 from src.parser import Parser
 from src.translator import Translator
 
@@ -33,6 +34,19 @@ def read_file(file_path):
     return lines
 
 
+def process_command_arguments():
+    current_command: CommandType = parser.command_type()
+    if current_command != CommandType.RETURN:
+        arg1: str = parser.arg1()
+    else:
+        arg1: None = None
+    if current_command in [CommandType.PUSH]:
+        arg2: int = parser.arg2()
+    else:
+        arg2: None = None
+    return arg1, arg2, current_command
+
+
 def write_to_file(file_name: str, code_file: list[str]):
     """
     Writes a translated list to a file, line by line.
@@ -47,8 +61,16 @@ def write_to_file(file_name: str, code_file: list[str]):
             split_line: list[str] = parser.get_line(line)
             print(f"{split_line}")
 
+            arg1, arg2, current_command = process_command_arguments()
+
+            print(f"Current command: {current_command} | Current arg1: {arg1 if arg1 else None} | Current arg2: {arg2 if arg2 else None}")
+
+
 
         file.writelines(f"{line}\n" for line in code_file)
+
+
+
 
 def main():
     """

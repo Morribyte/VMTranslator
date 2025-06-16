@@ -38,10 +38,10 @@ class Parser:
             return self.command_line[0]
         return self.command_line[1]
 
-    def arg2(self) -> str | None:
+    def arg2(self) -> int | None:
         """
         Returns the index if we need it.
         Called if the command_type is either C_PUSH, C_POP, C_FUNCTION, or C_CALL
         Not called if others.
         """
-        return self.command_line[2]
+        return int(self.command_line[2])
