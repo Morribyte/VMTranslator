@@ -51,3 +51,14 @@ def test_arg1_returns_string(setup_resources):
     command_list: list[str] = ["push", "constant", "7"]
     value: str = parser.arg1()
     assert value == "constant"
+
+
+def test_arg1_c_return_returns_none(setup_resources):
+    """
+    Test that arg1 returns None in the case of C_RETURN.
+    """
+    parser = setup_resources["parser"]
+    parser.get_next_line("return")
+    value: CommandType = parser.command_type()
+    value: str = parser.arg1()
+    assert value is None

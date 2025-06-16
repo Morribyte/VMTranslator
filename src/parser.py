@@ -11,7 +11,6 @@ class Parser:
     """
     def __init__(self):
         self.command_line: list[str] = []
-        self.command_type: CommandType
 
     def get_next_line(self, vm_command: str) -> list[str]:
         """
@@ -27,3 +26,12 @@ class Parser:
         """
         return CommandType.__members__.get(self.command_line[0].upper(), None)
 
+    def arg1(self) -> str | None:
+        """
+        Returns the segment if we need it.
+        If the command type is either C_RETURN or C_ARITHMETIC, we will handle differently.
+        """
+        print(self.command_type())
+        if self.command_type() == CommandType.RETURN:
+            return None
+        return self.command_line[1]
