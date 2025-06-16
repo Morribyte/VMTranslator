@@ -74,6 +74,7 @@ def write_to_file(file_name: str, code_file: list[str]):
                 case CommandType.ARITHMETIC:
                     translated_line = translator.write_arithmetic(arg1)
 
+
             print(f"Translated line: {translated_line}")
             file.writelines(f"{line}\n" for line in translated_line)
 
