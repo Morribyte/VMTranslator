@@ -32,13 +32,14 @@ class Translator:
         """
         Takes a command and depending on whether it's C_PUSH or C_POP, operate on it.
         """
-        if self.parser.command_type() == CommandType.PUSH:
+        if command.upper() == CommandType.PUSH.name:
             return segment_map[segment](index) + command_map[CommandType.PUSH]
         return None
 
-    def write_arithmetic(self) -> list[str]:
+    def write_arithmetic(self, command: str) -> list[str]:
         """
         Takes a command and translates it to a different command depending on what we need.
         """
+
 
 
