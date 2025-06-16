@@ -9,9 +9,9 @@ class Parser:
     Represents a parser object
     """
     def __init__(self):
-        pass
+        self.command_line: list[str] = []
 
-    def command_type(self, vm_command: str) -> list[str]:
+    def get_next_line(self, vm_command: str) -> list[str]:
         """
         Takes a string and splits it into a list.
         """
