@@ -24,6 +24,8 @@ class Parser:
         Returns the command type of the current command.
         Command types will be one of 8 named in the CommandType enum class.
         """
+        if self.command_line[0] in CommandType.ARITHMETIC_COMMANDS:
+            return CommandType.ARITHMETIC
         return CommandType.__members__.get(self.command_line[0].upper(), None)
 
     def arg1(self) -> str | None:
