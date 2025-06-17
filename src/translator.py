@@ -41,3 +41,11 @@ class Translator:
         """
         return arithmetic_map[command]
 
+    def generate_label(self, command: str, label_number: int, translated_line: list[str]) -> list[str]:
+        """
+        Takes a list of commands and generates a label.
+        Only applies to lt, gt, and eq commands.
+        Command: lt, gt, or eq as a string
+        Label_number: the number given at the start of the command in the loop, increments for each line.
+        """
+        return translated_line
