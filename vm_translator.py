@@ -5,7 +5,7 @@ Handles the orchestration of the VM translation process.
 import argparse
 from pathlib import Path
 
-from src.data_storage import CommandType, label_count
+from src.data_storage import CommandType
 import src.data_storage as data_storage
 from src.parser import Parser
 from src.translator import Translator
