@@ -51,6 +51,26 @@ def test_create_label(setup_resources):
     """
     translator = setup_resources["translator"]
     translated_line: list[str] = ["D=M-D", "M=-1", f"@LABEL", "JMP", "@SP", "A=M-1", "M=0", "(LABEL)"]
-    new_line: list[str] = translator.generate_label("eq", translated_line)
+    print(translated_line)
+    new_line: list[str] = translator.generate_label("eq", 0, translated_line)
+    print(new_line)
     assert new_line == ["D=M-D", "M=-1", f"@eq.0", "JMP", "@SP", "A=M-1", "M=0", "(eq.0)"]
+    data_storage.label_map = {
+        "eq": 0,
+        "lt": 0,
+        "gt": 0,
+    }
 
+@pytest.mark.parametrize("loop_list", ["eq", "gt", "lt"])
+def test_looped_label_eq(setup_resources, loop_list):
+    """
+    Test that our loop label starts back at 0 when moving on and increments in a loop properly.
+    """
+    translator = setup_resources["translator"]
+    translated_line: list[str] = ["D=M-D", "M=-1", f"@LABEL", "JMP", "@SP", "A=M-1", "M=0", "(LABEL)"]
+    print(data_storage.label_map)
+
+    for loop_items in range(10):
+        print(data_storage.label_map)
+        new_line: list[str] = translator.generate_label(loop_list, loop_items, translated_line)
+        print(new_line)
