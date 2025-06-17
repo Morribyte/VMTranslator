@@ -48,4 +48,6 @@ class Translator:
         Command: lt, gt, or eq as a string
         Label_number: the number given at the start of the command in the loop, increments for each line.
         """
-        return translated_line
+
+        appended_labels: list[str] = translated_line
+        return appended_labels
