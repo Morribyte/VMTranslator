@@ -44,11 +44,14 @@ def test_write_arithmetic_add(setup_resources):
     assert translated_add_value == ["@SP", "AM=M-1", "D=M", "A=A-1", "M=D+M"]
 
 
-def test_create_label(setup_resources):
+
+@pytest.mark.parametrize("label_name", ["eq", "lt", "gt"])
+def test_create_label(setup_resources, label_name):
     """
     Test that automatic labels are created.
     """
     translator = setup_resources["translator"]
     translated_line: list[str] = ["D=M-D", "M=-1", f"@LABEL", "JMP", "@SP", "A=M-1", "M=0", "(LABEL)"]
-    value: list[str] = translator.generate_label("eq", 0, translated_line)
-    assert value == ["D=M-D", "M=-1", f"@LABEL", "JMP", "@SP", "A=M-1", "M=0", "(LABEL)"]
+    for label_number in range(10):
+        value: list[str] = translator.generate_label(label_name, label_number, translated_line)
+        assert value == ["D=M-D", "M=-1", f"@LABEL", "JMP", "@SP", "A=M-1", "M=0", "(LABEL)"]

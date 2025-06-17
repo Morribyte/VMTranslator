@@ -16,3 +16,16 @@ class CommandType(Enum):
     CALL = "C_CALL"
 
 ARITHMETIC_COMMANDS = ["add", "eq"]
+
+command_map: dict = {
+    CommandType.PUSH: ["@SP", "AM=M+1", "A=A-1", "M=D"]
+}
+segment_map: dict = {
+    "constant": lambda x: [f"@{x}", "D=A"]
+}
+arithmetic_map: dict = {
+    "logical": ["D=M-D", "M=-1", f"@LABEL", "JMP", "@SP", "A=M-1", "M=0", "(LABEL)"],
+    "add": ["@SP", "AM=M-1", "D=M", "A=A-1", "M=D+M"],
+}
+
+comparison_map: list = ["lt", "gt", "eq"]

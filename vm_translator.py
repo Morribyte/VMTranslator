@@ -73,6 +73,8 @@ def write_to_file(file_name: str, code_file: list[str]):
                     translated_line = translator.write_push_pop(current_command, arg1, arg2)
                 case CommandType.ARITHMETIC:
                     translated_line = translator.write_arithmetic(arg1)
+                    if current_command in ["eq", "lt", "gt"]:
+                        print(f"Comparison label found: {current_command}")
 
 
             print(f"Translated line: {translated_line}")
