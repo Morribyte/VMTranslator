@@ -41,3 +41,11 @@ class Translator:
         new_line: list[str] = [word.replace("LABEL", f"{command}.{label_map[command]}") for word in translated_line]
         label_map[command] += 1
         return new_line
+
+    def write_jump(self, command: str, translated_line: list[str]) -> list[str]:
+        """
+        Replaces the jump directive with the proper jump command.
+        """
+        new_line: list[str] = [word.replace("JMP", f"D;J{command.upper()}") for word in translated_line]
+        print(new_line)
+        return new_line

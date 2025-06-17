@@ -67,13 +67,18 @@ def test_looped_label_eq(setup_resources, loop_list):
     Test that our loop label starts back at 0 when moving on and increments in a loop properly.
     """
     translator = setup_resources["translator"]
-    translated_line: list[str] = ["@SP", "AM=M-1", "M=-1", f"@LABEL", "JMP", "@SP", "A=M-1", "M=0", "(LABEL)"]
+    line_count = 0
     print(data_storage.label_map)
 
     for loop_items in range(10):
         print(data_storage.label_map)
+        translated_line: list[str] = ['@SP', 'AM=M-1', 'D=M', 'A=A-1', 'D=M-D', 'M=-1', f'@{loop_list}.{line_count}', 'JMP', '@SP',
+                                      'A=M-1', 'M=0', f'({loop_list}.{line_count})']
+
         new_line: list[str] = translator.generate_label(loop_list, translated_line)
         print(new_line)
+        assert new_line == translated_line
+        line_count += 1
 
 
 def test_arithmetic_command_returns_logical(setup_resources):
@@ -82,5 +87,16 @@ def test_arithmetic_command_returns_logical(setup_resources):
     """
     translator = setup_resources["translator"]
     line = translator.write_arithmetic("eq")
-    assert line == ["@SP", "AM=M-1", "M=-1", f"@LABEL", "JMP", "@SP", "A=M-1", "M=0", "(LABEL)"]
+    assert line == [ "@SP", "AM=M-1", "D=M", "A=A-1", "D=M-D", "M=-1", f"@LABEL", "JMP", "@SP", "A=M-1", "M=0", "(LABEL)"]
 
+
+def test_arithmetic_comparison_replace_jump(setup_resources):
+    """
+    Test that when an arithmetic command is comparison, we replace the JMP directive with the proper label.
+    """
+    translator = setup_resources["translator"]
+    translated_line: list[str] = ['@SP', 'AM=M-1', 'D=M', 'A=A-1', 'D=M-D', 'M=-1', f'@', 'JMP',
+                                  '@SP',
+                                  'A=M-1', 'M=0', f'()']
+    line = translator.write_jump("eq", translated_line)
+    assert line[7] == "D;JEQ"

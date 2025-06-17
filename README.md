@@ -76,6 +76,16 @@ A=A-1      // Load address below the top of the stack into the A register
 M=D+M      // Adds two values
 ```
 
+### sub
+* Subtracts two values
+```aiignore
+@SP        // Addresses stack pointer
+AM=M-1     // Decrements Stack Pointer and update A to new value.
+D=M        // Sets D to the second value in the computation.
+A=A-1      // Load address below the top of the stack into the A register
+M=D-M      // Subtracts two values
+```
+
 ### eq/lt/gt
 * Checks the equality of two values
 * If true, sets to -1, which is all bits set to 1

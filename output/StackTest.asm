@@ -14,6 +14,10 @@ AM=M+1
 A=A-1
 M=D
 // eq
+@SP
+AM=M-1
+D=M
+A=A-1
 D=M-D
 M=-1
 @eq.0
@@ -37,6 +41,10 @@ AM=M+1
 A=A-1
 M=D
 // eq
+@SP
+AM=M-1
+D=M
+A=A-1
 D=M-D
 M=-1
 @eq.1
@@ -60,6 +68,10 @@ AM=M+1
 A=A-1
 M=D
 // eq
+@SP
+AM=M-1
+D=M
+A=A-1
 D=M-D
 M=-1
 @eq.2
@@ -83,6 +95,10 @@ AM=M+1
 A=A-1
 M=D
 // lt
+@SP
+AM=M-1
+D=M
+A=A-1
 D=M-D
 M=-1
 @lt.0
@@ -106,6 +122,10 @@ AM=M+1
 A=A-1
 M=D
 // lt
+@SP
+AM=M-1
+D=M
+A=A-1
 D=M-D
 M=-1
 @lt.1
@@ -129,6 +149,10 @@ AM=M+1
 A=A-1
 M=D
 // lt
+@SP
+AM=M-1
+D=M
+A=A-1
 D=M-D
 M=-1
 @lt.2
@@ -152,6 +176,10 @@ AM=M+1
 A=A-1
 M=D
 // gt
+@SP
+AM=M-1
+D=M
+A=A-1
 D=M-D
 M=-1
 @gt.0
@@ -175,6 +203,10 @@ AM=M+1
 A=A-1
 M=D
 // gt
+@SP
+AM=M-1
+D=M
+A=A-1
 D=M-D
 M=-1
 @gt.1
@@ -198,6 +230,10 @@ AM=M+1
 A=A-1
 M=D
 // gt
+@SP
+AM=M-1
+D=M
+A=A-1
 D=M-D
 M=-1
 @gt.2
@@ -240,3 +276,36 @@ D=A
 AM=M+1
 A=A-1
 M=D
+// sub
+@SP
+AM=M-1
+D=M
+A=A-1
+M=D-M
+// neg
+@SP
+A=M-1
+M=-M
+// and
+@SP
+AM=M-1
+D=M
+A=A-1
+M=D&M
+// push constant 82
+@82
+D=A
+@SP
+AM=M+1
+A=A-1
+M=D
+// or
+@SP
+AM=M-1
+D=M
+A=A-1
+M=D|M
+// not
+@SP
+A=M-1
+M=!M

@@ -15,7 +15,7 @@ class CommandType(Enum):
     RETURN = "C_RETURN"
     CALL = "C_CALL"
 
-ARITHMETIC_COMMANDS = ["add", "eq", "lt", "gt"]
+ARITHMETIC_COMMANDS = ["add", "sub", "neg", "and", "not", "or", "eq", "lt", "gt"]
 
 command_map: dict = {
     CommandType.PUSH: ["@SP", "AM=M+1", "A=A-1", "M=D"],
@@ -27,6 +27,11 @@ segment_map: dict = {
 arithmetic_map: dict = {
     "logical": ["A=A-1", "D=M-D", "M=-1", f"@LABEL", "JMP", "@SP", "A=M-1", "M=0", "(LABEL)"],  # eq, gt, lt
     "add": ["@SP", "AM=M-1", "D=M", "A=A-1", "M=D+M"],
+    "sub": ["@SP", "AM=M-1", "D=M", "A=A-1", "M=D-M"],
+    "neg": ["@SP", "A=M-1", "M=-M"],
+    "and": ["@SP", "AM=M-1", "D=M", "A=A-1", "M=D&M"],
+    "or": ["@SP", "AM=M-1", "D=M", "A=A-1", "M=D|M"],
+    "not": ["@SP", "A=M-1", "M=!M"]
 }
 
 comparison_map: list = ["lt", "gt", "eq"]
