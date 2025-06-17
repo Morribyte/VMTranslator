@@ -67,7 +67,7 @@ def test_looped_label_eq(setup_resources, loop_list):
     Test that our loop label starts back at 0 when moving on and increments in a loop properly.
     """
     translator = setup_resources["translator"]
-    translated_line: list[str] = ["D=M-D", "M=-1", f"@LABEL", "JMP", "@SP", "A=M-1", "M=0", "(LABEL)"]
+    translated_line: list[str] = ["@SP", "AM=M-1", "M=-1", f"@LABEL", "JMP", "@SP", "A=M-1", "M=0", "(LABEL)"]
     print(data_storage.label_map)
 
     for loop_items in range(10):
@@ -82,5 +82,5 @@ def test_arithmetic_command_returns_logical(setup_resources):
     """
     translator = setup_resources["translator"]
     line = translator.write_arithmetic("eq")
-    assert line == ["D=M-D", "M=-1", f"@LABEL", "JMP", "@SP", "A=M-1", "M=0", "(LABEL)"]
+    assert line == ["@SP", "AM=M-1", "M=-1", f"@LABEL", "JMP", "@SP", "A=M-1", "M=0", "(LABEL)"]
 

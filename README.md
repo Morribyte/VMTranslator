@@ -53,16 +53,17 @@ This means that we should be able to break things down into smaller segments.
 ```aiignore
 @SP        // Addresses the stack pointer (R0, default 256)
 AM=M+1     // Increments Stack Pointer and update A to new value.
-A=M-1      // Moves A to the top of the stack (SP-1)
-M=D        // Store D at the top of the stack
+A=A-1      // Moves A to the top of the stack (SP-1)
+D=M       // Store D at the top of the stack
 ```
 
 ### Pop
 * Pops a value from the stack and decrements the stack pointer by 1.
+* Since we don't need to save any memory values, we don't need anything other than decrementing the stack pointer.
 ```aiignore
 @SP        // Addresses the stack pointer (R0, default 256)
 AM=M-1     // Decrements Stack Pointer and updates A to new value.
-A=M-1   
+D=M        // Places the new memory address (*SP) into RAM[*SP]
 ```
 
 ### add
@@ -80,9 +81,11 @@ M=D+M      // Adds two values
 * If true, sets to -1, which is all bits set to 1
 * If false, sets to 0, which is all bits set to 0
 ```aiignore
+A=A-1     // After the first pop, we need to pop a second value.
+D=M-D     // Checks if M and D are equal via a subtraction operation.
 M=-1      // Setting M to -1 to set for truth
 @EQ.#     // Label for jumping and skipping commands. Name EQ/LT/GT 
-@D;JEQ    // if D==0 then x==y; skip to next command
+D;JEQ     // if D==0 then x==y; skip to next command
 @SP       // Move to stack pointer
 A=M-1     // Select the top of the stack
 M=0       // If D!=0, then x!=y

@@ -28,7 +28,7 @@ class Translator:
         Takes a command and translates it to a different command depending on what we need.
         """
         if command in comparison_map:  # Redirect to logical
-           return arithmetic_map["logical"]
+           return command_map[CommandType.POP] + arithmetic_map["logical"]
         return arithmetic_map[command]
 
     def generate_label(self, command: str, translated_line: list[str]) -> list[str]:
