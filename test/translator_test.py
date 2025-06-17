@@ -43,3 +43,8 @@ def test_write_arithmetic_add(setup_resources):
     print(translated_add_value)
     assert translated_add_value == ["@SP", "AM=M-1", "D=M", "A=A-1", "M=D+M"]
 
+
+def test_create_label(setup_resources):
+    """
+    Test that automatic labels are created.
+    """

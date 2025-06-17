@@ -14,7 +14,8 @@ segment_map: dict = {
 }
 
 arithmetic_map: dict = {
-    "add": ["@SP", "AM=M-1", "D=M", "A=A-1", "M=D+M"]
+    "add": ["@SP", "AM=M-1", "D=M", "A=A-1", "M=D+M"],
+    "eq": ["M=-1", f"@EQLabel", "D;JEQ", "@SP", "A=M-1", "M=0", "(EQLabel)"]
 }
 
 # op_type: dict = {

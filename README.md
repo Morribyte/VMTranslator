@@ -72,10 +72,27 @@ A=M-1
 AM=M-1     // Decrements Stack Pointer and update A to new value.
 D=M        // Sets D to the second value in the computation.
 A=A-1      // Load address below the top of the stack into the A register
-M
+M=D+M      // Adds two values
+```
+
+### eq/lt/gt
+* Checks the equality of two values
+* If true, sets to -1, which is all bits set to 1
+* If false, sets to 0, which is all bits set to 0
+```aiignore
+M=-1      // Setting M to -1 to set for truth
+@EQ.#     // Label for jumping and skipping commands. Name EQ/LT/GT 
+@D;JEQ    // if D==0 then x==y; skip to next command
+@SP       // Move to stack pointer
+A=M-1     // Select the top of the stack
+M=0       // If D!=0, then x!=y
+(EQ.#)    // The command to take if we skip.  Name EQ/LT/GT 
+
 ```
 ## Segments
+
 ### Constant
+
 * Sets a value to a constant number using the A address.
 ```aiignore
 @X         // Load constant "X" into A
