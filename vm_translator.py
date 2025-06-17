@@ -52,12 +52,15 @@ def write_to_file(file_name: str, code_file: list[str]):
     """
     Writes a translated list to a file, line by line.
     """
+    label_number: int = 0
+
     with open(f"output/{file_name}.asm", "w") as file:
         print(f"Translated VM File @ output/{file_name}.hack")
         file.writelines(f"// Translated VM File @ output/{file_name}.hack\n")
+        translated_line: list[str] = []
 
         for index, line in enumerate(code_file):
-            translated_line = []
+
             print(f"\nIndex: {index} | Line: {line}")
 
             split_line: list[str] = parser.get_line(line)
@@ -74,12 +77,16 @@ def write_to_file(file_name: str, code_file: list[str]):
                     translated_line = translator.write_push_pop(current_command, arg1, arg2)
                 case CommandType.ARITHMETIC:
                     translated_line = translator.write_arithmetic(arg1)
-                    if current_command in ["eq", "lt", "gt"]:
+                    print(f"CommandType is ARITHMETIC. Command: {arg1}")
+                    if arg1 in data_storage.comparison_map:
                         print(f"Comparison label found: {current_command}")
+                        translated_line = translator.generate_label(arg1, label_number, translated_line)
 
 
             print(f"Translated line: {translated_line}")
             file.writelines(f"{line}\n" for line in translated_line)
+            label_number += 1
+
 
 
 

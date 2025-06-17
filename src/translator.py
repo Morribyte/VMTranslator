@@ -39,8 +39,7 @@ class Translator:
         Label_number: the number given at the start of the command in the loop, increments for each line.
         """
         print(f"Command is: {command}. Checking for labels...")
-        updated_words = [word.replace("LABEL", f"{command}.{label_number}") for word in translated_line]
-        print(updated_words)
+        new_line: list[str] = [word.replace("LABEL", f"{command}.{label_number}") for word in translated_line]
+        print(new_line)
         print(f"Labels found. Replacing with: {command}.{label_number}")
-        appended_labels: list[str] = translated_line
-        return appended_labels
+        return new_line

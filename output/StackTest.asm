@@ -16,12 +16,12 @@ M=D
 // eq
 D=M-D
 M=-1
-@LABEL
+@eq.0
 JMP
 @SP
 A=M-1
 M=0
-(LABEL)
+(eq.0)
 // push constant 17
 @17
 D=A
@@ -39,12 +39,12 @@ M=D
 // eq
 D=M-D
 M=-1
-@LABEL
+@eq.0
 JMP
 @SP
 A=M-1
 M=0
-(LABEL)
+(eq.0)
 // push constant 16
 @16
 D=A
@@ -62,12 +62,12 @@ M=D
 // eq
 D=M-D
 M=-1
-@LABEL
+@eq.0
 JMP
 @SP
 A=M-1
 M=0
-(LABEL)
+(eq.0)
 // push constant 892
 @892
 D=A
@@ -85,12 +85,12 @@ M=D
 // lt
 D=M-D
 M=-1
-@LABEL
+@lt.0
 JMP
 @SP
 A=M-1
 M=0
-(LABEL)
+(lt.0)
 // push constant 891
 @891
 D=A
@@ -108,12 +108,12 @@ M=D
 // lt
 D=M-D
 M=-1
-@LABEL
+@lt.0
 JMP
 @SP
 A=M-1
 M=0
-(LABEL)
+(lt.0)
 // push constant 891
 @891
 D=A
@@ -131,12 +131,12 @@ M=D
 // lt
 D=M-D
 M=-1
-@LABEL
+@lt.0
 JMP
 @SP
 A=M-1
 M=0
-(LABEL)
+(lt.0)
 // push constant 32767
 @32767
 D=A
@@ -154,12 +154,12 @@ M=D
 // gt
 D=M-D
 M=-1
-@LABEL
+@gt.0
 JMP
 @SP
 A=M-1
 M=0
-(LABEL)
+(gt.0)
 // push constant 32766
 @32766
 D=A
@@ -177,12 +177,12 @@ M=D
 // gt
 D=M-D
 M=-1
-@LABEL
+@gt.0
 JMP
 @SP
 A=M-1
 M=0
-(LABEL)
+(gt.0)
 // push constant 32766
 @32766
 D=A
@@ -200,12 +200,12 @@ M=D
 // gt
 D=M-D
 M=-1
-@LABEL
+@gt.0
 JMP
 @SP
 A=M-1
 M=0
-(LABEL)
+(gt.0)
 // push constant 57
 @57
 D=A
