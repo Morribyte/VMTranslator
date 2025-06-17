@@ -48,3 +48,6 @@ def test_create_label(setup_resources):
     """
     Test that automatic labels are created.
     """
+    translator = setup_resources["translator"]
+    value: list[str] = translator.generate_label()
+    assert value == ["D=M-D", "M=-1", f"@LABEL", "JMP", "@SP", "A=M-1", "M=0", "(LABEL)"]

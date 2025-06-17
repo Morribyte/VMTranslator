@@ -14,8 +14,8 @@ segment_map: dict = {
 }
 
 arithmetic_map: dict = {
+    "logical": ["D=M-D", "M=-1", f"@LABEL", "JMP", "@SP", "A=M-1", "M=0", "(LABEL)"],
     "add": ["@SP", "AM=M-1", "D=M", "A=A-1", "M=D+M"],
-    "eq": ["M=-1", f"@EQLabel", "D;JEQ", "@SP", "A=M-1", "M=0", "(EQLabel)"]
 }
 
 # op_type: dict = {
@@ -40,6 +40,4 @@ class Translator:
         Takes a command and translates it to a different command depending on what we need.
         """
         return arithmetic_map[command]
-
-
 
