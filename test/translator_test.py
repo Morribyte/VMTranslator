@@ -52,7 +52,7 @@ def test_create_label(setup_resources):
     translator = setup_resources["translator"]
     translated_line: list[str] = ["D=M-D", "M=-1", f"@LABEL", "JMP", "@SP", "A=M-1", "M=0", "(LABEL)"]
     print(translated_line)
-    new_line: list[str] = translator.generate_label("eq", 0, translated_line)
+    new_line: list[str] = translator.generate_label("eq",  translated_line)
     print(new_line)
     assert new_line == ["D=M-D", "M=-1", f"@eq.0", "JMP", "@SP", "A=M-1", "M=0", "(eq.0)"]
     data_storage.label_map = {
@@ -72,5 +72,15 @@ def test_looped_label_eq(setup_resources, loop_list):
 
     for loop_items in range(10):
         print(data_storage.label_map)
-        new_line: list[str] = translator.generate_label(loop_list, loop_items, translated_line)
+        new_line: list[str] = translator.generate_label(loop_list, translated_line)
         print(new_line)
+
+
+def test_arithmetic_command_returns_logical(setup_resources):
+    """
+    Test that when an arithmetic command is returned, the method outputs logical
+    """
+    translator = setup_resources["translator"]
+    line = translator.write_arithmetic("eq")
+    assert line == ["D=M-D", "M=-1", f"@LABEL", "JMP", "@SP", "A=M-1", "M=0", "(LABEL)"]
+
