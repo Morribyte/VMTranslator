@@ -29,3 +29,7 @@ arithmetic_map: dict = {
 }
 
 comparison_map: list = ["lt", "gt", "eq"]
+
+label_count: dict = {
+    "eq": 0, "lt": 0, "gt": 0
+}

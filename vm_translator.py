@@ -5,7 +5,7 @@ Handles the orchestration of the VM translation process.
 import argparse
 from pathlib import Path
 
-from src.data_storage import CommandType
+from src.data_storage import CommandType, label_count
 import src.data_storage as data_storage
 from src.parser import Parser
 from src.translator import Translator
@@ -52,7 +52,6 @@ def write_to_file(file_name: str, code_file: list[str]):
     """
     Writes a translated list to a file, line by line.
     """
-    label_number: int = 0
 
     with open(f"output/{file_name}.asm", "w") as file:
         print(f"Translated VM File @ output/{file_name}.hack")
@@ -80,12 +79,11 @@ def write_to_file(file_name: str, code_file: list[str]):
                     print(f"CommandType is ARITHMETIC. Command: {arg1}")
                     if arg1 in data_storage.comparison_map:
                         print(f"Comparison label found: {current_command}")
-                        translated_line = translator.generate_label(arg1, label_number, translated_line)
-
+                        translated_line = translator.generate_label(arg1, data_storage.label_count, translated_line)
+                        label_count[arg1] += 1
 
             print(f"Translated line: {translated_line}")
             file.writelines(f"{line}\n" for line in translated_line)
-            label_number += 1
 
 
 

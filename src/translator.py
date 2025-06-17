@@ -2,7 +2,7 @@
 src/translator.py
 Converts VM code instructions to machine / assembly code.
 """
-from src.data_storage import CommandType, command_map, segment_map, arithmetic_map, comparison_map
+from src.data_storage import CommandType, command_map, segment_map, arithmetic_map, comparison_map, label_count
 from src.parser import Parser
 
 
@@ -31,7 +31,7 @@ class Translator:
            return arithmetic_map["logical"]
         return arithmetic_map[command]
 
-    def generate_label(self, command: str, label_number: int | range, translated_line: list[str]) -> list[str]:
+    def generate_label(self, command: str,  translated_line: list[str]) -> list[str]:
         """
         Takes a list of commands and generates a label.
         Only applies to lt, gt, and eq commands.
@@ -39,7 +39,10 @@ class Translator:
         Label_number: the number given at the start of the command in the loop, increments for each line.
         """
         print(f"Command is: {command}. Checking for labels...")
-        new_line: list[str] = [word.replace("LABEL", f"{command}.{label_number}") for word in translated_line]
+        print(f"Label_count is: {label_count}")
+        new_line: list[str] = [word.replace("LABEL", f"{command}.{label_count[command]}") for word in translated_line]
         print(new_line)
-        print(f"Labels found. Replacing with: {command}.{label_number}")
+        print(f"Labels found. Replacing with: {command}.{label_count[command]}")
+        label_count[command] += 1
+        print(label_count)
         return new_line
