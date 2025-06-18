@@ -21,7 +21,7 @@ A=A-1
 D=M-D
 M=-1
 @eq.0
-JMP
+D;JEQ
 @SP
 A=M-1
 M=0
@@ -48,7 +48,7 @@ A=A-1
 D=M-D
 M=-1
 @eq.1
-JMP
+D;JEQ
 @SP
 A=M-1
 M=0
@@ -75,7 +75,7 @@ A=A-1
 D=M-D
 M=-1
 @eq.2
-JMP
+D;JEQ
 @SP
 A=M-1
 M=0
@@ -102,7 +102,7 @@ A=A-1
 D=M-D
 M=-1
 @lt.0
-JMP
+D;JLT
 @SP
 A=M-1
 M=0
@@ -129,7 +129,7 @@ A=A-1
 D=M-D
 M=-1
 @lt.1
-JMP
+D;JLT
 @SP
 A=M-1
 M=0
@@ -156,7 +156,7 @@ A=A-1
 D=M-D
 M=-1
 @lt.2
-JMP
+D;JLT
 @SP
 A=M-1
 M=0
@@ -183,7 +183,7 @@ A=A-1
 D=M-D
 M=-1
 @gt.0
-JMP
+D;JGT
 @SP
 A=M-1
 M=0
@@ -210,7 +210,7 @@ A=A-1
 D=M-D
 M=-1
 @gt.1
-JMP
+D;JGT
 @SP
 A=M-1
 M=0
@@ -237,7 +237,7 @@ A=A-1
 D=M-D
 M=-1
 @gt.2
-JMP
+D;JGT
 @SP
 A=M-1
 M=0
@@ -281,7 +281,7 @@ M=D
 AM=M-1
 D=M
 A=A-1
-M=D-M
+M=M-D
 // neg
 @SP
 A=M-1

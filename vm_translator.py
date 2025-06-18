@@ -80,7 +80,7 @@ def write_to_file(file_name: str, code_file: list[str]):
                     if arg1 in data_storage.comparison_map:
                         print(f"Comparison label found: {current_command}")
                         translated_line = translator.generate_label(arg1, translated_line)
-
+                        translated_line = translator.write_jump(arg1, translated_line)
             print(f"Translated line: {translated_line}")
             file.writelines(f"{line}\n" for line in translated_line)
 

@@ -27,7 +27,7 @@ segment_map: dict = {
 arithmetic_map: dict = {
     "logical": ["A=A-1", "D=M-D", "M=-1", f"@LABEL", "JMP", "@SP", "A=M-1", "M=0", "(LABEL)"],  # eq, gt, lt
     "add": ["@SP", "AM=M-1", "D=M", "A=A-1", "M=D+M"],
-    "sub": ["@SP", "AM=M-1", "D=M", "A=A-1", "M=D-M"],
+    "sub": ["@SP", "AM=M-1", "D=M", "A=A-1", "M=M-D"],
     "neg": ["@SP", "A=M-1", "M=-M"],
     "and": ["@SP", "AM=M-1", "D=M", "A=A-1", "M=D&M"],
     "or": ["@SP", "AM=M-1", "D=M", "A=A-1", "M=D|M"],
