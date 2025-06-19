@@ -20,9 +20,14 @@ class Translator:
     def write_push_pop(self, command: CommandType, segment: str, index: int) -> list[str]:
         """
         Takes a command and depending on whether it's C_PUSH or C_POP, operate on it.
+        :type segment: str
         """
         if command == CommandType.POP:
-            return segment_map[segment](index) + command_map[command] + segment_map["end"]
+            match segment:
+                case "temp":
+                    return ["temp"]
+                case _:
+                    return segment_map[segment](index) + command_map[command] + segment_map["end"]
         return segment_map[segment](index) + command_map[command]
 
     def write_arithmetic(self, command: str) -> list[str]:

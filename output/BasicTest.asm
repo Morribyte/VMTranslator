@@ -127,3 +127,84 @@ AM=M+1
 A=A-1
 M=D
 // pop temp 6
+temp
+// push local 0
+@0
+D=A
+@seg
+D=D+M
+@R13
+M=D
+@SP
+AM=M+1
+A=A-1
+M=D
+// push that 5
+@5
+D=A
+@seg
+D=D+M
+@R13
+M=D
+@SP
+AM=M+1
+A=A-1
+M=D
+// add
+@SP
+AM=M-1
+D=M
+A=A-1
+M=D+M
+// push argument 1
+@1
+D=A
+@seg
+D=D+M
+@R13
+M=D
+@SP
+AM=M+1
+A=A-1
+M=D
+// sub
+@SP
+AM=M-1
+D=M
+A=A-1
+M=M-D
+// push this 6
+@6
+D=A
+@seg
+D=D+M
+@R13
+M=D
+@SP
+AM=M+1
+A=A-1
+M=D
+// push this 6
+@6
+D=A
+@seg
+D=D+M
+@R13
+M=D
+@SP
+AM=M+1
+A=A-1
+M=D
+// add
+@SP
+AM=M-1
+D=M
+A=A-1
+M=D+M
+// sub
+@SP
+AM=M-1
+D=M
+A=A-1
+M=M-D
+// push temp 6
