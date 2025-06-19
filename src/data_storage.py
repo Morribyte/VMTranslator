@@ -23,7 +23,7 @@ command_map: dict = {
 }
 
 push_indirect_segment = lambda x: [f"@{x}", "D=A", "@seg", "A=D+M", "@R13", "M=D"]
-push_direct_segment = lambda x: ["@seg", "D=M"]
+push_direct_segment = lambda x: [f"@seg", "D=M"]
 
 push_segment_map: dict = {
     "constant": lambda x: [f"@{x}", "D=A"],

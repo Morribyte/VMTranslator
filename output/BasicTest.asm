@@ -129,12 +129,6 @@ M=D
 // pop temp 6
 @temp
 M=D
-@SP
-AM=M-1
-D=M
-@R13
-A=M
-M=D
 // push local 0
 @0
 D=A
