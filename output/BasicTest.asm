@@ -7,7 +7,7 @@ AM=M+1
 A=A-1
 M=D
 // pop local 0
-@None
+@0
 D=A
 @seg
 A=D+M
@@ -34,7 +34,7 @@ AM=M+1
 A=A-1
 M=D
 // pop argument 2
-@None
+@2
 D=A
 @seg
 A=D+M
@@ -47,7 +47,7 @@ D=M
 A=M
 M=D
 // pop argument 1
-@None
+@1
 D=A
 @seg
 A=D+M
@@ -67,7 +67,7 @@ AM=M+1
 A=A-1
 M=D
 // pop this 6
-@None
+@6
 D=A
 @seg
 A=D+M
@@ -94,7 +94,7 @@ AM=M+1
 A=A-1
 M=D
 // pop that 5
-@None
+@5
 D=A
 @seg
 A=D+M
@@ -107,7 +107,7 @@ D=M
 A=M
 M=D
 // pop that 2
-@None
+@2
 D=A
 @seg
 A=D+M
