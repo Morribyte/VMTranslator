@@ -171,17 +171,38 @@ A=A-1      // Load address below the top of the stack into the A register
 M=D+M      // We finally compute and store the value into the top of the stack, but keep our pointer 1 above the stack
 
 ### Local
-*locals segment: stored somewhere in the RAM;
-* LCL = base address
+* locals segment: stored somewhere in the RAM;
+* LCL = base address where the local segment is stored
 
 #### Pseudocode and full translation
 ```aiignore
 # pop local i
+# Pop handles in 3 stages -> calculate address -> get value -> store to address
 addr ← LCL + i
 SP--
 RAM[addr] ← RAM[SP]
 ```
 
+```aiignore
+# calculates address
+@i      // Addresses segment index at [i]
+D=A     // Places current index into D
+@LCL    // Addresses R[1], which stores the start of local 
+D=D+M   // stores LCL+i into D
+@R13    // Addressing a free register for storing the pointer+index
+M=D     // Stores D into M
+
+# Gets the value
+@SP     // Addresses stack pointer
+AM=M-1  // Decrements stack pointer and update A to new value
+D=M     // Pop top of stack into D
+
+# writes to address
+@R13    // Addresses to R13
+A=M     // Writes LCL+i into A
+M=D     // Writes D into M
+
+```
 
 ```aiignore
 # push local i
@@ -189,14 +210,12 @@ addr ← LCL + i
 RAM[SP] ← RAM[addr]
 SP++
 ```
-@i      // address the segment index at [i]
-D=A     // Place the index at [i] into D.
-@LCL    // Address the local label. 
-D=D+M   // Add D+M and store it in D for LCL+i
-@R13    // Address R13 for storing D.
-D=M     // Store LCL+i into M
-@SP     // Addresses the stack pointer
-AM=M+1  // Increments Stack Pointer and update A to new value.
-A=A-1   // 
-
-
+@i      // Address segment index at [i]
+D=A     // Pushes A into the data register
+@LCL    // Addresses the LCL segment
+A=D+M   // Adds i to LCL
+D=M     // Store RAM[base_addr+index]
+@SP     // Address the stackpointer
+AM=M+1  // Increments stack pointer and update A to new value
+A=A-1   // Moves at to the top of the stack (SP-1)
+D=M     // push value of register segment_base+base_addr onto stack.

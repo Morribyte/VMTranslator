@@ -100,3 +100,14 @@ def test_arithmetic_comparison_replace_jump(setup_resources):
                                   'A=M-1', 'M=0', f'()']
     line = translator.write_jump("eq", translated_line)
     assert line[7] == "D;JEQ"
+
+
+def test_pop_local_segment(setup_resources):
+    """
+    Test that when we use pop and local, we correctly translate into the code we need
+    """
+    translator = setup_resources["translator"]
+    translator = setup_resources["translator"]
+    translator.parser.command_line = ["push", "local", "0"]
+    translated_pop_value: list[str] = translator.write_push_pop(CommandType.POP, "local", 0)
+    assert translated_pop_value == ['@i', 'D=A', '@LCL', 'D=D+M', '@R13', 'M=D', '@SP', 'AM=M-1', 'D=M', '@R13', 'A=M', 'M=D']
