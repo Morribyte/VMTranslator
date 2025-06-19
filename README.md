@@ -170,9 +170,10 @@ D=M        // Sets D to the second value in the computation.
 A=A-1      // Load address below the top of the stack into the A register
 M=D+M      // We finally compute and store the value into the top of the stack, but keep our pointer 1 above the stack
 
-### Local
+### Local / Argument/ This / That
 * locals segment: stored somewhere in the RAM;
-* LCL = base address where the local segment is stored
+* Indirect memory access (through pointers)
+* LCL/ARG/THIS/THAT = base address where the local segment is stored
 
 #### Pseudocode and full translation
 ```aiignore
@@ -219,3 +220,17 @@ D=M     // Store RAM[base_addr+index]
 AM=M+1  // Increments stack pointer and update A to new value
 A=A-1   // Moves at to the top of the stack (SP-1)
 D=M     // push value of register segment_base+base_addr onto stack.
+
+### Temp / Pointer / Static
+* Mapped to RAM[5-12].
+* Direct memory access
+* RAM[5+i] 
+#### Pseudocode and full translation
+```aiignore
+# push temp i
+@i      // Address segment index at [i]
+D=A     // Pushes A into the data register
+@LCL    // Addresses the LCL segment
+A=D+M   // Adds i to LCL
+```
+
