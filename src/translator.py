@@ -21,6 +21,8 @@ class Translator:
         """
         Takes a command and depending on whether it's C_PUSH or C_POP, operate on it.
         """
+        if command == CommandType.POP:
+            return segment_map[segment](index) + command_map[command] + segment_map["end"]
         return segment_map[segment](index) + command_map[command]
 
     def write_arithmetic(self, command: str) -> list[str]:

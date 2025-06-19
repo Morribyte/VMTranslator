@@ -184,7 +184,7 @@ RAM[addr] ← RAM[SP]
 ```
 
 ```aiignore
-# calculates address
+# calculates address [local part of the command]
 @i      // Addresses segment index at [i]
 D=A     // Places current index into D
 @LCL    // Addresses R[1], which stores the start of local 
@@ -192,12 +192,12 @@ D=D+M   // stores LCL+i into D
 @R13    // Addressing a free register for storing the pointer+index
 M=D     // Stores D into M
 
-# Gets the value
+# Decrements stack poitner and pops into D [pop part of the command]
 @SP     // Addresses stack pointer
 AM=M-1  // Decrements stack pointer and update A to new value
 D=M     // Pop top of stack into D
 
-# writes to address
+# writes to LCL+i [
 @R13    // Addresses to R13
 A=M     // Writes LCL+i into A
 M=D     // Writes D into M

@@ -21,8 +21,13 @@ command_map: dict = {
     CommandType.PUSH: ["@SP", "AM=M+1", "A=A-1", "M=D"],
     CommandType.POP: ["@SP", "AM=M-1", "D=M"]
 }
+
+indirect = lambda x: [f"@{x}", "D=A", "@seg", "D=D+M", "@R13", "M=D"]
+
 segment_map: dict = {
-    "constant": lambda x: [f"@{x}", "D=A"]
+    "constant": lambda x: [f"@{x}", "D=A"],
+    "local": indirect,
+    "end": ["@R13", "A=M", "M=D"]
 }
 arithmetic_map: dict = {
     "logical": ["A=A-1", "D=M-D", "M=-1", f"@LABEL", "JMP", "@SP", "A=M-1", "M=0", "(LABEL)"],  # eq, gt, lt
@@ -40,4 +45,8 @@ label_map: dict = {
     "eq": 0,
     "lt": 0,
     "gt": 0,
+}
+
+segment_memory_map: dict = {
+    "local": "LCL",
 }

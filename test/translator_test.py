@@ -107,7 +107,18 @@ def test_pop_local_segment(setup_resources):
     Test that when we use pop and local, we correctly translate into the code we need
     """
     translator = setup_resources["translator"]
-    translator = setup_resources["translator"]
-    translator.parser.command_line = ["push", "local", "0"]
+    translator.parser.command_line = ["pop", "local", "0"]
     translated_pop_value: list[str] = translator.write_push_pop(CommandType.POP, "local", 0)
-    assert translated_pop_value == ['@i', 'D=A', '@LCL', 'D=D+M', '@R13', 'M=D', '@SP', 'AM=M-1', 'D=M', '@R13', 'A=M', 'M=D']
+    assert translated_pop_value == ['@0', 'D=A', '@seg', 'D=D+M', '@R13', 'M=D', '@SP', 'AM=M-1', 'D=M', '@R13', 'A=M', 'M=D']
+
+
+def test_local_segment_replacement(setup_resources):
+    """
+    Test that the @seg gets replaced with LCL properly.
+    """
+    translator = setup_resources["translator"]
+    translator.parser.command_line = ["pop", "local", "0"]
+    translated_line: list[str] = translator.write_push_pop(CommandType.POP, "local", 0)
+    assert translated_line == ['@0', 'D=A', '@seg', 'D=D+M', '@R13', 'M=D', '@SP', 'AM=M-1', 'D=M', '@R13', 'A=M', 'M=D']
+    line = translator.write_segment("local", translated_line)
+    assert line[2] == "@LCL"
