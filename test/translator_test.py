@@ -139,3 +139,10 @@ def test_local_argument_this_that_replacement(setup_resources, segment_type):
     line = translator.write_segment(segment_type, translated_line)
     print(f"after line: {line}")
     assert line[2] == f"@{data_storage.segment_memory_map[segment_type]}"
+
+
+def test_temp_replaces_seg(setup_resources):
+    """
+    Test that we can use the new dict for mapping the direct memory access pointers to the correct address
+    """
+    assert line == [f"@seg", "D=M", "@SP", "AM=M+1", "A=A-1", "M=D"]
