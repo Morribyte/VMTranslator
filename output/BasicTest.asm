@@ -215,10 +215,7 @@ D=M
 A=A-1
 M=M-D
 // push temp 6
-@6
-D=A
 @temp
-A=D+M
 D=M
 @SP
 AM=M+1

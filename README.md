@@ -216,6 +216,7 @@ D=A     // Pushes A into the data register
 @LCL    // Addresses the LCL segment
 A=D+M   // Adds i to LCL
 D=M     // Store RAM[base_addr+index]
+
 @SP     // Address the stackpointer
 AM=M+1  // Increments stack pointer and update A to new value
 A=A-1   // Moves at to the top of the stack (SP-1)
@@ -227,12 +228,9 @@ D=M     // push value of register segment_base+base_addr onto stack.
 * RAM[5+i] 
 #### Pseudocode and full translation
 ```aiignore
-# push temp i
-@i       // Addressing i
-D=A      // Setting D to equal A 
-@lbl     // Our label
-A=D+M    // Addressing D+i
-D=M      // setting the D to M.
+# push
+@seg     // Segmetn we push
+D=M      // Setting D to M 
 
 @SP
 M=M+1   // increment SP; point to new (after command) top of stack
@@ -242,7 +240,11 @@ M=D     // push value of register segment_base_addr+index onto stack; RAM[*SP--]
 ```
 
 ```aiignore
-# pop temp i
+# push
+```
+
+```aiignore
+# pop
 @SP     // Addresses stack pointer
 AM=M-1  // Decrements stack pointer and update A to new value
 D=M     // Pop top of stack into D
@@ -250,4 +252,5 @@ D=M     // Pop top of stack into D
 @seg    // The segment we're using
 M=D     // Setting M to equal D
 ```
+
 
