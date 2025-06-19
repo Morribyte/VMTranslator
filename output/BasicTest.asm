@@ -12,7 +12,7 @@ D=A
 @LCL
 D=D+M
 @R13
-D=M
+M=D
 @SP
 AM=M-1
 D=M
@@ -39,7 +39,7 @@ D=A
 @ARG
 D=D+M
 @R13
-D=M
+M=D
 @SP
 AM=M-1
 D=M
@@ -52,7 +52,7 @@ D=A
 @ARG
 D=D+M
 @R13
-D=M
+M=D
 @SP
 AM=M-1
 D=M
@@ -72,7 +72,7 @@ D=A
 @THIS
 D=D+M
 @R13
-D=M
+M=D
 @SP
 AM=M-1
 D=M
@@ -99,7 +99,7 @@ D=A
 @THAT
 D=D+M
 @R13
-D=M
+M=D
 @SP
 AM=M-1
 D=M
@@ -112,7 +112,7 @@ D=A
 @THAT
 D=D+M
 @R13
-D=M
+M=D
 @SP
 AM=M-1
 D=M
