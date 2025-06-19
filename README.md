@@ -228,9 +228,16 @@ D=M     // push value of register segment_base+base_addr onto stack.
 #### Pseudocode and full translation
 ```aiignore
 # push temp i
-@i      // Address segment index at [i]
-D=A     // Pushes A into the data register
-@LCL    // Addresses the LCL segment
-A=D+M   // Adds i to LCL
+@i       // Addressing i
+D=A      // Setting D to equal A 
+@lbl     // Our label
+A=D+M    // Addressing D+i
+D=M      // setting the D to M.
+
+@SP
+M=M+1   // increment SP; point to new (after command) top of stack
+A=M-1   // A=RAM[SP--]
+M=D     // push value of register segment_base_addr+index onto stack; RAM[*SP--]=RAM[base_addr+index]
+
 ```
 

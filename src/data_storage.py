@@ -22,14 +22,25 @@ command_map: dict = {
     CommandType.POP: ["@SP", "AM=M-1", "D=M"]
 }
 
-indirect_segment = lambda x: [f"@{x}", "D=A", "@seg", "D=D+M", "@R13", "M=D"]
+push_indirect_segment = lambda x: [f"@{x}", "D=A", "@seg", "D=D+M", "@R13", "M=D"]
 
-segment_map: dict = {
+push_segment_map: dict = {
     "constant": lambda x: [f"@{x}", "D=A"],
-    "local": indirect_segment,
-    "argument": indirect_segment,
-    "this": indirect_segment,
-    "that": indirect_segment,
+    "local": push_indirect_segment,
+    "argument": push_indirect_segment,
+    "this": push_indirect_segment,
+    "that": push_indirect_segment,
+    "end": ["@R13", "A=M", "M=D"]
+}
+
+pop_indirect_segment = lambda x: [f"@{x}", "D=A", "@seg", "A=D+M", "@R13", "D=M"]
+
+pop_segment_map: dict = {
+    "constant": lambda x: [f"@{x}", "D=A"],
+    "local": pop_indirect_segment,
+    "argument": pop_indirect_segment,
+    "this": pop_indirect_segment,
+    "that": pop_indirect_segment,
     "end": ["@R13", "A=M", "M=D"]
 }
 arithmetic_map: dict = {
