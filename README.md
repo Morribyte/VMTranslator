@@ -103,7 +103,6 @@ M=0       // If D!=0, then x!=y
 
 ```
 ## Segments
-
 ### Constant
 
 * Sets a value to a constant number using the A address.
@@ -112,7 +111,7 @@ M=0       // If D!=0, then x!=y
 D=A        // Move constant into D for storage
 ```
 
-### Pseudocode and full translation examples
+#### Pseudocode and full translation examples
 * push constant 7
 ```aiignore
 
@@ -120,7 +119,6 @@ pseudocode:
 RAM[SP] = 7             // RAM[256] = 7
 SP++                    // SP = 257
 ```
-
 
 assembly:
 # Use the "constant 7" segment
@@ -156,14 +154,14 @@ D=A        // Move constant into D for storage
 # Use the "push" command
 @SP        // Addresses the stack pointer (R0, default 256)
 AM=M+1     // Increments Stack Pointer and update A to new value.
-A=M-1      // Moves A to the top of the stack (SP-1)
+A=A-1      // Moves A to the top of the stack (SP-1)
 M=D        // Store D at the top of the stack
 # push constant 8
 @8         // Load constant 8 into A
 D=A        // Move constant into D for storage
 @SP        // Addresses the stack pointer (R0, default 256)
 AM=M+1     // Increments Stack Pointer and update A to new value.
-A=M-1      // Moves A to the top of the stack (SP-1)
+A=A-1      // Moves A to the top of the stack (SP-1)
 M=D        // Store D at the top of the stack
 # add
 @SP        // Addresses stack pointer
@@ -171,4 +169,34 @@ AM=M-1     // Decrements Stack Pointer and update A to new value.
 D=M        // Sets D to the second value in the computation.
 A=A-1      // Load address below the top of the stack into the A register
 M=D+M      // We finally compute and store the value into the top of the stack, but keep our pointer 1 above the stack
+
+### Local
+*locals segment: stored somewhere in the RAM;
+* LCL = base address
+
+#### Pseudocode and full translation
+```aiignore
+# pop local i
+addr ← LCL + i
+SP--
+RAM[addr] ← RAM[SP]
 ```
+
+
+```aiignore
+# push local i
+addr ← LCL + i
+RAM[SP] ← RAM[addr]
+SP++
+```
+@i      // address the segment index at [i]
+D=A     // Place the index at [i] into D.
+@LCL    // Address the local label. 
+D=D+M   // Add D+M and store it in D for LCL+i
+@R13    // Address R13 for storing D.
+D=M     // Store LCL+i into M
+@SP     // Addresses the stack pointer
+AM=M+1  // Increments Stack Pointer and update A to new value.
+A=A-1   // 
+
+

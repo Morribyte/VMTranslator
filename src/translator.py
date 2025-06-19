@@ -36,7 +36,7 @@ class Translator:
         Takes a list of commands and generates a label.
         Only applies to lt, gt, and eq commands.
         Command: lt, gt, or eq as a string
-        Label_number: the number given at the start of the command in the loop, increments for each line.
+        Label_map[command]: we track the label we're using lt, gt, or eq using a dict and increment the proper command at the end
         """
         new_line: list[str] = [word.replace("LABEL", f"{command}.{label_map[command]}") for word in translated_line]
         label_map[command] += 1

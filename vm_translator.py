@@ -18,7 +18,7 @@ def get_file():
     Prompts user for a file if not provided via command-line.
     """
     while True:
-        file_path = input("Hack assembler > ").strip()
+        file_path = input("Hack VMTranslator > ").strip()
         if Path(file_path).exists():
             return file_path
         print("File not found. Try again.")
@@ -54,8 +54,8 @@ def write_to_file(file_name: str, code_file: list[str]):
     """
     label_count: int = 0
     with open(f"output/{file_name}.asm", "w") as file:
-        print(f"Translated VM File @ output/{file_name}.hack")
-        file.writelines(f"// Translated VM File @ output/{file_name}.hack\n")
+        print(f"Translated VM File @ output/{file_name}.asm")
+        file.writelines(f"// Translated VM File @ output/{file_name}.asm\n")
         translated_line: list[str] = []
 
         for index, line in enumerate(code_file):
