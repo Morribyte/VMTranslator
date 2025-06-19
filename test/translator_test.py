@@ -119,6 +119,8 @@ def test_local_segment_replacement(setup_resources):
     translator = setup_resources["translator"]
     translator.parser.command_line = ["pop", "local", "0"]
     translated_line: list[str] = translator.write_push_pop(CommandType.POP, "local", 0)
+    print(f"translated_line: {translated_line}")
     assert translated_line == ['@0', 'D=A', '@seg', 'D=D+M', '@R13', 'M=D', '@SP', 'AM=M-1', 'D=M', '@R13', 'A=M', 'M=D']
     line = translator.write_segment("local", translated_line)
+    print(f"after line: {line}")
     assert line[2] == "@LCL"
