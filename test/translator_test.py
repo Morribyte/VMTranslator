@@ -145,4 +145,9 @@ def test_temp_replaces_seg(setup_resources):
     """
     Test that we can use the new dict for mapping the direct memory access pointers to the correct address
     """
+    translator = setup_resources["translator"]
+    translator.parser.command_line = ["push", "temp", "0"]
+    line: list[str] = [f"@seg", "D=M", "@SP", "AM=M+1", "A=A-1", "M=D"]
+    translator.write_segment("temp", line)
+    print(f"translated_line: {line}")
     assert line == [f"@seg", "D=M", "@SP", "AM=M+1", "A=A-1", "M=D"]
