@@ -9,8 +9,8 @@ M=D
 // pop local 0
 @0
 D=A
-@seg
-A=D+M
+@LCL
+D=D+M
 @R13
 D=M
 @SP
@@ -36,8 +36,8 @@ M=D
 // pop argument 2
 @2
 D=A
-@seg
-A=D+M
+@ARG
+D=D+M
 @R13
 D=M
 @SP
@@ -49,8 +49,8 @@ M=D
 // pop argument 1
 @1
 D=A
-@seg
-A=D+M
+@ARG
+D=D+M
 @R13
 D=M
 @SP
@@ -69,8 +69,8 @@ M=D
 // pop this 6
 @6
 D=A
-@seg
-A=D+M
+@THIS
+D=D+M
 @R13
 D=M
 @SP
@@ -96,8 +96,8 @@ M=D
 // pop that 5
 @5
 D=A
-@seg
-A=D+M
+@THAT
+D=D+M
 @R13
 D=M
 @SP
@@ -109,8 +109,8 @@ M=D
 // pop that 2
 @2
 D=A
-@seg
-A=D+M
+@THAT
+D=D+M
 @R13
 D=M
 @SP
@@ -127,7 +127,7 @@ AM=M+1
 A=A-1
 M=D
 // pop temp 6
-@seg
+@temp
 M=D
 @SP
 AM=M-1
@@ -138,8 +138,8 @@ M=D
 // push local 0
 @0
 D=A
-@seg
-D=D+M
+@LCL
+A=D+M
 @R13
 M=D
 @SP
@@ -149,8 +149,8 @@ M=D
 // push that 5
 @5
 D=A
-@seg
-D=D+M
+@THAT
+A=D+M
 @R13
 M=D
 @SP
@@ -166,8 +166,8 @@ M=D+M
 // push argument 1
 @1
 D=A
-@seg
-D=D+M
+@ARG
+A=D+M
 @R13
 M=D
 @SP
@@ -183,8 +183,8 @@ M=M-D
 // push this 6
 @6
 D=A
-@seg
-D=D+M
+@THIS
+A=D+M
 @R13
 M=D
 @SP
@@ -194,8 +194,8 @@ M=D
 // push this 6
 @6
 D=A
-@seg
-D=D+M
+@THIS
+A=D+M
 @R13
 M=D
 @SP
@@ -217,7 +217,7 @@ M=M-D
 // push temp 6
 @6
 D=A
-@seg
+@temp
 A=D+M
 D=M
 @SP

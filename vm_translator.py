@@ -74,6 +74,8 @@ def write_to_file(file_name: str, code_file: list[str]):
             match current_command:
                 case CommandType.PUSH | CommandType.POP:
                     translated_line = translator.write_push_pop(current_command, arg1, arg2)
+                    if arg1 != "constant":
+                        translated_line = translator.write_segment(arg1, translated_line)
                 case CommandType.ARITHMETIC:
                     translated_line = translator.write_arithmetic(arg1)
                     print(f"CommandType is ARITHMETIC. Command: {arg1}")

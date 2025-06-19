@@ -57,5 +57,8 @@ class Translator:
         """
         Replaces a segment with the correct label
         """
-        new_line: list[str] = [word.replace("seg", f"{segment_memory_map[command]}") for word in translated_line]
+        if command in segment_memory_map:
+            new_line: list[str] = [word.replace("seg", f"{segment_memory_map[command]}") for word in translated_line]
+        else:
+            new_line: list[str] = [word.replace("seg", command) for word in translated_line]
         return new_line
