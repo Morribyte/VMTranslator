@@ -30,7 +30,6 @@ push_segment_map: dict = {
     "argument": push_indirect_segment,
     "this": push_indirect_segment,
     "that": push_indirect_segment,
-    "end": ["@R13", "A=M", "M=D"]
 }
 
 pop_indirect_segment = lambda x: [f"@{x}", "D=A", "@seg", "A=D+M", "@R13", "D=M"]

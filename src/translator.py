@@ -2,7 +2,8 @@
 src/translator.py
 Converts VM code instructions to machine / assembly code.
 """
-from src.data_storage import CommandType, command_map, segment_map, arithmetic_map, comparison_map, label_map, segment_memory_map
+from src.data_storage import CommandType, command_map, segment_map, arithmetic_map, comparison_map, label_map, \
+    segment_memory_map, pop_segment_map
 from src.parser import Parser
 
 
@@ -23,11 +24,7 @@ class Translator:
         :type segment: str
         """
         if command == CommandType.POP:
-            match segment:
-                case "temp":
-                    return ["temp"]
-                case _:
-                    return segment_map[segment](index) + command_map[command] + segment_map["end"]
+            return pop_segment_map[segment](index) + command_map[command] + pop_segment_map["end"]
         return segment_map[segment](index) + command_map[command]
 
     def write_arithmetic(self, command: str) -> list[str]:
