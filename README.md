@@ -241,3 +241,12 @@ M=D     // push value of register segment_base_addr+index onto stack; RAM[*SP--]
 
 ```
 
+```aiignore
+# pop temp i
+
+
+@SP     // Addresses stack pointer
+AM=M-1  // Decrements stack pointer and update A to new value
+D=M     // Pop top of stack into D
+```
+

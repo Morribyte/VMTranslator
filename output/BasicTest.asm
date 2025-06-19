@@ -10,9 +10,9 @@ M=D
 @None
 D=A
 @seg
-D=D+M
+A=D+M
 @R13
-M=D
+D=M
 @SP
 AM=M-1
 D=M
@@ -37,9 +37,9 @@ M=D
 @None
 D=A
 @seg
-D=D+M
+A=D+M
 @R13
-M=D
+D=M
 @SP
 AM=M-1
 D=M
@@ -50,9 +50,9 @@ M=D
 @None
 D=A
 @seg
-D=D+M
+A=D+M
 @R13
-M=D
+D=M
 @SP
 AM=M-1
 D=M
@@ -70,9 +70,9 @@ M=D
 @None
 D=A
 @seg
-D=D+M
+A=D+M
 @R13
-M=D
+D=M
 @SP
 AM=M-1
 D=M
@@ -97,9 +97,9 @@ M=D
 @None
 D=A
 @seg
-D=D+M
+A=D+M
 @R13
-M=D
+D=M
 @SP
 AM=M-1
 D=M
@@ -110,9 +110,9 @@ M=D
 @None
 D=A
 @seg
-D=D+M
+A=D+M
 @R13
-M=D
+D=M
 @SP
 AM=M-1
 D=M
@@ -127,7 +127,14 @@ AM=M+1
 A=A-1
 M=D
 // pop temp 6
-temp
+@seg
+M=D
+@SP
+AM=M-1
+D=M
+@R13
+A=M
+M=D
 // push local 0
 @0
 D=A
@@ -208,3 +215,18 @@ D=M
 A=A-1
 M=M-D
 // push temp 6
+@6
+D=A
+@seg
+A=D+M
+D=M
+@SP
+AM=M+1
+A=A-1
+M=D
+// add
+@SP
+AM=M-1
+D=M
+A=A-1
+M=D+M

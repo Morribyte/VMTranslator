@@ -2,8 +2,8 @@
 src/translator.py
 Converts VM code instructions to machine / assembly code.
 """
-from src.data_storage import CommandType, command_map, segment_map, arithmetic_map, comparison_map, label_map, \
-    segment_memory_map, pop_segment_map
+from src.data_storage import CommandType, command_map, arithmetic_map, comparison_map, label_map, \
+    segment_memory_map, pop_segment_map, push_segment_map
 from src.parser import Parser
 
 
@@ -21,11 +21,10 @@ class Translator:
     def write_push_pop(self, command: CommandType, segment: str, index: int) -> list[str]:
         """
         Takes a command and depending on whether it's C_PUSH or C_POP, operate on it.
-        :type segment: str
         """
         if command == CommandType.POP:
             return pop_segment_map[segment](index) + command_map[command] + pop_segment_map["end"]
-        return segment_map[segment](index) + command_map[command]
+        return push_segment_map[segment](index) + command_map[command]
 
     def write_arithmetic(self, command: str) -> list[str]:
         """

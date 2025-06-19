@@ -23,6 +23,7 @@ command_map: dict = {
 }
 
 push_indirect_segment = lambda x: [f"@{x}", "D=A", "@seg", "D=D+M", "@R13", "M=D"]
+push_direct_segment = lambda x: [f"@{x}", "D=A", "@seg", "A=D+M", "D=M"]
 
 push_segment_map: dict = {
     "constant": lambda x: [f"@{x}", "D=A"],
@@ -30,9 +31,11 @@ push_segment_map: dict = {
     "argument": push_indirect_segment,
     "this": push_indirect_segment,
     "that": push_indirect_segment,
+    "temp": push_direct_segment,
 }
 
 pop_indirect_segment = lambda x: [f"@{x}", "D=A", "@seg", "A=D+M", "@R13", "D=M"]
+pop_direct_segment = lambda x: ["@seg", "M=D"]
 
 pop_segment_map: dict = {
     "constant": lambda x: [f"@{x}", "D=A"],
@@ -40,6 +43,7 @@ pop_segment_map: dict = {
     "argument": pop_indirect_segment,
     "this": pop_indirect_segment,
     "that": pop_indirect_segment,
+    "temp": pop_direct_segment,
     "end": ["@R13", "A=M", "M=D"]
 }
 arithmetic_map: dict = {
