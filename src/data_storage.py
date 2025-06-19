@@ -70,3 +70,7 @@ segment_memory_map: dict = {
     "this": "THIS",
     "that": "THAT",
 }
+
+direct_segment_access: dict = {
+    "temp": lambda x: f"{5+x}"
+}
