@@ -62,6 +62,6 @@ class Translator:
         Replaces a segment with the correct label
         """
         if index is not None:
-            new_line: list[str] = [word.replace("seg", f"{segment_memory_map[command]}") for word in translated_line]
-        new_line: list[str] = [word.replace("seg", direct_segment_access[command]) for word in translated_line]
+            new_line: list[str] = [word.replace("seg", direct_segment_access[command]) for word in translated_line]
+        new_line: list[str] = [word.replace("seg", f"{segment_memory_map[command]}") for word in translated_line]
         return new_line
