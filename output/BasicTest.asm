@@ -139,7 +139,6 @@ D=A
 A=D+M
 D=M
 @R13
-D=M
 @SP
 AM=M+1
 A=A-1
@@ -151,7 +150,6 @@ D=A
 A=D+M
 D=M
 @R13
-D=M
 @SP
 AM=M+1
 A=A-1
@@ -169,7 +167,6 @@ D=A
 A=D+M
 D=M
 @R13
-D=M
 @SP
 AM=M+1
 A=A-1
@@ -187,7 +184,6 @@ D=A
 A=D+M
 D=M
 @R13
-D=M
 @SP
 AM=M+1
 A=A-1
@@ -199,7 +195,6 @@ D=A
 A=D+M
 D=M
 @R13
-D=M
 @SP
 AM=M+1
 A=A-1
