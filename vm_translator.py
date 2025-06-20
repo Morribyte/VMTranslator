@@ -77,7 +77,7 @@ def write_to_file(file_name: str, code_file: list[str]):
                     if arg1 != "constant":
                         translated_line = translator.write_segment(arg1, translated_line, arg2)
                     if arg1 == "static":
-                        data_storage.STATIC_VARIABLE_NUMBER += 1
+                        translator.set_arg2(arg2)
                 case CommandType.ARITHMETIC:
                     translated_line = translator.write_arithmetic(arg1)
                     print(f"CommandType is ARITHMETIC. Command: {arg1}")
