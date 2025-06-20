@@ -21,3 +21,53 @@ AM=M+1
 A=A-1
 M=D
 // pop static 8
+@SP
+AM=M-1
+D=M
+@StaticTest.0
+M=D
+// pop static 3
+@SP
+AM=M-1
+D=M
+@StaticTest.0
+M=D
+// pop static 1
+@SP
+AM=M-1
+D=M
+@StaticTest.0
+M=D
+// push static 3
+@StaticTest.0
+D=M
+@SP
+AM=M+1
+A=A-1
+M=D
+// push static 1
+@StaticTest.0
+D=M
+@SP
+AM=M+1
+A=A-1
+M=D
+// sub
+@SP
+AM=M-1
+D=M
+A=A-1
+M=M-D
+// push static 8
+@StaticTest.0
+D=M
+@SP
+AM=M+1
+A=A-1
+M=D
+// add
+@SP
+AM=M-1
+D=M
+A=A-1
+M=D+M

@@ -4,7 +4,7 @@ Converts VM code instructions to machine / assembly code.
 """
 from typing import Optional
 
-
+from src import data_storage as data_storage
 from src.data_storage import CommandType, command_map, arithmetic_map, comparison_map, label_map, \
     segment_memory_map, pop_segment_map, push_segment_map, STATIC_VARIABLE_NUMBER
 from src.parser import Parser
@@ -70,10 +70,10 @@ class Translator:
         return new_line
 
     def set_arg2(self, arg2_value: int):
-        STATIC_VARIABLE_NUMBER = self.get_arg2()
+        data_storage.STATIC_VARIABLE_NUMBER = arg2_value
 
     def get_arg2(self) -> int:
         """
         Gets the current arg2 value from STATIC_VARIABLE_NUMBER.
         """
-        return STATIC_VARIABLE_NUMBER if STATIC_VARIABLE_NUMBER is not None else None
+        return data_storage.STATIC_VARIABLE_NUMBER if data_storage.STATIC_VARIABLE_NUMBER is not None else None

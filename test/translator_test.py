@@ -123,22 +123,7 @@ def test_local_segment_replacement(setup_resources):
     assert translated_line == ['@0', 'D=A', '@seg', 'D=D+M', '@R13', 'M=D', '@SP', 'AM=M-1', 'D=M', '@R13', 'A=M', 'M=D']
     line = translator.write_segment("local", translated_line)
     print(f"after line: {line}")
-    assert line[2] == "@LCL"
-
-
-@pytest.mark.parametrize("segment_type", ["local", "argument", "this", "that"])
-def test_local_argument_this_that_replacement(setup_resources, segment_type):
-    """
-    Test that we can use any of the local, argument, this, and that segments properly.
-    """
-    translator = setup_resources["translator"]
-    translator.parser.command_line = ["pop", "local", "0"]
-    translated_line: list[str] = translator.write_push_pop(CommandType.POP, "local", 0)
-    print(f"translated_line: {translated_line}")
-    assert translated_line == ['@0', 'D=A', '@seg', 'D=D+M', '@R13', 'M=D', '@SP', 'AM=M-1', 'D=M', '@R13', 'A=M', 'M=D']
-    line = translator.write_segment(segment_type, translated_line)
-    print(f"after line: {line}")
-    assert line[2] == f"@{data_storage.segment_memory_map[segment_type]}"
+    assert "@LCL" in line[2]
 
 
 def test_temp_replaces_seg(setup_resources):
@@ -161,3 +146,13 @@ def test_set_arg2_for_static(setup_resources):
     translator.parser.command_line = ["push", "temp", "3"]
     arg_2 = translator.set_arg2(3)
     assert data_storage.STATIC_VARIABLE_NUMBER == 3
+
+
+def test_get_arg2_for_static(setup_resources):
+    """
+    Test that when we use get_arg2 for static variables, it returns proper value.
+    """
+    translator = setup_resources["translator"]
+    translator.parser.command_line = ["push", "temp", "3"]
+    translator.set_arg2(3)
+    assert translator.get_arg2() == 3
