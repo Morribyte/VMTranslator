@@ -7,13 +7,10 @@ AM=M+1
 A=A-1
 M=D
 // pop pointer 0
-@THIS
-M=D
 @SP
 AM=M-1
 D=M
-@R13
-A=M
+@THIS
 M=D
 // push constant 3040
 @3040
@@ -23,13 +20,10 @@ AM=M+1
 A=A-1
 M=D
 // pop pointer 1
-@THAT
-M=D
 @SP
 AM=M-1
 D=M
-@R13
-A=M
+@THAT
 M=D
 // push constant 32
 @32
