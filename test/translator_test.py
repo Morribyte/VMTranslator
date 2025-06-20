@@ -156,3 +156,13 @@ def test_get_arg2_for_static(setup_resources):
     translator.parser.command_line = ["push", "temp", "3"]
     translator.set_arg2(3)
     assert translator.get_arg2() == 3
+
+
+def test_default_case_push_pop(setup_resources):
+    """
+    Test that we execute the default case in our push_pop method
+    """
+    translator = setup_resources["translator"]
+    translator.parser.command_line = ["pop", "temp", "7"]
+    translated_pop_value: list[str] = translator.write_push_pop(CommandType.POP, "temp", 7)
+    assert translated_pop_value == ['@SP', 'AM=M-1', 'D=M', '@seg', 'M=D']
