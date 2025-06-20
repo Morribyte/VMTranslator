@@ -138,7 +138,7 @@ D=A
 @LCL
 A=D+M
 @R13
-M=D
+D=M
 @SP
 AM=M+1
 A=A-1
@@ -149,7 +149,7 @@ D=A
 @THAT
 A=D+M
 @R13
-M=D
+D=M
 @SP
 AM=M+1
 A=A-1
@@ -166,7 +166,7 @@ D=A
 @ARG
 A=D+M
 @R13
-M=D
+D=M
 @SP
 AM=M+1
 A=A-1
@@ -183,7 +183,7 @@ D=A
 @THIS
 A=D+M
 @R13
-M=D
+D=M
 @SP
 AM=M+1
 A=A-1
@@ -194,7 +194,7 @@ D=A
 @THIS
 A=D+M
 @R13
-M=D
+D=M
 @SP
 AM=M+1
 A=A-1
