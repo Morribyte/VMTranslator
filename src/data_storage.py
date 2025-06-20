@@ -76,4 +76,3 @@ segment_memory_map: dict[str, Callable[[int], str]] = {
     "that": lambda _: "THAT",
     "temp": lambda x: f"{5 + x}",
 }
-
