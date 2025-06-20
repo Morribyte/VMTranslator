@@ -9,14 +9,6 @@ from typing import Callable
 # only callables. For the segments that don't require direct address replacements, I can use the function as a callable
 # replacement to make sure the code doesn't produce errors.
 
-def constant_formatter(label: str) -> Callable[[int], str]:
-    """
-    Returns a callable function
-    """
-    return lambda _: label
-
-
-
 class CommandType(Enum):
     ARITHMETIC = "C_ARITHMETIC"
     PUSH = "C_PUSH"
@@ -77,11 +69,11 @@ label_map: dict = {
     "gt": 0,
 }
 
-segment_memory_map: dict = {
-    "local": constant_formatter("LCL"),
-    "argument": constant_formatter("ARG"),
-    "this": constant_formatter("THIS"),
-    "that": constant_formatter("THAT"),
+segment_memory_map: dict[str, Callable[[int], str]] = {
+    "local": lambda _: "LCL",
+    "argument": lambda _: "ARG",
+    "this": lambda _: "THIS",
+    "that": lambda _: "THAT",
     "temp": lambda x: f"{5 + x}",
 }
 

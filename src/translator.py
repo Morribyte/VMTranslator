@@ -2,9 +2,13 @@
 src/translator.py
 Converts VM code instructions to machine / assembly code.
 """
+from typing import Optional
+
+
 from src.data_storage import CommandType, command_map, arithmetic_map, comparison_map, label_map, \
     segment_memory_map, pop_segment_map, push_segment_map
 from src.parser import Parser
+
 
 
 # op_type: dict = {
@@ -57,7 +61,7 @@ class Translator:
         print(new_line)
         return new_line
 
-    def write_segment(self, command: str, translated_line: list[str],  direct_memory_index: int = None) -> list[str]:
+    def write_segment(self, command: str, translated_line: list[str],  direct_memory_index: Optional[int] = None) -> list[str]:
         """
         Replaces a segment with the correct label
         """
