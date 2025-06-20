@@ -159,5 +159,5 @@ def test_set_arg2_for_static(setup_resources):
     """
     translator = setup_resources["translator"]
     translator.parser.command_line = ["push", "temp", "3"]
-    arg_2 = translator.get_arg2()
-    assert arg_2 == "3"
+    arg_2 = translator.set_arg2(3)
+    assert data_storage.STATIC_VARIABLE_NUMBER == 3
