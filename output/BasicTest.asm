@@ -127,6 +127,9 @@ AM=M+1
 A=A-1
 M=D
 // pop temp 6
+@SP
+AM=M-1
+D=M
 @11
 M=D
 // push local 0

@@ -29,7 +29,7 @@ class Translator:
         if command == CommandType.POP:
             match segment:
                 case "temp":
-                    return pop_segment_map[segment](index)
+                    return command_map[command] + pop_segment_map[segment](index)
                 case _:
                     return pop_segment_map[segment](index) + command_map[command] + pop_segment_map["end"]
         return push_segment_map[segment](index) + command_map[command]
