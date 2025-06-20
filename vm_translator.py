@@ -94,17 +94,17 @@ def main():
     parse.add_argument("file", nargs="?", help="Assembles the given file into a .hack file.")
 
     args = parse.parse_args()
-    file_path: Path = Path(args.file if args.file else get_file())
-    file_name: str = file_path.stem
+    data_storage.FILE_PATH = Path(args.file if args.file else get_file())
+    data_storage.FILE_NAME = data_storage.FILE_PATH.stem
 
-    print(f"Current file path: {file_path}")
-    print(f"Current file name: {file_path.stem}")
+    print(f"Current file path: {data_storage.FILE_PATH}")
+    print(f"Current file name: {data_storage.FILE_NAME}")
 
-    open_file = read_file(file_path)
+    open_file = read_file(data_storage.FILE_PATH)
 
     print(f"Translating file...\n")
 
-    write_to_file(file_name, open_file)
+    write_to_file(data_storage.FILE_NAME, open_file)
 
 
 if __name__ == "__main__":

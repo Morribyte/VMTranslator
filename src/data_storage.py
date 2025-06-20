@@ -1,7 +1,7 @@
 """
 An Enum class for holding the 8 types of commands.
 """
-
+from pathlib import Path
 from enum import Enum
 from typing import Callable
 
@@ -19,6 +19,9 @@ class CommandType(Enum):
     FUNCTION = "C_FUNCTION"
     RETURN = "C_RETURN"
     CALL = "C_CALL"
+
+FILE_PATH: Path = Path("")
+FILE_NAME: str = ""
 
 ARITHMETIC_COMMANDS = ["add", "sub", "neg", "and", "not", "or", "eq", "lt", "gt"]
 
