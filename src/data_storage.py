@@ -41,6 +41,7 @@ push_segment_map: dict = {
     "that": push_indirect_segment,
     "temp": push_direct_segment,
     "pointer": push_direct_segment,
+    "static": push_direct_segment,
 }
 
 pop_indirect_segment = lambda x: [f"@{x}", "D=A", "@seg", "D=D+M", "@R13", "M=D"]
@@ -54,6 +55,7 @@ pop_segment_map: dict = {
     "that": pop_indirect_segment,
     "temp": pop_direct_segment,
     "pointer": pop_direct_segment,
+    "static": pop_direct_segment,
     "end": ["@R13", "A=M", "M=D"]
 }
 arithmetic_map: dict = {
@@ -81,4 +83,5 @@ segment_memory_map: dict[str, Callable[[int], str]] = {
     "that": lambda _: "THAT",
     "temp": lambda x: f"{5 + x}",
     "pointer": lambda x: "THIS" if x==0 else "THAT",
+    "static": lambda x: {}
 }

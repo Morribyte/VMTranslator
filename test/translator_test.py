@@ -151,3 +151,13 @@ def test_temp_replaces_seg(setup_resources):
     line = translator.write_segment("temp", line, direct_memory_index=0)
     print(f"translated_line: {line}")
     assert line == [f"@5", "D=M", "@SP", "AM=M+1", "A=A-1", "M=D"]
+
+
+def test_set_arg2_for_static(setup_resources):
+    """
+    Test that when we use set_arg2 for static, it returns the proper value.
+    """
+    translator = setup_resources["translator"]
+    translator.parser.command_line = ["push", "temp", "3"]
+    arg_2 = translator.get_arg2()
+    assert arg_2 == "3"
