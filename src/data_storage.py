@@ -75,4 +75,5 @@ segment_memory_map: dict[str, Callable[[int], str]] = {
     "this": lambda _: "THIS",
     "that": lambda _: "THAT",
     "temp": lambda x: f"{5 + x}",
+    "pointer": lambda x: "THIS" if x==0 else "THAT",
 }
