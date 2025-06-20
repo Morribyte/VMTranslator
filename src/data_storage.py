@@ -49,6 +49,7 @@ pop_segment_map: dict = {
     "this": pop_indirect_segment,
     "that": pop_indirect_segment,
     "temp": pop_direct_segment,
+    "pointer": pop_direct_segment,
     "end": ["@R13", "A=M", "M=D"]
 }
 arithmetic_map: dict = {
