@@ -37,6 +37,7 @@ push_segment_map: dict = {
     "this": push_indirect_segment,
     "that": push_indirect_segment,
     "temp": push_direct_segment,
+    "pointer": push_direct_segment,
 }
 
 pop_indirect_segment = lambda x: [f"@{x}", "D=A", "@seg", "D=D+M", "@R13", "M=D"]
