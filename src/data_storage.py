@@ -3,6 +3,19 @@ An Enum class for holding the 8 types of commands.
 """
 
 from enum import Enum
+from typing import Callable
+
+# To simplify the write_segment method, I decided it'd be best to create a helper function so that the dict stores
+# only callables. For the segments that don't require direct address replacements, I can use the function as a callable
+# replacement to make sure the code doesn't produce errors.
+
+def constant_formatter(label: str) -> str:
+    """
+    Returns a callable function
+    """
+    return label
+
+
 
 class CommandType(Enum):
     ARITHMETIC = "C_ARITHMETIC"
@@ -65,12 +78,10 @@ label_map: dict = {
 }
 
 segment_memory_map: dict = {
-    "local": "LCL",
-    "argument": "ARG",
-    "this": "THIS",
-    "that": "THAT",
+    "local": constant_formatter("LCL"),
+    "argument": constant_formatter("ARG"),
+    "this": constant_formatter("THIS"),
+    "that": constant_formatter("THAT"),
+    "temp": lambda x: f"{5 + x}",
 }
 
-direct_segment_access: dict = {
-    "temp": lambda x: f"{5+x}"
-}

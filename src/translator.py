@@ -3,7 +3,7 @@ src/translator.py
 Converts VM code instructions to machine / assembly code.
 """
 from src.data_storage import CommandType, command_map, arithmetic_map, comparison_map, label_map, \
-    segment_memory_map, pop_segment_map, push_segment_map, direct_segment_access
+    segment_memory_map, pop_segment_map, push_segment_map
 from src.parser import Parser
 
 
@@ -61,8 +61,5 @@ class Translator:
         """
         Replaces a segment with the correct label
         """
-        if direct_memory_index:
-            new_line: list[str] = [word.replace("seg", direct_segment_access[command](direct_memory_index)) for word in translated_line]
-        else:
-            new_line: list[str] = [word.replace("seg", f"{segment_memory_map[command]}") for word in translated_line]
-        return new_line
+        print(f"Command: {command}, {direct_memory_index}")
+        new_line: list[str] = [word.replace("seg", f"{segment_memory_map[command](direct_memory_index)}") for word in translated_line]

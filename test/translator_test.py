@@ -148,6 +148,6 @@ def test_temp_replaces_seg(setup_resources):
     translator = setup_resources["translator"]
     translator.parser.command_line = ["push", "temp", "0"]
     line: list[str] = [f"@seg", "D=M", "@SP", "AM=M+1", "A=A-1", "M=D"]
-    translator.write_segment("temp", line, direct_memory_index=0)
+    line = translator.write_segment("temp", line, direct_memory_index=0)
     print(f"translated_line: {line}")
-    assert line == [f"@seg", "D=M", "@SP", "AM=M+1", "A=A-1", "M=D"]
+    assert line == [f"@5", "D=M", "@SP", "AM=M+1", "A=A-1", "M=D"]
