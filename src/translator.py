@@ -63,3 +63,4 @@ class Translator:
         """
         print(f"Command: {command}, {direct_memory_index}")
         new_line: list[str] = [word.replace("seg", f"{segment_memory_map[command](direct_memory_index)}") for word in translated_line]
+        return new_line

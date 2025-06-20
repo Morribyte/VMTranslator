@@ -86,11 +86,6 @@ def write_to_file(file_name: str, code_file: list[str]):
             print(f"Translated line: {translated_line}")
             file.writelines(f"{line}\n" for line in translated_line)
 
-
-
-
-
-
 def main():
     """
     main function

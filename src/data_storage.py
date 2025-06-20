@@ -9,11 +9,11 @@ from typing import Callable
 # only callables. For the segments that don't require direct address replacements, I can use the function as a callable
 # replacement to make sure the code doesn't produce errors.
 
-def constant_formatter(label: str) -> str:
+def constant_formatter(label: str) -> Callable[[int], str]:
     """
     Returns a callable function
     """
-    return label
+    return lambda _: label
 
 
 
