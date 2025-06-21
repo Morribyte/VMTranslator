@@ -166,3 +166,12 @@ def test_default_case_push_pop(setup_resources):
     translator.parser.command_line = ["pop", "temp", "7"]
     translated_pop_value: list[str] = translator.write_push_pop(CommandType.POP, "temp", 7)
     assert translated_pop_value == ['@SP', 'AM=M-1', 'D=M', '@seg', 'M=D']
+
+
+def test_label_command(setup_resources):
+    """
+    Test that when we execute the label command, it properly writes teh label we need.
+    """
+    translator = setup_resources["translator"]
+    translator.parser.command_line = ["label", "LOOP"]
+

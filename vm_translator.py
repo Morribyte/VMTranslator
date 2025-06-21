@@ -91,8 +91,8 @@ def main():
     """
     main function
     """
-    parse = argparse.ArgumentParser(description="HACK Assembler")
-    parse.add_argument("file", nargs="?", help="Assembles the given file into a .hack file.")
+    parse = argparse.ArgumentParser(description="HACK VMTranslatorr")
+    parse.add_argument("file", nargs="?", help="Translates the given file into a .hack file.")
 
     args = parse.parse_args()
     data_storage.FILE_PATH = Path(args.file if args.file else get_file())
