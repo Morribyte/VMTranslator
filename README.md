@@ -253,7 +253,44 @@ D=M     // Pop top of stack into D
 @seg    // The segment we're using
 M=D     // Setting M to equal D
 ```
+# Specifications of the VM
+Booting the VM
 
+1. VM programming function
+    - One file in any VM program is expected to be named Main.vm
+	- One VM function in this file is expected to be named main()
+	
+2. When the VM starts running, or is reset
+    - Starts executing an argument-less OS function called sys.init
+	- Sys.init then calls Main.vm, and enters an infinite loop.
+	
+3. Bootstrap code
+    - Code should be written in assembly
+	- Put into the Hack ROM, beginning with Address 0.
 
+	Set SP=256
+	Call sys.init
+	
+	
+4. Standard mapping of VM and host RAM on the Hack platform
+HACK Ram
+0-15 -> Pointers and registers
+16-255 -> Static variables
+256-2047 -> stack
+2048-16383 -> heap
+16384-24576 -> memory mapped I/O (everything except keyboard on 24576 is screen)
+24577-32767 -> unused memory space
 
+5. Special symbols in VM programs
+SP -> points to memory address within host RAM 1 past the top of the stack
+LCL,ARG,THIS,THAT -> base addresses within host RAM of the virtual segments local, argument, this, and that
+R13-R15 -> Can be used for any purpose
+xxx.i -> static variable in xxx.vm file is translated into xxx.j where j is incremented each time a new static variable is encountered
+functionName$label
+functionName
+functionName$ret.i 
 
+5. Handles multiple VM files, a full directory, but generates a single assembly file that contains the sequence of all the functions we're translating.
+
+Main fileName - name of a single source file, or
+directoryName - name of a directory containing one more more .vm source files
