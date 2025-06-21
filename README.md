@@ -45,8 +45,8 @@ This means that we should be able to break things down into smaller segments.
   break each unit of code into an individual set of code and concatenate them together to create the full translation.
   * Check out the [Reference](#Reference) section for individual break down.
 
-# Translation Reference
-
+# Translation Reference 
+PLEASE NOTE THAT THIS IS INCOMPLETE AND ONLY WHAT I NEEDED TO FINISH THE PROJECT=
 ## Commands
 ### Push
 * Pushes a value onto the stack and increments the stack pointer by 1.
@@ -120,6 +120,7 @@ RAM[SP] = 7             // RAM[256] = 7
 SP++                    // SP = 257
 ```
 
+```
 assembly:
 # Use the "constant 7" segment
 @7         // Load constant 7 into A
@@ -252,5 +253,7 @@ D=M     // Pop top of stack into D
 @seg    // The segment we're using
 M=D     // Setting M to equal D
 ```
+
+
 
 
