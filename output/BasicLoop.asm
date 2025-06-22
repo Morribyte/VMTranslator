@@ -115,7 +115,7 @@ M=D
 AM=M-1
 D=M
 @LOOP
-0;JNE
+D;JNE
 // push local 0
 @0
 D=A

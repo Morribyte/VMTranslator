@@ -52,7 +52,7 @@ class Translator:
         """
         Generates and returns the label we need for jumping conditionally
         """
-        return command_map[CommandType.POP] + [f"@{label_name}", "0;JNE"]
+        return command_map[CommandType.POP] + [f"@{label_name}", "D;JNE"]
 
     def generate_label(self, command: CommandType | None, translated_line: list[str]) -> list[str]:
         """
