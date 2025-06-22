@@ -186,6 +186,7 @@ def test_if_goto_command(setup_resources):
     """
     translator = setup_resources["translator"]
     translator.parser.command_line = ["if-goto", "LOOP"]
-    translated_pop_value: list[str] = translator.write_goto("LOOP")
-    print(translated_pop_value)
+    translated_label: list[str] = translator.write_if_goto("LOOP")
+    print(translated_label)
+    assert translated_label == ['@SP', 'AM=M-1', 'D=M', '@LOOP', '0;JNE']
 

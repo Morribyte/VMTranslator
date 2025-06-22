@@ -26,6 +26,8 @@ class Parser:
         """
         if self.command_line[0] in ARITHMETIC_COMMANDS:
             return CommandType.ARITHMETIC
+        if "if-goto" in self.command_line[0]:
+            return CommandType.IF
         return CommandType.__members__.get(self.command_line[0].upper(), None)
 
     def arg1(self) -> str | None:

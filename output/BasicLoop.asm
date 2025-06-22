@@ -111,16 +111,11 @@ AM=M+1
 A=A-1
 M=D
 // if-goto LOOP
-@0
-D=A
-@ARG
-A=D+M
-D=M
-@R13
 @SP
-AM=M+1
-A=A-1
-M=D
+AM=M-1
+D=M
+@LOOP
+0;JNE
 // push local 0
 @0
 D=A
