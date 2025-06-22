@@ -84,6 +84,9 @@ def write_to_file(file_name: str, code_file: list[str]):
                         print(f"Comparison label found: {current_command}")
                         translated_line = translator.generate_label(arg1, translated_line)
                         translated_line = translator.write_jump(arg1, translated_line)
+                case CommandType.LABEL:
+                    print(f"Generating Label")
+                    translated_line = translator.write_label(arg1)
             print(f"Translated line: {translated_line}")
             file.writelines(f"{line}\n" for line in translated_line)
 
