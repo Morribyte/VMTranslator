@@ -1,3 +1,215 @@
+// Translated VM File @ output/input\FibonacciElement\Main.vm
+// function Main.fibonacci 0
+@2
+D=A
+(init_lcl.0)
+@SP
+AM=M+1
+A=A-1
+M=0
+@init_lcl.0
+D=D-1;JGT
+// push argument 0
+@0
+D=A
+@ARG
+A=D+M
+D=M
+@R13
+@SP
+AM=M+1
+A=A-1
+M=D
+// push constant 2
+@2
+D=A
+@SP
+AM=M+1
+A=A-1
+M=D
+// lt
+@SP
+AM=M-1
+D=M
+A=A-1
+D=M-D
+M=-1
+@lt.0
+D;JLT
+@SP
+A=M-1
+M=0
+(lt.0)
+// if-goto N_LT_2
+@SP
+AM=M-1
+D=M
+@N_LT_2
+D;JNE
+// goto N_GE_2
+@N_GE_2
+0;JMP
+// label N_LT_2
+(N_LT_2)
+// push argument 0
+@0
+D=A
+@ARG
+A=D+M
+D=M
+@R13
+@SP
+AM=M+1
+A=A-1
+M=D
+// return
+@LCL
+D=M
+@R13
+M=D
+@5
+A=D-A
+D=M
+@R14
+M=D
+@SP
+A=M-1
+D=M
+@ARG
+A=M
+M=D
+@ARG
+D=M
+@SP
+M=D+1
+@R13
+M=M-1
+A=M
+D=M
+@THAT
+M=D
+@R13
+M=M-1
+A=M
+D=M
+@THIS
+M=D
+@R13
+M=M-1
+A=M
+D=M
+@ARG
+M=D
+@R13
+M=M-1
+A=M
+D=M
+@LCL
+M=D
+// label N_GE_2
+(N_GE_2)
+// push argument 0
+@0
+D=A
+@ARG
+A=D+M
+D=M
+@R13
+@SP
+AM=M+1
+A=A-1
+M=D
+// push constant 2
+@2
+D=A
+@SP
+AM=M+1
+A=A-1
+M=D
+// sub
+@SP
+AM=M-1
+D=M
+A=A-1
+M=M-D
+// call Main.fibonacci 1
+Main.fibonacci$ret.0
+// push argument 0
+@0
+D=A
+@ARG
+A=D+M
+D=M
+@R13
+@SP
+AM=M+1
+A=A-1
+M=D
+// push constant 1
+@1
+D=A
+@SP
+AM=M+1
+A=A-1
+M=D
+// sub
+@SP
+AM=M-1
+D=M
+A=A-1
+M=M-D
+// call Main.fibonacci 1
+Main.fibonacci$ret.0
+// add
+@SP
+AM=M-1
+D=M
+A=A-1
+M=D+M
+// return
+@LCL
+D=M
+@R13
+M=D
+@5
+A=D-A
+D=M
+@R14
+M=D
+@SP
+A=M-1
+D=M
+@ARG
+A=M
+M=D
+@ARG
+D=M
+@SP
+M=D+1
+@R13
+M=M-1
+A=M
+D=M
+@THAT
+M=D
+@R13
+M=M-1
+A=M
+D=M
+@THIS
+M=D
+@R13
+M=M-1
+A=M
+D=M
+@ARG
+M=D
+@R13
+M=M-1
+A=M
+D=M
+@LCL
+M=D
 // Translated VM File @ output/input\FibonacciElement\Sys.vm
 // function Sys.init 0
 @2
@@ -17,12 +229,7 @@ AM=M+1
 A=A-1
 M=D
 // call Main.fibonacci 1
-@4
-D=A
-@SP
-AM=M+1
-A=A-1
-M=D
+Main.fibonacci$ret.0
 // label END
 (END)
 // goto END

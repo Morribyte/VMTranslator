@@ -74,7 +74,7 @@ def write_to_file(file_name: str | Path, code_file: list[str]):
     print(output_path.parent)
     output_path.parent.mkdir(parents=True, exist_ok=True)
 
-    with open(f"{output_path.parent}/{data_storage.FILE_NAME}.asm", "w") as file:
+    with open(f"{output_path.parent}/{data_storage.FILE_NAME}.asm", "a") as file:
         print(f"Translated VM File @ {file_name}")
         file.writelines(f"// Translated VM File @ output/{file_name}\n")
         translated_line: list[str] = []
@@ -108,6 +108,9 @@ def write_to_file(file_name: str | Path, code_file: list[str]):
                 case CommandType.FUNCTION:
                     print(f"Generating function")
                     translated_line = translator.write_function(arg1, arg2)
+                case CommandType.CALL:
+                    print(f"Generating call")
+                    translated_line = translator.write_call(arg1)
                 case CommandType.LABEL:
                     print(f"Generating Label")
                     translated_line = translator.write_label(arg1)
