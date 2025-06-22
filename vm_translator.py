@@ -41,7 +41,7 @@ def process_command_arguments():
         arg1: str = parser.arg1()
     else:
         arg1: None = None
-    if current_command in [CommandType.PUSH, CommandType.POP]:
+    if current_command in [CommandType.PUSH, CommandType.POP, CommandType.FUNCTION]:
         arg2: int = parser.arg2()
     else:
         arg2: None = None
@@ -84,6 +84,9 @@ def write_to_file(file_name: str, code_file: list[str]):
                         print(f"Comparison label found: {current_command}")
                         translated_line = translator.generate_label(arg1, translated_line)
                         translated_line = translator.write_jump(arg1, translated_line)
+                case CommandType.FUNCTION:
+                    print(f"Generating function")
+                    translated_line = translator.write_function(arg1, arg2)
                 case CommandType.LABEL:
                     print(f"Generating Label")
                     translated_line = translator.write_label(arg1)

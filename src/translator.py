@@ -60,7 +60,7 @@ class Translator:
         """
         return [f"@{label_name}"] + command_map[CommandType.GOTO]
 
-    def write_function(self):
+    def write_function(self, function_name: str, n_vars: int) -> list[str]:
         """
         Converts a function call to the proper branching assembly
         """
