@@ -49,14 +49,27 @@ def process_command_arguments():
     return current_command, arg1, arg2
 
 
-def write_to_file(file_name: str, code_file: list[str]):
+def translate_files(input_list: list[Path], output_list: list[Path]):
+    """
+    Translates a list of paths and places them in a mirrored directory when done
+    """
+    for index, items in enumerate(input_list):
+        print(f"Full list: {input_list}\n")
+
+        open_file = read_file(items)
+        print(f"Translating file...\n")
+        write_to_file(items, open_file, output_list[index])
+
+def write_to_file(file_name: str | Path, code_file: list[str], output_path):
     """
     Writes a translated list to a file, line by line.
     """
     label_count: int = 0
-    with open(f"output/{file_name}.asm", "w") as file:
-        print(f"Translated VM File @ output/{file_name}.asm")
-        file.writelines(f"// Translated VM File @ output/{file_name}.asm\n")
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+
+    with open(output_path, "w") as file:
+        print(f"Translated VM File @ {file_name}")
+        file.writelines(f"// Translated VM File @ output/{file_name}\n")
         translated_line: list[str] = []
 
         for index, line in enumerate(code_file):
@@ -119,18 +132,24 @@ def main():
     print(f"Current file path: {data_storage.FILE_PATH} | is directory: {data_storage.FILE_PATH.is_dir()}")
     print(f"Current file name: {data_storage.FILE_NAME}")
 
-    paths: list[str] = []
+    input_list: list[Path] = []
+    output_list: list[Path] = []
 
     if data_storage.FILE_PATH.is_file():
         open_file = read_file(data_storage.FILE_PATH)
         print(f"Translating file...\n")
         write_to_file(data_storage.FILE_NAME, open_file)
     elif data_storage.FILE_PATH.is_dir():
-        print("Reading files...")
-        for file in data_storage.FILE_PATH.glob("*.vm"):
-            paths.append(file)
-            print
 
+        for file in data_storage.FILE_PATH.glob("*.vm"):
+            print(f"Reading file: {file}")
+            input_path = file.relative_to("input")
+            output_path = "output" / input_path.with_suffix(".asm")
+
+            input_list.append(file)
+            output_list.append(output_path)
+
+        translate_files(input_list, output_list)
 
 if __name__ == "__main__":
     main()
