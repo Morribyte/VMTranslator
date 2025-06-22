@@ -221,4 +221,7 @@ def test_return_command(setup_resources):
     translator.parser.command_line = ["return"]
     translated_return: list[str] = translator.write_return()
     print(translated_return)
-    assert translated_return == ["@LCL"]
+    assert translated_return == ["@LCL", "D=M", "@R13", "M=D",  # get address at frame end
+                         "@5", "A=D-A", "D=M",  # calculate return address
+                         "@R14", "M=D", "@SP", "A=M-1", "D=M"  # Place return value for caller
+                         "ARG", "A=M", "M=D", "@ARG", "D=M", "@SP", "M=D+1"] # Reposition stack pointer

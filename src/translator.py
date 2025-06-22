@@ -73,6 +73,8 @@ class Translator:
         Converts a return to a full return call.
         """
 
+        return command_map[CommandType.RETURN]
+
     def generate_label(self, command: CommandType | str | None, translated_line: list[str]) -> list[str]:
         """
         Takes a list of commands and generates a label.
