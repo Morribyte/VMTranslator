@@ -29,7 +29,9 @@ ARITHMETIC_COMMANDS = ["add", "sub", "neg", "and", "not", "or", "eq", "lt", "gt"
 
 command_map: dict = {
     CommandType.PUSH: ["@SP", "AM=M+1", "A=A-1", "M=D"],
-    CommandType.POP: ["@SP", "AM=M-1", "D=M"]
+    CommandType.POP: ["@SP", "AM=M-1", "D=M"],
+    CommandType.GOTO: ["0;JMP"],
+    CommandType.IF: ["D;JNE"],
 }
 
 push_indirect_segment = lambda x: [f"@{x}", "D=A", "@seg", "A=D+M", "D=M", "@R13"]

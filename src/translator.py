@@ -52,12 +52,13 @@ class Translator:
         """
         Generates and returns the label we need for jumping conditionally
         """
-        return command_map[CommandType.POP] + [f"@{label_name}", "D;JNE"]
+        return command_map[CommandType.POP] + [f"@{label_name}"] + command_map[CommandType.IF]
 
     def write_goto(self, label_name: str) -> list[str]:
         """
         Generates and returns the label we need for unconditional jumps
         """
+        return [f"@{label_name}"] + command_map[CommandType.GOTO]
 
     def generate_label(self, command: CommandType | None, translated_line: list[str]) -> list[str]:
         """
