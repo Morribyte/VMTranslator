@@ -210,4 +210,15 @@ def test_function_command(setup_resources):
     translator.parser.command_line = ["function", "SimpleFunction.test", "2"]
     translated_function: list[str] = translator.write_function()
     print(translated_function)
-    assert translated_function ==  ["@2", "D=A", "(LABEL)", "function", "SimpleFunction.test", 2]
+    assert translated_function ==  ["@2", "D=A", "(LABEL)", "@SP", "AM=M+1", "A=A-1", "M=0", "@LABEL", "D=D-1;JGT"]
+
+
+def test_label_replacement(setup_resources):
+    """
+    Test that when we execute the function command, the label replacer properly replaces with the correct label.
+    """
+    translator = setup_resources["translator"]
+    translator.parser.command_line = ["function", "SimpleFunction.test", "2"]
+    translated_function: list[str] = translator.write_function()
+    print(translated_function)
+    assert translated_function ==  ["@2", "D=A", "@init_lcl.0", "@SP", "AM=M+1", "A=A-1", "M=0", "@init_lcl.0", "D=D-1;JGT"]
