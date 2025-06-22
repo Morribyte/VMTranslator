@@ -294,3 +294,28 @@ functionName$ret.i
 
 Main fileName - name of a single source file, or
 directoryName - name of a directory containing one more more .vm source files
+
+## Call, Function, Return
+
+### Call
+
+Calls function, informs number of nArgs that were pushed to the stack before the call.
+
+#### Pseudocode and assembly
+```aiignore
+# This is the function frame 
+push returnAddress      // Generates label and pushes it to the stack
+push LCL                // saves LCL of the caller
+push ARG                // saves ARG of the caller
+push THIS               // saves THIS of the caller
+push THAT               // saves THAT of the caller
+# Where the return address should be
+ARG = SP-5-nArgs        // repositions ARG to top of arguments
+LCL = SP                // repositions LCL to stack pointer
+goto function           // transfers control to callee
+(returnAddress)         // injects return label into the code
+```
+
+```aiignore
+# First thing is we push a label, so 
+```

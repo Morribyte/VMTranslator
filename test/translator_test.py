@@ -200,3 +200,14 @@ def test_goto_command(setup_resources):
     translated_label: list[str] = translator.write_goto("LOOP")
     print(translated_label)
     assert translated_label == ["@LOOP", "0;JMP"]
+
+
+def test_function_command(setup_resources):
+    """
+    Test that when we execute the function command, it properly creates teh assembly we need.
+    """
+    translator = setup_resources["translator"]
+    translator.parser.command_line = ["function", "SimpleFunction.test", "2"]
+    translated_function: list[str] = translator.write_function()
+    print(translated_function)
+    assert translated_function == ["function", "SimpleFunction.test", "2"]
