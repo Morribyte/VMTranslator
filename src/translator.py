@@ -75,6 +75,14 @@ class Translator:
         updated_labels = [label.replace("ptr", item) for item in data_storage.return_pointer_map for label in data_storage.return_map]
         return command_map[CommandType.RETURN] + updated_labels
 
+    def write_call(self, function_name: str) -> list[str]:
+        """
+        Converts a call to a full call.
+        """
+
+        labelled_line = [f"{function_name}$ret.{label_map["ret"]}"]
+        return labelled_line
+
     def generate_label(self, command: CommandType | str | None, translated_line: list[str]) -> list[str]:
         """
         Takes a list of commands and generates a label.

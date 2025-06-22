@@ -232,7 +232,7 @@ def test_call_command(setup_resources):
     Test that when we execute the call command, it properly translates the assembly.
     """
     translator = setup_resources["translator"]
-    translator.parser.command_line = ["return"]
-    translated_call: list[str] = translator.write_call()
+    translator.parser.command_line = ["call", "Main.main"]
+    translated_call: list[str] = translator.write_call("Main.main")
     print(translated_call)
-    assert translated_call == [""]
+    assert translated_call == ["Main.main$ret.0"]
