@@ -60,11 +60,11 @@ class Translator:
         """
         return [f"@{label_name}"] + command_map[CommandType.GOTO]
 
-    def write_function(self, function_name: str, number_of_arguments: str):
+    def write_function(self):
         """
         Converts a function call to the proper branching assembly
         """
-        return push_segment_map["constant"](number_of_arguments) + ["function", function_name, int(number_of_arguments)]
+        return command_map[CommandType.FUNCTION]
 
     def generate_label(self, command: CommandType | None, translated_line: list[str]) -> list[str]:
         """
@@ -94,6 +94,9 @@ class Translator:
         return new_line
 
     def set_arg2(self, arg2_value: int):
+        """
+        Sets static_variable_number to arg2.
+        """
         data_storage.STATIC_VARIABLE_NUMBER = arg2_value
 
     def get_arg2(self) -> int:
