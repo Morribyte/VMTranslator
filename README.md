@@ -319,11 +319,85 @@ AM=M+1      // Increments A and M both by 1
 A=A-1       // Decrements the addressing register by 1, but keeps the M value the same
 M=0         // Initializes variable, sets it to 0.
 @init_lcl_x
-D=D-1;JGT   // Subtract 1 from D;jump if D>0
-
-            
+D=D-1;JGT   // Subtract 1 from D;jump if D>0            
 ```
 
+### Return
+
+```aiignore
+Pseudocode
+endFrame = LCL             // gets the address at frame end
+retAddr = *(endFrame -5)   // gets return address
+*ARG = pop()               // puts the return value for caller
+SP=ARG+1                   // Reposition SP
+THAT = *(endFrame - 1)     // restores THAT
+THIS = *(endFrame - 2)     // restores THIS
+ARG = *(endFrame - 3)      // restores ARG
+LCL = *(endFrame - 4)      // restores LCL
+goto retAddr               // jumps to return address
+```
+
+```aiignore
+# get address at frame end
+@LCL      // get address at frame end
+D=M       // Place @LCL into RAM
+@R13      // Here's where we'll put the frame.
+M=D       // Place LCL into R13 to operate on
+
+# gets return address
+@5        
+A=D-A     // Calculates Frame-5
+D=M       // Places return address into D.
+
+# puts the return value for caller
+
+@R14       
+M=D       // Places return address into R14
+@SP       
+A=M-1     // Sets address to top of stack
+D=M       // Grab the return value
+
+# Repositions stack pointer
+@ARG
+A=M       // Places the value at ARG into M
+M=D       // RAM[ARG] = return value
+@ARG
+D=M       // Place return value into RAM where ARG was.
+@SP
+M=D+1     // Places D+1 into RAM at current stack pointer address.
+
+# restores THAT
+@R13      // Frame
+M=M-1     // Frame-1
+A=M       // Move M into the addressing register, so we're working at the frame address
+D=M       // Puts Frame-1 into the data register
+@THAT
+M=D       // Puts D into the Memory register, restoring THAT
+
+# restores THIS
+@R13      // Frame-1
+M=M-1     // Frame-2
+A=M       // Move M into the addressing register, so we're working at the frame address
+D=M       // Puts Frame-1 into the data register
+@THIS
+M=D       // Puts D into the Memory register, restoring THIS
+
+# restores ARG
+@R13      // Frame-2
+M=M-1     // Frame-3
+A=M       // Move M into the addressing register, so we're working at the frame address
+D=M       // Puts Frame-1 into the data register
+@ARG
+M=D       // Puts D into the Memory register, restoring ARG
+
+# restores LCL
+@R13      // Frame-3
+M=M-1     // Frame-4
+A=M       // Move M into the addressing register, so we're working at the frame address
+D=M       // Puts Frame-1 into the data register
+@LCL
+M=D       // Puts D into the Memory register, restoring LCL
+```
 
 ### Call
 

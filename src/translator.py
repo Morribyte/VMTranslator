@@ -68,6 +68,11 @@ class Translator:
         final_line: list[str] =  self.generate_label("init_lcl", function_list)
         return final_line
 
+    def write_return(self) -> list[str]:
+        """
+        Converts a return to a full return call.
+        """
+
     def generate_label(self, command: CommandType | str | None, translated_line: list[str]) -> list[str]:
         """
         Takes a list of commands and generates a label.
