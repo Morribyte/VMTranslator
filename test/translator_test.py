@@ -223,5 +223,5 @@ def test_return_command(setup_resources):
     print(translated_return)
     assert translated_return == ["@LCL", "D=M", "@R13", "M=D",  # get address at frame end
                          "@5", "A=D-A", "D=M",  # calculate return address
-                         "@R14", "M=D", "@SP", "A=M-1", "D=M"  # Place return value for caller
-                         "ARG", "A=M", "M=D", "@ARG", "D=M", "@SP", "M=D+1"] # Reposition stack pointer
+                         "@R14", "M=D", "@SP", "A=M-1", "D=M",  # Place return value for caller
+                         "@ARG", "A=M", "M=D", "@ARG", "D=M", "@SP", "M=D+1", '@R13', 'M=M-1', 'A=M', 'D=M', '@THAT', 'M=D', '@R13', 'M=M-1', 'A=M', 'D=M', '@THIS', 'M=D', '@R13', 'M=M-1', 'A=M', 'D=M', '@ARG', 'M=D', '@R13', 'M=M-1', 'A=M', 'D=M', '@LCL', 'M=D'] # Reposition stack pointer

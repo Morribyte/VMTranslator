@@ -72,8 +72,8 @@ class Translator:
         """
         Converts a return to a full return call.
         """
-
-        return command_map[CommandType.RETURN]
+        updated_labels = [label.replace("ptr", item) for item in data_storage.return_pointer_map for label in data_storage.return_map]
+        return command_map[CommandType.RETURN] + updated_labels
 
     def generate_label(self, command: CommandType | str | None, translated_line: list[str]) -> list[str]:
         """
