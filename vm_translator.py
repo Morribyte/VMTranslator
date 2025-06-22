@@ -87,6 +87,9 @@ def write_to_file(file_name: str, code_file: list[str]):
                 case CommandType.LABEL:
                     print(f"Generating Label")
                     translated_line = translator.write_label(arg1)
+                case CommandType.GOTO:
+                    print(f"Generating Unconditional Goto")
+                    translated_line = translator.write_goto(arg1)
                 case CommandType.IF:
                     print(f"Generating Conditional Goto")
                     translated_line = translator.write_if_goto(arg1)
