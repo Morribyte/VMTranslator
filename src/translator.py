@@ -60,6 +60,12 @@ class Translator:
         """
         return [f"@{label_name}"] + command_map[CommandType.GOTO]
 
+    def write_function(self, function_name: str, number_of_arguments: str):
+        """
+        Converts a function call to the proper branching assembly
+        """
+        return ["function", function_name, int(number_of_arguments)]
+
     def generate_label(self, command: CommandType | None, translated_line: list[str]) -> list[str]:
         """
         Takes a list of commands and generates a label.

@@ -32,6 +32,7 @@ command_map: dict = {
     CommandType.POP: ["@SP", "AM=M-1", "D=M"],
     CommandType.GOTO: ["0;JMP"],
     CommandType.IF: ["D;JNE"],
+    CommandType.FUNCTION: [""]
 }
 
 push_indirect_segment = lambda x: [f"@{x}", "D=A", "@seg", "A=D+M", "D=M", "@R13"]

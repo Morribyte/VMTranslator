@@ -297,6 +297,34 @@ directoryName - name of a directory containing one more more .vm source files
 
 ## Call, Function, Return
 
+### Function
+
+Defines the code to set up / execute a function in assembly
+
+```aiignore
+Pseudocode
+function SimpleFunction.test 2
+(functionName)            // Injects a function entry label into the code
+    repeat nVar times:    // nVars = number of local variables
+    push 0                // Initializes variables to 0
+```
+
+```aiignore
+function (functionName)
+@arg2       // Sets addressing register for constant, which is arg2(number of args)
+D=A         // Sets D register to the value at A
+(init_lcl_x)
+@SP         // Sets A to SP
+AM=M+1      // Increments A and M both by 1
+A=A-1       // Decrements the addressing register by 1, but keeps the M value the same
+M=0         // Initializes variable, sets it to 0.
+@init_lcl_x
+D=D-1;JGT   // Subtract 1 from D;jump if D>0
+
+            
+```
+
+
 ### Call
 
 Calls function, informs number of nArgs that were pushed to the stack before the call.
@@ -318,4 +346,5 @@ goto function           // transfers control to callee
 
 ```aiignore
 # First thing is we push a label, so 
+
 ```
