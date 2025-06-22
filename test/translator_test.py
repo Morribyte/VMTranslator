@@ -190,3 +190,13 @@ def test_if_goto_command(setup_resources):
     print(translated_label)
     assert translated_label == ['@SP', 'AM=M-1', 'D=M', '@LOOP', '0;JNE']
 
+
+def test_goto_command(setup_resources):
+    """
+    Test that when we execute the goto command, it properly writes the label we need.
+    """
+    translator = setup_resources["translator"]
+    translator.parser.command_line = ["goto", "LOOP"]
+    translated_label: list[str] = translator.write_goto("LOOP")
+    print(translated_label)
+    assert translated_label == ["@LOOP", "0;JMP"]
