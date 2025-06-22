@@ -65,10 +65,10 @@ class Translator:
         Converts a function call to the proper branching assembly
         """
         function_list: list[str] = command_map[CommandType.FUNCTION]
-        self.generate_label(CommandType.FUNCTION, function_list)
-        return command_map[CommandType.FUNCTION]
+        final_line: list[str] =  self.generate_label("init_lcl", function_list)
+        return final_line
 
-    def generate_label(self, command: CommandType | None, translated_line: list[str]) -> list[str]:
+    def generate_label(self, command: CommandType | str | None, translated_line: list[str]) -> list[str]:
         """
         Takes a list of commands and generates a label.
         Only applies to lt, gt, and eq commands.
