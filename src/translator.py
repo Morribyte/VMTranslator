@@ -64,7 +64,7 @@ class Translator:
         """
         Converts a function call to the proper branching assembly
         """
-        return ["function", function_name, int(number_of_arguments)]
+        return push_segment_map["constant"](number_of_arguments) + ["function", function_name, int(number_of_arguments)]
 
     def generate_label(self, command: CommandType | None, translated_line: list[str]) -> list[str]:
         """
