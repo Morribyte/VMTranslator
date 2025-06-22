@@ -420,5 +420,12 @@ goto function           // transfers control to callee
 
 ```aiignore
 # First thing is we push a label, so 
+# Generates label and pushes it to the stack
+@arg2
+D=A
+@R13
+M=D
+@functionName$__FUNCTION_CALL
 
 ```
+

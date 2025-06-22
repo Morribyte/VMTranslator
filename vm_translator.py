@@ -49,7 +49,7 @@ def process_command_arguments():
     return current_command, arg1, arg2
 
 
-def translate_files(input_list: list[Path], output_list: list[Path]):
+def translate_files(input_list: list[Path]):
     """
     Translates a list of paths and places them in a mirrored directory when done
     """
@@ -58,16 +58,23 @@ def translate_files(input_list: list[Path], output_list: list[Path]):
 
         open_file = read_file(items)
         print(f"Translating file...\n")
-        write_to_file(items, open_file, output_list[index])
+        write_to_file(items, open_file)
 
-def write_to_file(file_name: str | Path, code_file: list[str], output_path):
+def write_to_file(file_name: str | Path, code_file: list[str]):
     """
     Writes a translated list to a file, line by line.
     """
     label_count: int = 0
+    print(f"output path: {data_storage.FILE_PATH}")
+    data_storage.FILE_PATH.parent.mkdir(parents=True, exist_ok=True)
+
+    relative = file_name.relative_to("input")
+    print(relative)
+    output_path = "output" / relative.with_suffix(".asm")
+    print(output_path.parent)
     output_path.parent.mkdir(parents=True, exist_ok=True)
 
-    with open(output_path, "w") as file:
+    with open(f"{output_path.parent}/{data_storage.FILE_NAME}.asm", "w") as file:
         print(f"Translated VM File @ {file_name}")
         file.writelines(f"// Translated VM File @ output/{file_name}\n")
         translated_line: list[str] = []
@@ -133,7 +140,7 @@ def main():
     print(f"Current file name: {data_storage.FILE_NAME}")
 
     input_list: list[Path] = []
-    output_list: list[Path] = []
+    output_path: Path = Path("")
 
     if data_storage.FILE_PATH.is_file():
         open_file = read_file(data_storage.FILE_PATH)
@@ -147,9 +154,8 @@ def main():
             output_path = "output" / input_path.with_suffix(".asm")
 
             input_list.append(file)
-            output_list.append(output_path)
 
-        translate_files(input_list, output_list)
+        translate_files(input_list)
 
 if __name__ == "__main__":
     main()

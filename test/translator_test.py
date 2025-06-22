@@ -225,3 +225,14 @@ def test_return_command(setup_resources):
                          "@5", "A=D-A", "D=M",  # calculate return address
                          "@R14", "M=D", "@SP", "A=M-1", "D=M",  # Place return value for caller
                          "@ARG", "A=M", "M=D", "@ARG", "D=M", "@SP", "M=D+1", '@R13', 'M=M-1', 'A=M', 'D=M', '@THAT', 'M=D', '@R13', 'M=M-1', 'A=M', 'D=M', '@THIS', 'M=D', '@R13', 'M=M-1', 'A=M', 'D=M', '@ARG', 'M=D', '@R13', 'M=M-1', 'A=M', 'D=M', '@LCL', 'M=D'] # Reposition stack pointer
+
+
+def test_call_command(setup_resources):
+    """
+    Test that when we execute the call command, it properly translates the assembly.
+    """
+    translator = setup_resources["translator"]
+    translator.parser.command_line = ["return"]
+    translated_call: list[str] = translator.write_call()
+    print(translated_call)
+    assert translated_call == [""]
