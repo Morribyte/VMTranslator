@@ -42,7 +42,13 @@ class Translator:
            return command_map[CommandType.POP] + arithmetic_map["logical"]
         return arithmetic_map[command]
 
-    def generate_label(self, command: str, translated_line: list[str]) -> list[str]:
+    def write_label(self, command: CommandType, label_name: str) -> str:
+        """
+        Generates and returns the label we need for our labels
+        """
+        return f"({data_storage.FUNCTION_NAME}${label_name})"
+
+    def generate_label(self, command: CommandType, translated_line: list[str]) -> list[str]:
         """
         Takes a list of commands and generates a label.
         Only applies to lt, gt, and eq commands.

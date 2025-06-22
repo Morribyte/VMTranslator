@@ -174,4 +174,8 @@ def test_label_command(setup_resources):
     """
     translator = setup_resources["translator"]
     translator.parser.command_line = ["label", "LOOP"]
+    data_storage.FUNCTION_NAME = "Main.main"
+    translated_pop_value: str = translator.write_label(CommandType.LABEL, "LOOP")
+    print(translated_pop_value)
+    assert translated_pop_value == "Main.main$LOOP"
 

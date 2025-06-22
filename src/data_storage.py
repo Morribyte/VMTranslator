@@ -23,6 +23,7 @@ class CommandType(Enum):
 FILE_PATH: Path = Path("")
 FILE_NAME: str = ""
 STATIC_VARIABLE_NUMBER: int = 0
+FUNCTION_NAME: str = ""
 
 ARITHMETIC_COMMANDS = ["add", "sub", "neg", "and", "not", "or", "eq", "lt", "gt"]
 
