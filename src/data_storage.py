@@ -86,6 +86,7 @@ label_map: dict = {
     "lt": 0,
     "gt": 0,
     "init_lcl": 0,
+    "ret": 0,
 }
 
 segment_memory_map: dict[str, Callable[[int], str]] = {
