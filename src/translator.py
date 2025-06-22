@@ -64,6 +64,8 @@ class Translator:
         """
         Converts a function call to the proper branching assembly
         """
+        function_list: list[str] = command_map[CommandType.FUNCTION]
+        self.generate_label(CommandType.FUNCTION, function_list)
         return command_map[CommandType.FUNCTION]
 
     def generate_label(self, command: CommandType | None, translated_line: list[str]) -> list[str]:
