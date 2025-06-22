@@ -28,6 +28,7 @@ def read_file(file_path):
     """
     Opens a file, and strips comments whether they're at the start or at the end of a line.
     """
+    print(f"Opening {file_path}")
     with open(file_path, "r") as file:
         lines: list[str] = [line.split("//")[0].rstrip() for line in file.readlines() if line.split("//")[0].strip()]
     lines = [line.strip() for line in lines]
@@ -103,6 +104,7 @@ def write_to_file(file_name: str, code_file: list[str]):
             print(f"Translated line: {translated_line}")
             file.writelines(f"{line}\n" for line in translated_line)
 
+
 def main():
     """
     main function
@@ -114,14 +116,20 @@ def main():
     data_storage.FILE_PATH = Path(args.file if args.file else get_file())
     data_storage.FILE_NAME = data_storage.FILE_PATH.stem
 
-    print(f"Current file path: {data_storage.FILE_PATH}")
+    print(f"Current file path: {data_storage.FILE_PATH} | is directory: {data_storage.FILE_PATH.is_dir()}")
     print(f"Current file name: {data_storage.FILE_NAME}")
 
-    open_file = read_file(data_storage.FILE_PATH)
+    paths: list[str] = []
 
-    print(f"Translating file...\n")
-
-    write_to_file(data_storage.FILE_NAME, open_file)
+    if data_storage.FILE_PATH.is_file():
+        open_file = read_file(data_storage.FILE_PATH)
+        print(f"Translating file...\n")
+        write_to_file(data_storage.FILE_NAME, open_file)
+    elif data_storage.FILE_PATH.is_dir():
+        print("Reading files...")
+        for file in data_storage.FILE_PATH.glob("*.vm"):
+            paths.append(file)
+            print
 
 
 if __name__ == "__main__":
