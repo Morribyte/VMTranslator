@@ -233,6 +233,6 @@ def test_save_frame(setup_resources):
     """
     translator = setup_resources["translator"]
     translator.parser.command_line = ["call"]
-    translated_call: list[str] = translator.write_call()
+    translated_call: list[str] = translator.write_save_frame()
     print(translated_call)
-    assert translated_call == [""]
+    assert translated_call == ["@SP", "AM=M+1", "A=A-1", "M=D"]

@@ -102,6 +102,12 @@ class Translator:
         new_line: list[str] = [word.replace("seg", f"{segment_memory_map[command](direct_memory_index)}") for word in translated_line]
         return new_line
 
+    def write_save_frame(self) -> list[str]:
+        """
+        Used when we need to save the frame to the stack.
+        """
+        return ["@SP", "AM=M+1", "A=A-1", "M=D"]
+
     def set_arg2(self, arg2_value: int):
         """
         Sets static_variable_number to arg2.
