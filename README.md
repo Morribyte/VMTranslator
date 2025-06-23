@@ -419,6 +419,21 @@ goto function           // transfers control to callee
 ```
 
 ```aiignore
-# First thing is we push a label, so 
+# First thing is we need is to push the arguments onto the stack.
+@arg2                   // The 
 
+# Saving function frame
+# Push return address
+@SP
+AM=M+1
+A=A-1
+M=D
+
+# Push save frame
+@LCL/@ARG/@THIS/@THAT
+D=M
+@SP
+AM=M+1
+A=A-1
+M=D
 ```
