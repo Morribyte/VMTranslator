@@ -24,15 +24,19 @@ def get_file():
         print("File not found. Try again.")
 
 
-def read_file(file_path):
+def read_file(file_paths):
     """
     Opens a file, and strips comments whether they're at the start or at the end of a line.
     """
-    with open(file_path, "r") as file:
-        lines: list[str] = [line.split("//")[0].rstrip() for line in file.readlines() if line.split("//")[0].strip()]
+    all_lines: list[str] = []
+    for file_path in file_paths:
+        print(f"Reading: {file_path}")
+        with open(file_path, "r") as file:
+            lines: list[str] = [line.split("//")[0].rstrip() for line in file.readlines() if line.split("//")[0].strip()]
+            all_lines.extend(line.strip() for line in lines)
     lines = [line.strip() for line in lines]
-    print(lines)
-    return lines
+    print(all_lines)
+    return all_lines
 
 
 def process_command_arguments():
@@ -124,13 +128,14 @@ def main():
         file_list = [file for file in data_storage.FILE_PATH.glob("*.vm")]
         print(f"Files to translate: {file_list}")
     elif data_storage.FILE_PATH.is_file():
+        file_list = [data_storage.FILE_PATH]
         print(f"File to translate: {data_storage.FILE_PATH}")
 
-    # open_file = read_file(data_storage.FILE_PATH)
+    open_file = read_file(file_list)
 
     print(f"Translating file...\n")
 
-    # write_to_file(data_storage.FILE_NAME, open_file)
+    write_to_file(data_storage.FILE_NAME, open_file)
 
 
 if __name__ == "__main__":
