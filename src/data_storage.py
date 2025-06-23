@@ -37,9 +37,7 @@ command_map: dict = {
     CommandType.RETURN: ["@LCL", "D=M", "@R13", "M=D",  # get address at frame end
                          "@5", "A=D-A", "D=M",  # calculate return address
                          "@R14", "M=D", "@SP", "A=M-1", "D=M",  # Place return value for caller
-                         "@ARG", "A=M", "M=D", "@ARG", "D=M", "@SP", "M=D+1"  # Reposition stack pointer
-
-    ]
+                         "@ARG", "A=M", "M=D", "@ARG", "D=M", "@SP", "M=D+1"] # reposition SP
 }
 
 push_indirect_segment = lambda x: [f"@{x}", "D=A", "@seg", "A=D+M", "D=M", "@R13"]
@@ -87,6 +85,7 @@ label_map: dict = {
     "lt": 0,
     "gt": 0,
     "init_lcl": 0,
+    "ret": 0,
 }
 
 segment_memory_map: dict[str, Callable[[int], str]] = {
@@ -102,3 +101,7 @@ segment_memory_map: dict[str, Callable[[int], str]] = {
 return_pointer_map: list[str] = ["THAT", "THIS", "ARG", "LCL"]
 
 return_map: list[str] = ["@R13", "M=M-1", "A=M", "D=M", "@ptr", "M=D"]
+
+calL_map_1: list[str] = ["@LABEL", "D=A"]
+
+call_map_return: list[str] = ["@ptr", "D=M"]

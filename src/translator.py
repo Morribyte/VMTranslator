@@ -76,8 +76,9 @@ class Translator:
         return command_map[CommandType.RETURN] + updated_labels
 
     def write_call(self, function_name: str, n_args: int) -> list[str]:
-
-        return ["@Main.main$ret.0", "D=A"]
+        line: list[str] = self.generate_label(f"ret", data_storage.calL_map_1)
+        line: list[str] = [word.replace("ret", f"{function_name}$ret") for word in line]
+        return line + command_map[CommandType.PUSH] + self.write_save_frame()
 
     def generate_label(self, command: CommandType | str | None, translated_line: list[str]) -> list[str]:
         """
@@ -105,6 +106,16 @@ class Translator:
         print(f"Command: {command}, {direct_memory_index}")
         new_line: list[str] = [word.replace("seg", f"{segment_memory_map[command](direct_memory_index)}") for word in translated_line]
         return new_line
+
+    def write_save_frame(self) -> list[str]:
+        """
+        Writes the save frame using the reverse
+        """
+        save_frame = []
+        for items in reversed(data_storage.return_pointer_map):
+            replaced = [line.replace("ptr", items) for line in data_storage.call_map_return]
+            save_frame.extend(replaced + command_map[CommandType.PUSH])
+        return save_frame
 
     def set_arg2(self, arg2_value: int):
         """

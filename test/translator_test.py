@@ -234,5 +234,19 @@ def test_call_command_push_return_address(setup_resources):
     translator = setup_resources["translator"]
     translator.parser.command_line = ["call", "Main.main", 2]
     the_list = translator.write_call("Main.main", 2)
-    assert the_list == ["@Main.main$ret.0", "D=A"]
+    print(the_list)
+    assert the_list == ["@Main.main$ret.0", "D=A", "@SP", "AM=M+1", "A=A-1", "M=D" + '@LCL', 'D=M', '@SP', 'AM=M+1', 'A=A-1', 'M=D', '@ARG', 'D=M', '@SP', 'AM=M+1', 'A=A-1', 'M=D', '@THIS', 'D=M', '@SP', 'AM=M+1', 'A=A-1', 'M=D', '@THAT', 'D=M', '@SP', 'AM=M+1', 'A=A-1', 'M=D']
 
+
+def test_call_save_frame(setup_resources):
+    """
+    Test the save frame method
+    """
+    translator = setup_resources["translator"]
+    translator.parser.command_line = ["call", "Main.main", 2]
+    the_list = translator.write_save_frame()
+    print(the_list)
+    assert the_list == ['@LCL', 'D=M', '@SP', 'AM=M+1', 'A=A-1', 'M=D',
+                        '@ARG', 'D=M', '@SP', 'AM=M+1', 'A=A-1', 'M=D',
+                        '@THIS', 'D=M', '@SP', 'AM=M+1', 'A=A-1', 'M=D',
+                        '@THAT', 'D=M', '@SP', 'AM=M+1', 'A=A-1', 'M=D']
