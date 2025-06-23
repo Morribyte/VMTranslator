@@ -34,7 +34,6 @@ def read_file(file_paths):
         with open(file_path, "r") as file:
             lines: list[str] = [line.split("//")[0].rstrip() for line in file.readlines() if line.split("//")[0].strip()]
             all_lines.extend(line.strip() for line in lines)
-    lines = [line.strip() for line in lines]
     print(all_lines)
     return all_lines
 
@@ -107,7 +106,7 @@ def write_to_file(file_name: str, code_file: list[str]):
                 case CommandType.CALL:
                     print(f"Generating call")
                     print(f"Saving frame")
-                    translated_line = translator.write_call(arg1)
+                    translated_line = translator.write_call(arg1, 2)
             print(f"Translated line: {translated_line}")
             file.writelines(f"{line}\n" for line in translated_line)
 

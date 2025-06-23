@@ -248,13 +248,13 @@ def test_full_call(setup_resources):
     """
     translator = setup_resources["translator"]
     translator.parser.command_line = ["call"]
-    translated_call: list[str] = translator.write_call("Main.main")
+    translated_call: list[str] = translator.write_call("Main.main", 2)
     print(translated_call)
-    assert (translated_call == ["@arg2", "D=A", "@R13", "M=D",
+    assert (translated_call == ["@2", "D=A", "@R13", "M=D",
                                 "@Main.main$ret.0", "D=A", "@SP", "AM=M+1", "A=A-1", "M=D",
                                 '@SP', 'AM=M+1', 'A=A-1', 'M=D',
                                 '@LCL', 'D=M', '@SP', 'AM=M+1', 'A=A-1', 'M=D',
                                 '@ARG', 'D=M', '@SP', 'AM=M+1', 'A=A-1', 'M=D',
                                 '@THIS', 'D=M', '@SP', 'AM=M+1', 'A=A-1', 'M=D',
                                 '@THAT', 'D=M', '@SP', 'AM=M+1', 'A=A-1', 'M=D',
-                                "@SP", "D=M", "@LCL", "M=D", "functionName", "0;JMP", "(Main.main$ret.0)"])
+                                "@SP", "D=M", "@LCL", "M=D", "@Main.main", "0;JMP", "(Main.main$ret.0)"])
