@@ -2,12 +2,12 @@
 // function Main.fibonacci 0
 @2
 D=A
-(init_lcl.0)
+(LABEL)
 @SP
 AM=M+1
 A=A-1
 M=0
-@init_lcl.0
+@LABEL
 D=D-1;JGT
 // push argument 0
 @0
@@ -175,7 +175,7 @@ M=D
 D=M
 @LCL
 M=D
-Main.fibonacci
+@Main.fibonacci
 0;JMP
 (Main.fibonacci$ret.0)
 // push argument 0
@@ -245,7 +245,7 @@ M=D
 D=M
 @LCL
 M=D
-Main.fibonacci
+@Main.fibonacci
 0;JMP
 (Main.fibonacci$ret.1)
 // add
@@ -301,12 +301,12 @@ M=D
 // function Sys.init 0
 @2
 D=A
-(init_lcl.1)
+(LABEL)
 @SP
 AM=M+1
 A=A-1
 M=0
-@init_lcl.1
+@LABEL
 D=D-1;JGT
 // push constant 4
 @4
@@ -358,7 +358,7 @@ M=D
 D=M
 @LCL
 M=D
-Main.fibonacci
+@Main.fibonacci
 0;JMP
 (Main.fibonacci$ret.2)
 // label END

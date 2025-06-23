@@ -65,7 +65,7 @@ class Translator:
         Converts a function call to the proper branching assembly
         """
         function_list: list[str] = command_map[CommandType.FUNCTION]
-        final_line: list[str] =  self.generate_label("init_lcl", function_list)
+        final_line: list[str] =  [label.replace("LABEL", function_name) for label in function_list]
         return final_line
 
     def write_return(self) -> list[str]:
