@@ -24,6 +24,7 @@ FILE_PATH: Path = Path("")
 FILE_NAME: str = ""
 STATIC_VARIABLE_NUMBER: int = 0
 FUNCTION_NAME: str = ""
+FILE_FOLDER: str = ""
 
 ARITHMETIC_COMMANDS = ["add", "sub", "neg", "and", "not", "or", "eq", "lt", "gt"]
 

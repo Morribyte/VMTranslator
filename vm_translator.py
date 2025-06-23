@@ -111,17 +111,26 @@ def main():
     parse.add_argument("file", nargs="?", help="Translates the given file into a .hack file.")
 
     args = parse.parse_args()
+    file_list: list[Path] = []
     data_storage.FILE_PATH = Path(args.file if args.file else get_file())
     data_storage.FILE_NAME = data_storage.FILE_PATH.stem
+    data_storage.FILE_FOLDER = data_storage.FILE_PATH.parent
 
     print(f"Current file path: {data_storage.FILE_PATH}")
     print(f"Current file name: {data_storage.FILE_NAME}")
+    print(f"Current folder: {data_storage.FILE_FOLDER}")
 
-    open_file = read_file(data_storage.FILE_PATH)
+    if data_storage.FILE_PATH.is_dir():
+        file_list = [file for file in data_storage.FILE_PATH.glob("*.vm")]
+        print(f"Files to translate: {file_list}")
+    elif data_storage.FILE_PATH.is_file():
+        print(f"File to translate: {data_storage.FILE_PATH}")
+
+    # open_file = read_file(data_storage.FILE_PATH)
 
     print(f"Translating file...\n")
 
-    write_to_file(data_storage.FILE_NAME, open_file)
+    # write_to_file(data_storage.FILE_NAME, open_file)
 
 
 if __name__ == "__main__":
