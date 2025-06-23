@@ -420,5 +420,12 @@ goto function           // transfers control to callee
 
 ```aiignore
 # First thing is we push a label, so 
+@functionName$ret.X    // Set return label
+D=A                    // Put that address into D
+@SP                    // Address stack pointer
+AM=M+1                 // Push
+A=A-1
+M=D
+
 
 ```

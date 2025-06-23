@@ -2,13 +2,14 @@
 // function SimpleFunction.test 2
 @2
 D=A
-(init_lcl.0)
+(init_lcl.SimpleFunction.test)
 @SP
 AM=M+1
 A=A-1
 M=0
-@init_lcl.0
-D=D-1;JGT
+D=D-1
+@init_lcl.SimpleFunction.test
+D;JGT
 // push local 0
 @0
 D=A

@@ -33,7 +33,7 @@ command_map: dict = {
     CommandType.POP: ["@SP", "AM=M-1", "D=M"],
     CommandType.GOTO: ["0;JMP"],
     CommandType.IF: ["D;JNE"],
-    CommandType.FUNCTION: ["@2", "D=A", "(LABEL)", "@SP", "AM=M+1", "A=A-1", "M=0", "@LABEL", "D=D-1;JGT"],
+    CommandType.FUNCTION: ["@2", "D=A", "(LABEL)", "@SP", "AM=M+1", "A=A-1", "M=0", "D=D-1", "@LABEL", "D;JGT"],
     CommandType.RETURN: ["@LCL", "D=M", "@R13", "M=D",  # get address at frame end
                          "@5", "A=D-A", "D=M",  # calculate return address
                          "@R14", "M=D", "@SP", "A=M-1", "D=M",  # Place return value for caller
