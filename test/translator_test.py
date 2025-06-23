@@ -210,7 +210,7 @@ def test_function_command(setup_resources):
     translator.parser.command_line = ["function", "SimpleFunction.test", "2"]
     translated_function: list[str] = translator.write_function("SimpleFunction.test", 2)
     print(translated_function)
-    assert translated_function ==  ["@2", "D=A", "(init_lcl.0)", "@SP", "AM=M+1", "A=A-1", "M=0", "@init_lcl.0", "D=D-1;JGT"]
+    assert translated_function ==  ["@2", "D=A", "(init_lcl.SimpleFunction.test)", "@SP", "AM=M+1", "A=A-1", "M=0", "D=D-1", "@init_lcl.SimpleFunction.test", "D;JGT"]
 
 
 def test_return_command(setup_resources):
@@ -233,5 +233,6 @@ def test_call_command_push_return_address(setup_resources):
     """
     translator = setup_resources["translator"]
     translator.parser.command_line = ["call", "Main.main", 2]
-    translated_call: list[str] = translator.write_call()
-    assert translated_call == ["Main.main$ret.0", "D=A"]
+    the_list = translator.write_call("Main.main", 2)
+    assert the_list == ["@Main.main$ret.0", "D=A"]
+

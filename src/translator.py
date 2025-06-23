@@ -75,6 +75,10 @@ class Translator:
         updated_labels = [label.replace("ptr", item) for item in data_storage.return_pointer_map for label in data_storage.return_map]
         return command_map[CommandType.RETURN] + updated_labels
 
+    def write_call(self, function_name: str, n_args: int) -> list[str]:
+
+        return ["@Main.main$ret.0", "D=A"]
+
     def generate_label(self, command: CommandType | str | None, translated_line: list[str]) -> list[str]:
         """
         Takes a list of commands and generates a label.
