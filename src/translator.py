@@ -106,8 +106,13 @@ class Translator:
         """
         Used when we need to save the frame to the stack.
         """
-
-        return command_map[CommandType.PUSH] + data_storage.save_frame
+        save_frame_list: list[str] = []
+        for item in reversed(data_storage.return_pointer_map):
+            print(item)
+            replaced = [line.replace("ptr", item) for line in data_storage.save_frame]
+            print(replaced)
+            save_frame_list.extend(replaced + command_map[CommandType.PUSH])
+        return command_map[CommandType.PUSH] + save_frame_list
 
     def set_arg2(self, arg2_value: int):
         """

@@ -37,7 +37,8 @@ command_map: dict = {
     CommandType.RETURN: ["@LCL", "D=M", "@R13", "M=D",  # get address at frame end
                          "@5", "A=D-A", "D=M",  # calculate return address
                          "@R14", "M=D", "@SP", "A=M-1", "D=M",  # Place return value for caller
-                         "@ARG", "A=M", "M=D", "@ARG", "D=M", "@SP", "M=D+1"]  # Reposition stack pointer]
+                         "@ARG", "A=M", "M=D", "@ARG", "D=M", "@SP", "M=D+1"],  # Reposition stack pointer]
+    CommandType.CALL: []
 }
 
 push_indirect_segment = lambda x: [f"@{x}", "D=A", "@seg", "A=D+M", "D=M", "@R13"]

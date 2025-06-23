@@ -235,4 +235,8 @@ def test_save_frame(setup_resources):
     translator.parser.command_line = ["call"]
     translated_call: list[str] = translator.write_save_frame()
     print(translated_call)
-    assert translated_call == ["@SP", "AM=M+1", "A=A-1", "M=D", "@ptr", "D=M"]
+    assert translated_call == ['@SP', 'AM=M+1', 'A=A-1', 'M=D',
+                               '@LCL', 'D=M', '@SP', 'AM=M+1', 'A=A-1', 'M=D',
+                               '@ARG', 'D=M', '@SP', 'AM=M+1', 'A=A-1', 'M=D',
+                               '@THIS', 'D=M', '@SP', 'AM=M+1', 'A=A-1', 'M=D',
+                               '@THAT', 'D=M', '@SP', 'AM=M+1', 'A=A-1', 'M=D']

@@ -420,20 +420,71 @@ goto function           // transfers control to callee
 
 ```aiignore
 # First thing is we need is to push the arguments onto the stack.
-@arg2                   // The 
+@arg2                   // The number of arguments we have
+D=A                     // Push A into D
+@R13                    // Addresses R13, an empty register
+M=D                     // Saving nArgs for later
 
 # Saving function frame
 # Push return address
+@functionName$ret.#
+D=A
 @SP
 AM=M+1
 A=A-1
 M=D
 
+
+
 # Push save frame
-@LCL/@ARG/@THIS/@THAT
+@LCL
 D=M
 @SP
 AM=M+1
 A=A-1
 M=D
+@ARG
+D=M
+@SP
+AM=M+1
+A=A-1
+M=D
+@THIS
+D=M
+@SP
+AM=M+1
+A=A-1
+M=D
+@THAT
+D=M
+@SP
+AM=M+1
+A=A-1
+M=D
+
+
+# ARG is now SP - 5 - nArgs
+@R13               // Address R13
+D=M                // D = nArgs
+@5                 // Addresses 5
+D=D+A              // Adds nArgs to 5
+@SP                // Addresses Stack Pointer
+D=M-D              // Subtract D from M, place it into D
+@ARG               // Addresses ARG
+M=D                // Places D into M
+
+
+
+# LCL = SP
+@SP               // Address SP
+D=M               // Places stack pointer location into D
+@LCL              // Address LCL
+M=D               // Replace LCL with SP
+
+# goto (functionName)
+@functionName
+0;JMP
+
+(functionName$ret.#)
+
 ```
