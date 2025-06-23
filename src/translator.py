@@ -106,7 +106,8 @@ class Translator:
         """
         Used when we need to save the frame to the stack.
         """
-        return ["@SP", "AM=M+1", "A=A-1", "M=D"]
+
+        return command_map[CommandType.PUSH]
 
     def set_arg2(self, arg2_value: int):
         """
