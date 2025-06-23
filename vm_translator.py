@@ -104,6 +104,10 @@ def write_to_file(file_name: str, code_file: list[str]):
                     print(f"Generating return")
                     print(f"Restoring Pointers")
                     translated_line = translator.write_return()
+                case CommandType.CALL:
+                    print(f"Generating call")
+                    print(f"Saving frame")
+                    translated_line = translator.write_call(arg1)
             print(f"Translated line: {translated_line}")
             file.writelines(f"{line}\n" for line in translated_line)
 
