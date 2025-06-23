@@ -107,7 +107,7 @@ class Translator:
         Used when we need to save the frame to the stack.
         """
 
-        return command_map[CommandType.PUSH]
+        return command_map[CommandType.PUSH] + data_storage.save_frame
 
     def set_arg2(self, arg2_value: int):
         """
