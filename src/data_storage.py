@@ -111,4 +111,4 @@ reposition_arg: list[str] = ["@R13", "D=M", "@5", "D=D-A", "@2", "D=D-A", "@ARG"
 
 reposition_lcl: list[str] = ["@SP", "D=M", "@LCL", "M=D"]
 
-final_return: list[str] = [""]
+final_return = lambda x: [f"({x})", "0;JMP", "(LABEL)"]
