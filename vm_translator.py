@@ -93,6 +93,9 @@ def write_to_file(file_name: str, code_file: list[str]):
                     print("Saving function name...")
                     data_storage.FUNCTION_NAME = arg1
                     translated_line = translator.write_function(arg1, arg2)
+                case CommandType.CALL:
+                    print("Generating call")
+                    translated_line = translator.write_call(arg1, arg2)
                 case CommandType.LABEL:
                     print("Generating Label")
                     translated_line = translator.write_label(arg1)

@@ -38,7 +38,8 @@ command_map: dict = {
     CommandType.RETURN: ["@LCL", "D=M", "@R13", "M=D",  # get address at frame end
                          "@5", "A=D-A", "D=M",  # calculate return address
                          "@R14", "M=D", "@SP", "A=M-1", "D=M",  # Place return value for caller
-                         "@ARG", "A=M", "M=D", "@ARG", "D=M", "@SP", "M=D+1"], # reposition SP
+                         "@ARG", "A=M", "M=D", "@ARG", "D=M", "@SP", "M=D+1"],  # reposition SP
+
     CommandType.CALL: ["@LABEL", "D=A"]  # This is a long-winded command, only putting the start here.
 }
 
@@ -103,6 +104,7 @@ segment_memory_map: dict[str, Callable[[int], str]] = {
 return_pointer_map: list[str] = ["THAT", "THIS", "ARG", "LCL"]
 
 return_map: list[str] = ["@R13", "M=M-1", "A=M", "D=M", "@ptr", "M=D"]
+final_return_jump: list[str] = ["@R14", "A=M", "0;JMP"]  # Go to retAddr
 
 # Things for the CALL command
 save_frame_return: list[str] = ["@ptr", "D=M"]
@@ -111,4 +113,4 @@ reposition_arg: list[str] = ["@R13", "D=M", "@5", "D=D-A", "@2", "D=D-A", "@ARG"
 
 reposition_lcl: list[str] = ["@SP", "D=M", "@LCL", "M=D"]
 
-final_return = lambda x: [f"({x})", "0;JMP", "(LABEL)"]
+final_return = lambda x: [f"@{x}", "0;JMP", "(LABEL)"]
