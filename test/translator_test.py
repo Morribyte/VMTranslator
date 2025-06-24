@@ -197,6 +197,7 @@ def test_goto_command(setup_resources):
     Test that when we execute the goto command, it properly writes the label we need.
     """
     translator = setup_resources["translator"]
+    data_storage.FUNCTION_NAME = "Main.main"
     translator.parser.command_line = ["goto", "LOOP"]
     translated_label: list[str] = translator.write_goto("LOOP")
     print(translated_label)

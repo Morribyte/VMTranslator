@@ -60,7 +60,6 @@ class Translator:
         """
         Generates and returns the label we need for unconditional jumps
         """
-        data_storage.FUNCTION_NAME = "Main.main"
         goto_list: list[str] = [word.replace("LABEL", f"{data_storage.FUNCTION_NAME}${label_name}") for word in command_map[CommandType.GOTO]]
         return goto_list
 

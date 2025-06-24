@@ -94,7 +94,7 @@ D=M
 A=M
 M=D
 // label LOOP
-(LOOP)
+($LOOP)
 // push argument 0
 @0
 D=A
@@ -110,13 +110,13 @@ M=D
 @SP
 AM=M-1
 D=M
-@Main.main$COMPUTE_ELEMENT
+@$COMPUTE_ELEMENT
 D;JNE
 // goto END
-@Main.main$END
+@$END
 0;JMP
 // label COMPUTE_ELEMENT
-(COMPUTE_ELEMENT)
+($COMPUTE_ELEMENT)
 // push that 0
 @0
 D=A
@@ -222,7 +222,7 @@ D=M
 A=M
 M=D
 // goto LOOP
-@Main.main$LOOP
+@$LOOP
 0;JMP
 // label END
-(END)
+($END)
