@@ -258,5 +258,5 @@ def test_call_command_push_return_address(setup_resources):
                         '@THAT', 'D=M', '@SP', 'AM=M+1', 'A=A-1', 'M=D',
                         '@R13', 'D=M', '@5', 'D=D-A', '@2', 'D=D-A', '@ARG', 'M=D',
                         '@SP', 'D=M', '@LCL', 'M=D',
-                        '(Main.main)', '0;JMP', '(Main.main$ret.0)']
+                        '@Main.main', '0;JMP', '(Main.main$ret.0)']
 

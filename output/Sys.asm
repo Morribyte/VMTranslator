@@ -71,7 +71,7 @@ M=D
 D=M
 @5
 D=D-A
-@2
+@n_args
 D=D-A
 @ARG
 M=D
@@ -232,7 +232,7 @@ M=D
 D=M
 @5
 D=D-A
-@2
+@n_args
 D=D-A
 @ARG
 M=D

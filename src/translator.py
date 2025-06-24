@@ -79,7 +79,8 @@ class Translator:
         return command_map[CommandType.RETURN] + updated_labels
 
     def write_call(self, function_name: str, n_args: int) -> list[str]:
-        call_line: list[str] = command_map[CommandType.CALL] + command_map[CommandType.PUSH] + self.write_save_frame() + data_storage.reposition_arg + data_storage.reposition_lcl + data_storage.final_return(function_name)
+        replaced_arg = [word.replace("n_args", f"{n_args}") for word in data_storage.reposition_arg]
+        call_line: list[str] = command_map[CommandType.CALL] + command_map[CommandType.PUSH] + self.write_save_frame() + replaced_arg + data_storage.reposition_lcl + data_storage.final_return(function_name)
         call_line = self.generate_label(f"ret", call_line)
         call_line = [word.replace("ret", f"{function_name}$ret") for word in call_line]
         return call_line
