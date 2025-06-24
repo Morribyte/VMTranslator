@@ -103,7 +103,9 @@ return_pointer_map: list[str] = ["THAT", "THIS", "ARG", "LCL"]
 
 return_map: list[str] = ["@R13", "M=M-1", "A=M", "D=M", "@ptr", "M=D"]
 
+# Things for the CALL command
 save_frame_return: list[str] = ["@ptr", "D=M"]
 
 reposition_arg: list[str] = ["@R13", "D=M", "@5", "D=D-A", "@2", "D=D-A", "@ARG", "M=D"]
 
+reposition_lcl: list[str] = ["@SP", "D=M", "@LCL", "M=D"]

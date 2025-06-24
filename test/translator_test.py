@@ -227,6 +227,20 @@ def test_return_command(setup_resources):
                          "@ARG", "A=M", "M=D", "@ARG", "D=M", "@SP", "M=D+1", '@R13', 'M=M-1', 'A=M', 'D=M', '@THAT', 'M=D', '@R13', 'M=M-1', 'A=M', 'D=M', '@THIS', 'M=D', '@R13', 'M=M-1', 'A=M', 'D=M', '@ARG', 'M=D', '@R13', 'M=M-1', 'A=M', 'D=M', '@LCL', 'M=D'] # Reposition stack pointer
 
 
+def test_call_save_frame(setup_resources):
+    """
+    Test the save frame method
+    """
+    translator = setup_resources["translator"]
+    translator.parser.command_line = ["call", "Main.main", 2]
+    the_list = translator.write_save_frame()
+    print(the_list)
+    assert the_list == ['@LCL', 'D=M', '@SP', 'AM=M+1', 'A=A-1', 'M=D',
+                        '@ARG', 'D=M', '@SP', 'AM=M+1', 'A=A-1', 'M=D',
+                        '@THIS', 'D=M', '@SP', 'AM=M+1', 'A=A-1', 'M=D',
+                        '@THAT', 'D=M', '@SP', 'AM=M+1', 'A=A-1', 'M=D']
+
+
 def test_call_command_push_return_address(setup_resources):
     """
     Test that when we do the call command, we push the return address
@@ -240,18 +254,6 @@ def test_call_command_push_return_address(setup_resources):
                         '@ARG', 'D=M', '@SP', 'AM=M+1', 'A=A-1', 'M=D',
                         '@THIS', 'D=M', '@SP', 'AM=M+1', 'A=A-1', 'M=D',
                         '@THAT', 'D=M', '@SP', 'AM=M+1', 'A=A-1', 'M=D',
-                        '@R13', 'D=M', '@5', 'D=D-A', '@2', 'D=D-A', '@ARG', 'M=D']
+                        '@R13', 'D=M', '@5', 'D=D-A', '@2', 'D=D-A', '@ARG', 'M=D',
+                        '@SP', 'D=M', '@LCL', 'M=D']
 
-
-def test_call_save_frame(setup_resources):
-    """
-    Test the save frame method
-    """
-    translator = setup_resources["translator"]
-    translator.parser.command_line = ["call", "Main.main", 2]
-    the_list = translator.write_save_frame()
-    print(the_list)
-    assert the_list == ['@LCL', 'D=M', '@SP', 'AM=M+1', 'A=A-1', 'M=D',
-                        '@ARG', 'D=M', '@SP', 'AM=M+1', 'A=A-1', 'M=D',
-                        '@THIS', 'D=M', '@SP', 'AM=M+1', 'A=A-1', 'M=D',
-                        '@THAT', 'D=M', '@SP', 'AM=M+1', 'A=A-1', 'M=D']
