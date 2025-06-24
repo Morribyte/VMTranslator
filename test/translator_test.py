@@ -224,8 +224,7 @@ def test_function_initialization(setup_resources, n_vars):
     expected = [f"({function_name})"]
     for _ in range(n_vars):
         expected += ["@0", "D=A", "@SP", "AM=M+1", "A=A-1", "M=D"]
-        print(f"Expected: {expected}")
-
+    print(f"n_vars = {n_vars}\nExpected: {expected}\nTranslated: {translated}\n")
 
     assert translated == expected
 
