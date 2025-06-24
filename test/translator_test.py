@@ -177,7 +177,7 @@ def test_label_command(setup_resources):
     data_storage.FUNCTION_NAME = "Main.main"
     translated_label: list[str] = translator.write_label("LOOP")
     print(translated_label)
-    assert translated_label == ["(LOOP)"]
+    assert translated_label == ["(Main.main$LOOP)"]
 
 
 def test_if_goto_command(setup_resources):
@@ -185,6 +185,7 @@ def test_if_goto_command(setup_resources):
     Test that when we execute the IF command, it properly writes the label we need.
     """
     translator = setup_resources["translator"]
+    data_storage.FUNCTION_NAME = "Main.main"
     translator.parser.command_line = ["if-goto", "LOOP"]
     translated_label: list[str] = translator.write_if_goto("LOOP")
     print(translated_label)

@@ -1,4 +1,4 @@
-// Translated VM File @ output/BasicAdd.hack
+// Translated VM File @ output/BasicAdd.asm
 // push constant 7
 @7
 D=A

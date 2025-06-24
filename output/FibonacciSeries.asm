@@ -110,10 +110,10 @@ M=D
 @SP
 AM=M-1
 D=M
-@COMPUTE_ELEMENT
+@Main.main$COMPUTE_ELEMENT
 D;JNE
 // goto END
-@END
+@Main.main$END
 0;JMP
 // label COMPUTE_ELEMENT
 (COMPUTE_ELEMENT)
@@ -222,7 +222,7 @@ D=M
 A=M
 M=D
 // goto LOOP
-@LOOP
+@Main.main$LOOP
 0;JMP
 // label END
 (END)
