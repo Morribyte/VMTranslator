@@ -78,7 +78,7 @@ class Translator:
     def write_call(self, function_name: str, n_args: int) -> list[str]:
         line: list[str] = self.generate_label(f"ret", command_map[CommandType.CALL])
         line: list[str] = [word.replace("ret", f"{function_name}$ret") for word in line]
-        return line + command_map[CommandType.PUSH] + self.write_save_frame()
+        return line + command_map[CommandType.PUSH] + self.write_save_frame() + data_storage.reposition_arg
 
     def generate_label(self, command: CommandType | str | None, translated_line: list[str]) -> list[str]:
         """
