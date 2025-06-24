@@ -188,7 +188,7 @@ def test_if_goto_command(setup_resources):
     translator.parser.command_line = ["if-goto", "LOOP"]
     translated_label: list[str] = translator.write_if_goto("LOOP")
     print(translated_label)
-    assert translated_label == ['@SP', 'AM=M-1', 'D=M', '@LOOP', 'D;JNE']
+    assert translated_label == ['@SP', 'AM=M-1', 'D=M', '@Main.main$LOOP', 'D;JNE']
 
 
 def test_goto_command(setup_resources):
@@ -199,7 +199,7 @@ def test_goto_command(setup_resources):
     translator.parser.command_line = ["goto", "LOOP"]
     translated_label: list[str] = translator.write_goto("LOOP")
     print(translated_label)
-    assert translated_label == ["@LOOP", "0;JMP"]
+    assert translated_label == ["@Main.main$LOOP", "0;JMP"]
 
 
 def test_function_command(setup_resources):
@@ -210,7 +210,7 @@ def test_function_command(setup_resources):
     translator.parser.command_line = ["function", "SimpleFunction.test", "2"]
     translated_function: list[str] = translator.write_function("SimpleFunction.test", 2)
     print(translated_function)
-    assert translated_function ==  ["@2", "D=A", "(init_lcl.SimpleFunction.test)", "@SP", "AM=M+1", "A=A-1", "M=0", "D=D-1", "@init_lcl.SimpleFunction.test", "D;JGT"]
+    assert translated_function ==  ["@2", "D=A", "(SimpleFunction.test)", "@SP", "AM=M+1", "A=A-1", "M=0", "D=D-1", "@SimpleFunction.test", "D;JGT"]
 
 
 def test_return_command(setup_resources):

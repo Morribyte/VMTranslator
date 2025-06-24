@@ -31,8 +31,8 @@ ARITHMETIC_COMMANDS = ["add", "sub", "neg", "and", "not", "or", "eq", "lt", "gt"
 command_map: dict = {
     CommandType.PUSH: ["@SP", "AM=M+1", "A=A-1", "M=D"],
     CommandType.POP: ["@SP", "AM=M-1", "D=M"],
-    CommandType.GOTO: ["0;JMP"],
-    CommandType.IF: ["D;JNE"],
+    CommandType.GOTO: ["@LABEL", "0;JMP"],
+    CommandType.IF: ["@LABEL", "D;JNE"],
     CommandType.FUNCTION: ["@2", "D=A", "(LABEL)", "@SP", "AM=M+1", "A=A-1", "M=0", "D=D-1", "@LABEL", "D;JGT"],
     CommandType.RETURN: ["@LCL", "D=M", "@R13", "M=D",  # get address at frame end
                          "@5", "A=D-A", "D=M",  # calculate return address

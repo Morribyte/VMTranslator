@@ -52,14 +52,17 @@ class Translator:
         """
         Generates and returns the label we need for jumping conditionally
         """
-        return command_map[CommandType.POP] + [f"@{label_name}"] + command_map[CommandType.IF]
+        data_storage.FUNCTION_NAME = "Main.main"
+        goto_list: list[str] = [word.replace("LABEL", f"{data_storage.FUNCTION_NAME}${label_name}") for word in command_map[CommandType.IF]]
+        return command_map[CommandType.POP] + goto_list
 
     def write_goto(self, label_name: str) -> list[str]:
         """
         Generates and returns the label we need for unconditional jumps
         """
-        goto_list: list[str] = [word.replace("LABEL", f"${label_name}") for word in command_map[CommandType.GOTO]]
-        return [f"@{function_name}"] + command_map[CommandType.GOTO]
+        data_storage.FUNCTION_NAME = "Main.main"
+        goto_list: list[str] = [word.replace("LABEL", f"{data_storage.FUNCTION_NAME}${label_name}") for word in command_map[CommandType.GOTO]]
+        return goto_list
 
     def write_function(self, function_name: str, n_vars: int) -> list[str]:
         """
