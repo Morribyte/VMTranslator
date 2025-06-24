@@ -45,7 +45,7 @@ def process_command_arguments():
         arg1: str = parser.arg1()
     else:
         arg1: None = None
-    if current_command in [CommandType.PUSH, CommandType.POP, CommandType.FUNCTION]:
+    if current_command in [CommandType.PUSH, CommandType.POP, CommandType.FUNCTION, CommandType.CALL]:
         arg2: int = parser.arg2()
     else:
         arg2: None = None

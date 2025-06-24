@@ -210,9 +210,27 @@ def test_function_command(setup_resources):
     """
     translator = setup_resources["translator"]
     translator.parser.command_line = ["function", "SimpleFunction.test", "2"]
-    translated_function: list[str] = translator.write_function("SimpleFunction.test", 2)
+    translated_function: list[str] = translator.write_function("SimpleFunction.test", 1)
     print(translated_function)
-    assert translated_function ==  ["@2", "D=A", "(SimpleFunction.test)", "@SP", "AM=M+1", "A=A-1", "M=0", "D=D-1", "@SimpleFunction.test", "D;JGT"]
+    assert translated_function ==  ["(SimpleFunction.test)", "@0", "D=A", "@SP", "AM=M+1", "A=A-1", "M=D"]
+
+
+@pytest.mark.parametrize("n_vars", range(6))  # 0 to 5
+def test_function_initialization(setup_resources, n_vars):
+    translator = setup_resources["translator"]
+    function_name = "Test.init"
+    translated = translator.write_function(function_name, n_vars)
+
+    expected = [f"({function_name})"]
+    for _ in range(n_vars):
+        expected += ["@0", "D=A", "@SP", "AM=M+1", "A=A-1", "M=D"]
+        print(f"Expected: {expected}")
+
+
+    assert translated == expected
+
+
+
 
 
 def test_return_command(setup_resources):

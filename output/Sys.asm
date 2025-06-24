@@ -1,15 +1,15 @@
 // Translated VM File @ output/Sys.asm
 // function Sys.init 0
-@2
-D=A
-(Sys.init)
-@SP
-AM=M+1
-A=A-1
-M=0
-D=D-1
-@Sys.init
-D;JGT
+(
+S
+y
+s
+.
+i
+n
+i
+t
+)
 // push constant 4000
 @4000
 D=A
@@ -71,7 +71,7 @@ M=D
 D=M
 @5
 D=D-A
-@n_args
+@0
 D=D-A
 @ARG
 M=D
@@ -94,16 +94,16 @@ M=D
 @Sys.init$LOOP
 0;JMP
 // function Sys.main 5
-@2
-D=A
-(Sys.main)
-@SP
-AM=M+1
-A=A-1
-M=0
-D=D-1
-@Sys.main
-D;JGT
+(
+S
+y
+s
+.
+m
+a
+i
+n
+)
 // push constant 4001
 @4001
 D=A
@@ -232,7 +232,7 @@ M=D
 D=M
 @5
 D=D-A
-@n_args
+@1
 D=D-A
 @ARG
 M=D
@@ -373,16 +373,17 @@ D=M
 @LCL
 M=D
 // function Sys.add12 0
-@2
-D=A
-(Sys.add12)
-@SP
-AM=M+1
-A=A-1
-M=0
-D=D-1
-@Sys.add12
-D;JGT
+(
+S
+y
+s
+.
+a
+d
+d
+1
+2
+)
 // push constant 4002
 @4002
 D=A

@@ -311,15 +311,14 @@ function SimpleFunction.test 2
 
 ```aiignore
 function (functionName)
-@arg2       // Sets addressing register for constant, which is arg2(number of args)
-D=A         // Sets D register to the value at A
-(init_lcl_x)
-@SP         // Sets A to SP
-AM=M+1      // Increments A and M both by 1
-A=A-1       // Decrements the addressing register by 1, but keeps the M value the same
-M=0         // Initializes variable, sets it to 0.
-@init_lcl_x
-D=D-1;JGT   // Subtract 1 from D;jump if D>0            
+# Repeat nVars times
+@0 
+D=A
+
+@SP
+AM=M+1
+A=A-1
+M=D     
 ```
 
 ### Return

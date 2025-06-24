@@ -63,13 +63,14 @@ class Translator:
         goto_list: list[str] = [word.replace("LABEL", f"{data_storage.FUNCTION_NAME}${label_name}") for word in command_map[CommandType.GOTO]]
         return goto_list
 
-    def write_function(self, function_name: str, n_vars: int) -> list[str]:
+    def write_function(self, function_name: str, n_vars: int) -> list[str] | str:
         """
         Converts a function call to the proper branching assembly
         """
-        function_list: list[str] = command_map[CommandType.FUNCTION]
-        final_line: list[str] =  [word.replace("LABEL", f"{function_name}") for word in function_list]
-        return final_line
+        asm = [f"({function_name})"]
+        for _ in range(n_vars):
+            asm.extend(["@0", "D=A", "@SP", "AM=M+1", "A=A-1", "M=D"])
+        return asm
 
     def write_return(self) -> list[str]:
         """
@@ -80,6 +81,7 @@ class Translator:
 
     def write_call(self, function_name: str, n_args: int) -> list[str]:
         replaced_arg = [word.replace("n_args", f"{n_args}") for word in data_storage.reposition_arg]
+        print(f"replaced_arg: {replaced_arg}")
         call_line: list[str] = command_map[CommandType.CALL] + command_map[CommandType.PUSH] + self.write_save_frame() + replaced_arg + data_storage.reposition_lcl + data_storage.final_return(function_name)
         call_line = self.generate_label(f"ret", call_line)
         call_line = [word.replace("ret", f"{function_name}$ret") for word in call_line]
