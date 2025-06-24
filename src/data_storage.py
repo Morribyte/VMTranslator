@@ -103,4 +103,4 @@ return_pointer_map: list[str] = ["THAT", "THIS", "ARG", "LCL"]
 
 return_map: list[str] = ["@R13", "M=M-1", "A=M", "D=M", "@ptr", "M=D"]
 
-call_map_return: list[str] = ["@ptr", "D=M"]
+save_frame_return: list[str] = ["@ptr", "D=M"]

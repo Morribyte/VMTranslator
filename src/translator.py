@@ -113,7 +113,7 @@ class Translator:
         """
         save_frame = []
         for items in reversed(data_storage.return_pointer_map):
-            replaced = [line.replace("ptr", items) for line in data_storage.call_map_return]
+            replaced = [line.replace("ptr", items) for line in data_storage.save_frame_return]
             save_frame.extend(replaced + command_map[CommandType.PUSH])
         return save_frame
 
