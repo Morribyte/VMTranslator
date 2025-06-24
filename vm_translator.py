@@ -89,10 +89,12 @@ def write_to_file(file_name: str, code_file: list[str]):
                         translated_line = translator.generate_label(arg1, translated_line)
                         translated_line = translator.write_jump(arg1, translated_line)
                 case CommandType.FUNCTION:
-                    print(f"Generating function")
+                    print("Generating function")
+                    print("Saving function name...")
+                    data_storage.FUNCTION_NAME = arg1
                     translated_line = translator.write_function(arg1, arg2)
                 case CommandType.LABEL:
-                    print(f"Generating Label")
+                    print("Generating Label")
                     translated_line = translator.write_label(arg1)
                 case CommandType.GOTO:
                     print(f"Generating Unconditional Goto")

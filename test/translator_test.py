@@ -255,5 +255,6 @@ def test_call_command_push_return_address(setup_resources):
                         '@THIS', 'D=M', '@SP', 'AM=M+1', 'A=A-1', 'M=D',
                         '@THAT', 'D=M', '@SP', 'AM=M+1', 'A=A-1', 'M=D',
                         '@R13', 'D=M', '@5', 'D=D-A', '@2', 'D=D-A', '@ARG', 'M=D',
-                        '@SP', 'D=M', '@LCL', 'M=D']
+                        '@SP', 'D=M', '@LCL', 'M=D'
+                        '']
 

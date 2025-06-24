@@ -58,14 +58,15 @@ class Translator:
         """
         Generates and returns the label we need for unconditional jumps
         """
-        return [f"@{label_name}"] + command_map[CommandType.GOTO]
+        goto_list: list[str] = [word.replace("LABEL", f"${label_name}") for word in command_map[CommandType.GOTO]]
+        return [f"@{function_name}"] + command_map[CommandType.GOTO]
 
     def write_function(self, function_name: str, n_vars: int) -> list[str]:
         """
         Converts a function call to the proper branching assembly
         """
         function_list: list[str] = command_map[CommandType.FUNCTION]
-        final_line: list[str] =  [word.replace("LABEL", f"init_lcl.{function_name}") for word in function_list]
+        final_line: list[str] =  [word.replace("LABEL", f"{function_name}") for word in function_list]
         return final_line
 
     def write_return(self) -> list[str]:
