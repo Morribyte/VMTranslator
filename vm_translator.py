@@ -28,13 +28,13 @@ def read_file(file_paths):
     """
     Opens a file, and strips comments whether they're at the start or at the end of a line.
     """
-    all_lines: list[str] = []
+    all_lines: dict[str, str] = {}
     for file_path in file_paths:
         print(f"Reading: {file_path}")
+        file_name = Path(file_path).stem
         with open(file_path, "r") as file:
             lines: list[str] = [line.split("//")[0].rstrip() for line in file.readlines() if line.split("//")[0].strip()]
-            all_lines.extend(line.strip() for line in lines)
-    lines = [line.strip() for line in lines]
+        all_lines[file_name] = lines
     print(all_lines)
     return all_lines
 
@@ -52,7 +52,7 @@ def process_command_arguments():
     return current_command, arg1, arg2
 
 
-def write_to_file(file_name: str, code_file: list[str]):
+def write_to_file(file_name: str, code_to_translate: dict[str, str]):
     """
     Writes a translated list to a file, line by line.
     """
@@ -66,55 +66,57 @@ def write_to_file(file_name: str, code_file: list[str]):
         file.writelines(f"{line}\n" for line in data_storage.system_initialization)
         file.writelines("\n".join(translator.write_call("Sys.init", 0)) + "\n")
 
-        for index, line in enumerate(code_file):
+        for file_name, code_file in code_to_translate.items():
+            data_storage.FILE_NAME = file_name
 
-            print(f"\nIndex: {index} | Line: {line}")
+            for index, line in enumerate(code_file):
 
-            split_line: list[str] = parser.get_line(line)
-            print(f"{split_line}")
+                print(f"\nIndex: {index} | Line: {line}")
 
-            current_command, arg1, arg2 = process_command_arguments()
+                split_line: list[str] = parser.get_line(line)
+                print(f"{split_line}")
 
-            print(f"Current command: {current_command} | Current arg1: {arg1} | Current arg2: {arg2}")
-            file.writelines(f"// {line}\n")
+                current_command, arg1, arg2 = process_command_arguments()
 
+                print(f"Current command: {current_command} | Current arg1: {arg1} | Current arg2: {arg2}")
+                file.writelines(f"// {line}\n")
 
-            match current_command:
-                case CommandType.PUSH | CommandType.POP:
-                    translator.set_arg2(arg2)
-                    translated_line = translator.write_push_pop(current_command, arg1, arg2)
-                    if arg1 != "constant":
-                        translated_line = translator.write_segment(arg1, translated_line, arg2)
-                case CommandType.ARITHMETIC:
-                    translated_line = translator.write_arithmetic(arg1)
-                    print(f"CommandType is ARITHMETIC. Command: {arg1}")
-                    if arg1 in data_storage.comparison_map:
-                        print(f"Comparison label found: {current_command}")
-                        translated_line = translator.generate_label(arg1, translated_line)
-                        translated_line = translator.write_jump(arg1, translated_line)
-                case CommandType.FUNCTION:
-                    print("Generating function")
-                    print("Saving function name...")
-                    data_storage.FUNCTION_NAME = arg1
-                    translated_line = translator.write_function(arg1, arg2)
-                case CommandType.CALL:
-                    print("Generating call")
-                    translated_line = translator.write_call(arg1, arg2)
-                case CommandType.LABEL:
-                    print("Generating Label")
-                    translated_line = translator.write_label(arg1)
-                case CommandType.GOTO:
-                    print(f"Generating Unconditional Goto")
-                    translated_line = translator.write_goto(arg1)
-                case CommandType.IF:
-                    print(f"Generating Conditional Goto")
-                    translated_line = translator.write_if_goto(arg1)
-                case CommandType.RETURN:
-                    print(f"Generating return")
-                    print(f"Restoring Pointers")
-                    translated_line = translator.write_return()
-            print(f"Translated line: {translated_line}")
-            file.writelines(f"{line}\n" for line in translated_line)
+                match current_command:
+                    case CommandType.PUSH | CommandType.POP:
+                        translator.set_arg2(arg2)
+                        translated_line = translator.write_push_pop(current_command, arg1, arg2)
+                        if arg1 != "constant":
+                            translated_line = translator.write_segment(arg1, translated_line, arg2)
+                    case CommandType.ARITHMETIC:
+                        translated_line = translator.write_arithmetic(arg1)
+                        print(f"CommandType is ARITHMETIC. Command: {arg1}")
+                        if arg1 in data_storage.comparison_map:
+                            print(f"Comparison label found: {current_command}")
+                            translated_line = translator.generate_label(arg1, translated_line)
+                            translated_line = translator.write_jump(arg1, translated_line)
+                    case CommandType.FUNCTION:
+                        print("Generating function")
+                        print("Saving function name...")
+                        data_storage.FUNCTION_NAME = arg1
+                        translated_line = translator.write_function(arg1, arg2)
+                    case CommandType.CALL:
+                        print("Generating call")
+                        translated_line = translator.write_call(arg1, arg2)
+                    case CommandType.LABEL:
+                        print("Generating Label")
+                        translated_line = translator.write_label(arg1)
+                    case CommandType.GOTO:
+                        print(f"Generating Unconditional Goto")
+                        translated_line = translator.write_goto(arg1)
+                    case CommandType.IF:
+                        print(f"Generating Conditional Goto")
+                        translated_line = translator.write_if_goto(arg1)
+                    case CommandType.RETURN:
+                        print(f"Generating return")
+                        print(f"Restoring Pointers")
+                        translated_line = translator.write_return()
+                print(f"Translated line: {translated_line}")
+                file.writelines(f"{line}\n" for line in translated_line)
 
 def main():
     """
