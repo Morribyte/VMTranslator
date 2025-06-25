@@ -28,6 +28,10 @@ D=M
 @THAT
 M=D
 // call Sys.main 0
+@0
+D=A
+@R13
+M=D
 @Sys.main$ret.0
 D=A
 @SP
@@ -61,9 +65,9 @@ M=D
 @R13
 D=M
 @5
-D=D-A
-@0
-D=D-A
+D=D+A
+@SP
+D=M-D
 @ARG
 M=D
 @SP
@@ -210,6 +214,10 @@ AM=M+1
 A=A-1
 M=D
 // call Sys.add12 1
+@1
+D=A
+@R13
+M=D
 @Sys.add12$ret.1
 D=A
 @SP
@@ -243,9 +251,9 @@ M=D
 @R13
 D=M
 @5
-D=D-A
-@1
-D=D-A
+D=D+A
+@SP
+D=M-D
 @ARG
 M=D
 @SP
@@ -384,6 +392,9 @@ A=M
 D=M
 @LCL
 M=D
+@R14
+A=M
+0;JMP
 // function Sys.add12 0
 (Sys.add12)
 // push constant 4002
@@ -480,3 +491,6 @@ A=M
 D=M
 @LCL
 M=D
+@R14
+A=M
+0;JMP

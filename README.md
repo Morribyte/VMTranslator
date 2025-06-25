@@ -396,6 +396,11 @@ A=M       // Move M into the addressing register, so we're working at the frame 
 D=M       // Puts Frame-1 into the data register
 @LCL
 M=D       // Puts D into the Memory register, restoring LCL
+
+# Goes back to return address using @R14
+@R14      // Addresses return addres
+A=M       // Places return address into A
+0;JMP     // Jumps
 ```
 
 ### Call
@@ -418,13 +423,6 @@ goto function           // transfers control to callee
 ```
 
 ```aiignore
-# First thing is we need is to push the arguments onto the stack.
-@arg2                   // The number of arguments we have
-D=A                     // Push A into D
-@R13                    // Addresses R13, an empty register
-M=D                     // Saving nArgs for later
-
-
 # Saving function frame
 # Push return address
 @functionName$ret.#

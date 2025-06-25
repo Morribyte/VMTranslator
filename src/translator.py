@@ -77,12 +77,11 @@ class Translator:
         Converts a return to a full return call.
         """
         updated_labels = [label.replace("ptr", item) for item in data_storage.return_pointer_map for label in data_storage.return_map]
-        return command_map[CommandType.RETURN] + updated_labels
+        return command_map[CommandType.RETURN] + updated_labels + data_storage.final_return_jump
 
     def write_call(self, function_name: str, n_args: int) -> list[str]:
-        replaced_arg = [word.replace("n_args", f"{n_args}") for word in data_storage.reposition_arg]
-        print(f"replaced_arg: {replaced_arg}")
-        call_line: list[str] = command_map[CommandType.CALL] + command_map[CommandType.PUSH] + self.write_save_frame() + replaced_arg + data_storage.reposition_lcl + data_storage.final_return(function_name)
+        call_line: list[str] = command_map[CommandType.CALL] + command_map[CommandType.PUSH] + self.write_save_frame() + data_storage.reposition_arg + data_storage.reposition_lcl + data_storage.final_return(function_name)
+        call_line = [word.replace("n_args", f"{n_args}") for word in call_line]
         call_line = self.generate_label(f"ret", call_line)
         call_line = [word.replace("ret", f"{function_name}$ret") for word in call_line]
         return call_line

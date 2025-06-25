@@ -40,7 +40,7 @@ command_map: dict = {
                          "@R14", "M=D", "@SP", "A=M-1", "D=M",  # Place return value for caller
                          "@ARG", "A=M", "M=D", "@ARG", "D=M", "@SP", "M=D+1"],  # reposition SP
 
-    CommandType.CALL: ["@LABEL", "D=A"]  # This is a long-winded command, only putting the start here.
+    CommandType.CALL: ["@n_args", "D=A", "@R13", "M=D", "@LABEL", "D=A"]  # This is a long-winded command, only putting the start here.
 }
 
 push_indirect_segment = lambda x: [f"@{x}", "D=A", "@seg", "A=D+M", "D=M", "@R13"]
@@ -104,12 +104,13 @@ segment_memory_map: dict[str, Callable[[int], str]] = {
 return_pointer_map: list[str] = ["THAT", "THIS", "ARG", "LCL"]
 
 return_map: list[str] = ["@R13", "M=M-1", "A=M", "D=M", "@ptr", "M=D"]
+
 final_return_jump: list[str] = ["@R14", "A=M", "0;JMP"]  # Go to retAddr
 
 # Things for the CALL command
 save_frame_return: list[str] = ["@ptr", "D=M"]
 
-reposition_arg: list[str] = ["@R13", "D=M", "@5", "D=D-A", "@n_args", "D=D-A", "@ARG", "M=D"]
+reposition_arg: list[str] = ["@R13", "D=M", "@5", "D=D+A", "@SP", "D=M-D", "@ARG", "M=D"]
 
 reposition_lcl: list[str] = ["@SP", "D=M", "@LCL", "M=D"]
 

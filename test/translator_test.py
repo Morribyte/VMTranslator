@@ -228,10 +228,6 @@ def test_function_initialization(setup_resources, n_vars):
 
     assert translated == expected
 
-
-
-
-
 def test_return_command(setup_resources):
     """
     Test that when we execute the return command, it properly translates the assembly we need.
@@ -243,7 +239,12 @@ def test_return_command(setup_resources):
     assert translated_return == ["@LCL", "D=M", "@R13", "M=D",  # get address at frame end
                          "@5", "A=D-A", "D=M",  # calculate return address
                          "@R14", "M=D", "@SP", "A=M-1", "D=M",  # Place return value for caller
-                         "@ARG", "A=M", "M=D", "@ARG", "D=M", "@SP", "M=D+1", '@R13', 'M=M-1', 'A=M', 'D=M', '@THAT', 'M=D', '@R13', 'M=M-1', 'A=M', 'D=M', '@THIS', 'M=D', '@R13', 'M=M-1', 'A=M', 'D=M', '@ARG', 'M=D', '@R13', 'M=M-1', 'A=M', 'D=M', '@LCL', 'M=D'] # Reposition stack pointer
+                         "@ARG", "A=M", "M=D", "@ARG", "D=M", "@SP", "M=D+1",
+                         '@R13', 'M=M-1', 'A=M', 'D=M', '@THAT', 'M=D',
+                         '@R13', 'M=M-1', 'A=M', 'D=M', '@THIS', 'M=D',
+                         '@R13', 'M=M-1', 'A=M', 'D=M', '@ARG', 'M=D',
+                         '@R13', 'M=M-1', 'A=M', 'D=M', '@LCL', 'M=D',
+                         "@R14", "A=M", "0;JMP"] # Reposition stack pointer
 
 
 def test_call_save_frame(setup_resources):
@@ -268,12 +269,13 @@ def test_call_command_push_return_address(setup_resources):
     translator.parser.command_line = ["call", "Main.main", 2]
     the_list = translator.write_call("Main.main", 2)
     print(the_list)
-    assert the_list == ["@Main.main$ret.0", "D=A", "@SP", "AM=M+1", "A=A-1", "M=D",
+    assert the_list == ["@2", "D=A", "@R13", "M=D",
+                        "@Main.main$ret.0", "D=A", "@SP", "AM=M+1", "A=A-1", "M=D",
                         '@LCL', 'D=M', '@SP', 'AM=M+1', 'A=A-1', 'M=D',
                         '@ARG', 'D=M', '@SP', 'AM=M+1', 'A=A-1', 'M=D',
                         '@THIS', 'D=M', '@SP', 'AM=M+1', 'A=A-1', 'M=D',
                         '@THAT', 'D=M', '@SP', 'AM=M+1', 'A=A-1', 'M=D',
-                        '@R13', 'D=M', '@5', 'D=D-A', '@2', 'D=D-A', '@ARG', 'M=D',
+                        '@R13', 'D=M', '@5', 'D=D+A', '@SP', 'D=M-D', '@ARG', 'M=D',
                         '@SP', 'D=M', '@LCL', 'M=D',
                         '@Main.main', '0;JMP', '(Main.main$ret.0)']
 
