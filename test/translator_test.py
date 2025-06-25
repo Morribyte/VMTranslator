@@ -266,3 +266,10 @@ def test_call_command_push_return_address(setup_resources):
                         '@SP', 'D=M', '@LCL', 'M=D',
                         '@Main.main', '0;JMP', '(Main.main$ret.0)']
 
+
+def test_bootstrap_code(setup_resources):
+    """
+    Test that when we call the bootstrap_init() method, the correct bootstrap code is emitted.
+    """
+    translator = setup_resources["translator"]
+    assert bootstrap == ["@256", "D=A", "@SP", "M=D", "call Sys.init 0"]

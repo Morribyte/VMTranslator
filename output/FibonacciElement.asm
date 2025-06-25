@@ -1,14 +1,6 @@
 // Translated VM File @ output/FibonacciElement.asm
 // function Main.fibonacci 0
-@2
-D=A
-(init_lcl.0)
-@SP
-AM=M+1
-A=A-1
-M=0
-@init_lcl.0
-D=D-1;JGT
+(Main.fibonacci)
 // push argument 0
 @0
 D=A
@@ -44,13 +36,13 @@ M=0
 @SP
 AM=M-1
 D=M
-@N_LT_2
+@Main.fibonacci$N_LT_2
 D;JNE
 // goto N_GE_2
-@N_GE_2
+@Main.fibonacci$N_GE_2
 0;JMP
 // label N_LT_2
-(N_LT_2)
+(Main.fibonacci$N_LT_2)
 // push argument 0
 @0
 D=A
@@ -106,8 +98,11 @@ A=M
 D=M
 @LCL
 M=D
+@R14
+A=M
+0;JMP
 // label N_GE_2
-(N_GE_2)
+(Main.fibonacci$N_GE_2)
 // push argument 0
 @0
 D=A
@@ -133,11 +128,55 @@ D=M
 A=A-1
 M=M-D
 // call Main.fibonacci 1
+@1
+D=A
+@R13
+M=D
+@Main.fibonacci$ret.0
+D=A
 @SP
-AM=M-1
-D=M
+AM=M+1
 A=A-1
-M=M-D
+M=D
+@LCL
+D=M
+@SP
+AM=M+1
+A=A-1
+M=D
+@ARG
+D=M
+@SP
+AM=M+1
+A=A-1
+M=D
+@THIS
+D=M
+@SP
+AM=M+1
+A=A-1
+M=D
+@THAT
+D=M
+@SP
+AM=M+1
+A=A-1
+M=D
+@R13
+D=M
+@5
+D=D+A
+@SP
+D=M-D
+@ARG
+M=D
+@SP
+D=M
+@LCL
+M=D
+@Main.fibonacci
+0;JMP
+(Main.fibonacci$ret.0)
 // push argument 0
 @0
 D=A
@@ -163,11 +202,55 @@ D=M
 A=A-1
 M=M-D
 // call Main.fibonacci 1
+@1
+D=A
+@R13
+M=D
+@Main.fibonacci$ret.1
+D=A
 @SP
-AM=M-1
-D=M
+AM=M+1
 A=A-1
-M=M-D
+M=D
+@LCL
+D=M
+@SP
+AM=M+1
+A=A-1
+M=D
+@ARG
+D=M
+@SP
+AM=M+1
+A=A-1
+M=D
+@THIS
+D=M
+@SP
+AM=M+1
+A=A-1
+M=D
+@THAT
+D=M
+@SP
+AM=M+1
+A=A-1
+M=D
+@R13
+D=M
+@5
+D=D+A
+@SP
+D=M-D
+@ARG
+M=D
+@SP
+D=M
+@LCL
+M=D
+@Main.fibonacci
+0;JMP
+(Main.fibonacci$ret.1)
 // add
 @SP
 AM=M-1
@@ -218,16 +301,11 @@ A=M
 D=M
 @LCL
 M=D
+@R14
+A=M
+0;JMP
 // function Sys.init 0
-@2
-D=A
-(init_lcl.1)
-@SP
-AM=M+1
-A=A-1
-M=0
-@init_lcl.1
-D=D-1;JGT
+(Sys.init)
 // push constant 4
 @4
 D=A
@@ -236,14 +314,57 @@ AM=M+1
 A=A-1
 M=D
 // call Main.fibonacci 1
-@4
+@1
+D=A
+@R13
+M=D
+@Main.fibonacci$ret.2
 D=A
 @SP
 AM=M+1
 A=A-1
 M=D
+@LCL
+D=M
+@SP
+AM=M+1
+A=A-1
+M=D
+@ARG
+D=M
+@SP
+AM=M+1
+A=A-1
+M=D
+@THIS
+D=M
+@SP
+AM=M+1
+A=A-1
+M=D
+@THAT
+D=M
+@SP
+AM=M+1
+A=A-1
+M=D
+@R13
+D=M
+@5
+D=D+A
+@SP
+D=M-D
+@ARG
+M=D
+@SP
+D=M
+@LCL
+M=D
+@Main.fibonacci
+0;JMP
+(Main.fibonacci$ret.2)
 // label END
-(END)
+(Sys.init$END)
 // goto END
-@END
+@Sys.init$END
 0;JMP
