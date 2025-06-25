@@ -272,4 +272,5 @@ def test_bootstrap_code(setup_resources):
     Test that when we call the bootstrap_init() method, the correct bootstrap code is emitted.
     """
     translator = setup_resources["translator"]
+    bootstrap = translator.write_bootstrap()
     assert bootstrap == ["@256", "D=A", "@SP", "M=D", "call Sys.init 0"]
