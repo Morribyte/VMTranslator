@@ -72,6 +72,12 @@ class Translator:
             asm.extend(["@0", "D=A", "@SP", "AM=M+1", "A=A-1", "M=D"])
         return asm
 
+    def write_compact_function(self, function_name: str, n_vars: int) -> list[str] | str:
+        translated_function = self.generate_label("init_lcl", command_map[CommandType.FUNCTION])
+        translated_function = [word.replace("nArgs", f"{n_vars}") for word in translated_function]
+        print(translated_function)
+        return [f"({function_name})"] + translated_function
+
     def write_return(self) -> list[str]:
         """
         Converts a return to a full return call.
