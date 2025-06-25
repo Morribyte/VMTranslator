@@ -118,4 +118,4 @@ final_return = lambda x: [f"@{x}", "0;JMP", "(LABEL)"]
 
 # Don't want to write out the entire code, so writing the four instructions for the stack pointer, then sys.init 0 for the system to translate it.
 
-system_initialization: list[str] = ["@256", "D=A", "@SP", "M=D", "call Sys.init 0"]
+system_initialization: list[str] = ["@256", "D=A", "@SP", "M=D"]

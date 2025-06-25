@@ -93,6 +93,7 @@ class Translator:
         return call_line
 
     def write_bootstrap(self) -> list[str]:
+
         return data_storage.system_initialization
 
     def generate_label(self, command: CommandType | str | None, translated_line: list[str]) -> list[str]:

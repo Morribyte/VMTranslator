@@ -273,4 +273,5 @@ def test_bootstrap_code(setup_resources):
     """
     translator = setup_resources["translator"]
     bootstrap = translator.write_bootstrap()
+    print(bootstrap)
     assert bootstrap == ["@256", "D=A", "@SP", "M=D", "call Sys.init 0"]

@@ -62,6 +62,10 @@ def write_to_file(file_name: str, code_file: list[str]):
         file.writelines(f"// Translated VM File @ output/{file_name}.asm\n")
         translated_line: list[str] = []
 
+        # Bootstrap code, written manually.
+        file.writelines(f"{line}\n" for line in data_storage.system_initialization)
+        file.writelines("\n".join(translator.write_call("Sys.init", 0)) + "\n")
+
         for index, line in enumerate(code_file):
 
             print(f"\nIndex: {index} | Line: {line}")
