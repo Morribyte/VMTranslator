@@ -92,6 +92,9 @@ class Translator:
         call_line = [word.replace("ret", f"{function_name}$ret") for word in call_line]
         return call_line
 
+    def write_bootstrap(self) -> list[str]:
+        return data_storage.system_initialization
+
     def generate_label(self, command: CommandType | str | None, translated_line: list[str]) -> list[str]:
         """
         Takes a list of commands and generates a label.
