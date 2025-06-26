@@ -57,8 +57,8 @@ push_segment_map: dict = {
     "static": push_direct_segment,
 }
 
-pop_indirect_segment = lambda x: [f"@{x}", "D=A", "@seg", "D=D+M", "@R13", "M=D"]
-pop_direct_segment = lambda x: ["@seg", "M=D", "@R13", "A=M", "M=D"]
+pop_indirect_segment = lambda x: [f"@{x}", "D=A", "@seg", "D=D+M", "@R13", "M=D", "@R13", "A=M", "M=D"]
+pop_direct_segment = lambda x: ["@seg", "M=D"]
 
 pop_segment_map: dict = {
     "constant": lambda x: [f"@{x}", "D=A"],
@@ -70,7 +70,6 @@ pop_segment_map: dict = {
     "pointer": pop_direct_segment,
     "static": pop_direct_segment,
 }
-
 arithmetic_map: dict = {
     "logical": ["A=A-1", "D=M-D", "M=-1", f"@LABEL", "JMP", "@SP", "A=M-1", "M=0", "(LABEL)"],  # eq, gt, lt
     "add": ["@SP", "AM=M-1", "D=M", "A=A-1", "M=D+M"],
