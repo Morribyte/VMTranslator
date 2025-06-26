@@ -40,7 +40,7 @@ command_map: dict = {
                          "@R14", "M=D", "@SP", "A=M-1", "D=M",  # Place return value for caller
                          "@ARG", "A=M", "M=D", "@ARG", "D=M", "@SP", "M=D+1"],  # reposition SP
 
-    CommandType.CALL: ["@n_args", "D=A", "@R13", "M=D", "@LABEL", "D=A"]  # This is a long-winded command, only putting the start here.
+    CommandType.CALL: ["@n_args", "D=A", "@R13", "M=D", "@LABEL", "D=A"]
 }
 
 push_indirect_segment = lambda x: [f"@{x}", "D=A", "@seg", "A=D+M", "D=M", "@R13"]
@@ -58,7 +58,7 @@ push_segment_map: dict = {
 }
 
 pop_indirect_segment = lambda x: [f"@{x}", "D=A", "@seg", "D=D+M", "@R13", "M=D"]
-pop_direct_segment = lambda x: ["@seg", "M=D"]
+pop_direct_segment = lambda x: ["@seg", "M=D", "@R13", "A=M", "M=D"]
 
 pop_segment_map: dict = {
     "constant": lambda x: [f"@{x}", "D=A"],
@@ -69,8 +69,8 @@ pop_segment_map: dict = {
     "temp": pop_direct_segment,
     "pointer": pop_direct_segment,
     "static": pop_direct_segment,
-    "end": ["@R13", "A=M", "M=D"]
 }
+
 arithmetic_map: dict = {
     "logical": ["A=A-1", "D=M-D", "M=-1", f"@LABEL", "JMP", "@SP", "A=M-1", "M=0", "(LABEL)"],  # eq, gt, lt
     "add": ["@SP", "AM=M-1", "D=M", "A=A-1", "M=D+M"],

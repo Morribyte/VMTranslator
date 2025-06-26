@@ -31,7 +31,7 @@ class Translator:
                 case "temp" | "pointer" | "static":
                     return command_map[command] + pop_segment_map[segment](index)
                 case _:
-                    return pop_segment_map[segment](index) + command_map[command] + pop_segment_map["end"]
+                    return pop_segment_map[segment](index) + command_map[command]
         return push_segment_map[segment](index) + command_map[command]
 
     def write_arithmetic(self, command: str) -> list[str]:
