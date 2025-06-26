@@ -52,7 +52,7 @@ def process_command_arguments():
     return current_command, arg1, arg2
 
 
-def translate_to_file(file_name: str, code_to_write: dict[str, str]):
+def translate_to_file(file_name: str, code_to_translate: dict[str, str]):
     """
     Takes a list of VM commands, translates them on the fly and writes them to a file.
     """
@@ -66,7 +66,7 @@ def translate_to_file(file_name: str, code_to_write: dict[str, str]):
         file.writelines(f"{line}\n" for line in data_storage.system_initialization)
         file.writelines("\n".join(translator.write_call("Sys.init", 0)) + "\n")
 
-        for file_name, code_file in code_to_write.items():
+        for file_name, code_file in code_to_translate.items():
             data_storage.FILE_NAME = file_name
 
             for index, line in enumerate(code_file):
@@ -146,7 +146,7 @@ def main():
 
     print(f"Translating file...\n")
 
-    write_to_file(data_storage.FILE_NAME, open_file)
+    translate_to_file(data_storage.FILE_NAME, open_file)
 
 
 if __name__ == "__main__":
