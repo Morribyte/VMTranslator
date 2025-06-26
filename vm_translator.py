@@ -52,7 +52,7 @@ def process_command_arguments():
     return current_command, arg1, arg2
 
 
-def write_to_file(file_name: str, code_to_translate: dict[str, str]):
+def write_to_file(file_name: str, code_to_write: dict[str, str]):
     """
     Writes a translated list to a file, line by line.
     """
@@ -66,7 +66,7 @@ def write_to_file(file_name: str, code_to_translate: dict[str, str]):
         file.writelines(f"{line}\n" for line in data_storage.system_initialization)
         file.writelines("\n".join(translator.write_call("Sys.init", 0)) + "\n")
 
-        for file_name, code_file in code_to_translate.items():
+        for file_name, code_file in code_to_write.items():
             data_storage.FILE_NAME = file_name
 
             for index, line in enumerate(code_file):
