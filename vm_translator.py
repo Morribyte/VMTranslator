@@ -52,9 +52,9 @@ def process_command_arguments():
     return current_command, arg1, arg2
 
 
-def write_to_file(file_name: str, code_to_write: dict[str, str]):
+def translate_to_file(file_name: str, code_to_write: dict[str, str]):
     """
-    Writes a translated list to a file, line by line.
+    Takes a list of VM commands, translates them on the fly and writes them to a file.
     """
     label_count: int = 0
     with open(f"output/{file_name}.asm", "w") as file:
